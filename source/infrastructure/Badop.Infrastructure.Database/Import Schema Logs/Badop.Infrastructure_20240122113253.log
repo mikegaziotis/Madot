@@ -1,0 +1,85 @@
+22/01/2024 23:32:53	This log contains information about the import schema operation into project 'Badop.Infrastructure.Database' on computer 'LON1L24566' by user 'mig'.
+22/01/2024 23:32:53	Import of database schema has started.
+22/01/2024 23:32:59	Gathering database credentials
+22/01/2024 23:32:59	Gathering database options
+22/01/2024 23:32:59	Gathering generic database scoped configuration option
+22/01/2024 23:32:59	Gathering users
+22/01/2024 23:32:59	Gathering roles
+22/01/2024 23:32:59	Gathering application roles
+22/01/2024 23:32:59	Gathering role memberships
+22/01/2024 23:32:59	Gathering filegroups
+22/01/2024 23:32:59	Gathering full-text catalogs
+22/01/2024 23:32:59	Gathering assemblies
+22/01/2024 23:32:59	Gathering certificates
+22/01/2024 23:32:59	Gathering asymmetric keys
+22/01/2024 23:32:59	Gathering symmetric keys
+22/01/2024 23:32:59	Gathering encrypted symmetric keys
+22/01/2024 23:32:59	Gathering schemas
+22/01/2024 23:32:59	Gathering XML schema collections
+22/01/2024 23:32:59	Gathering user-defined data types
+22/01/2024 23:32:59	Gathering user-defined types
+22/01/2024 23:32:59	Gathering table types
+22/01/2024 23:32:59	Gathering unique keys for table types
+22/01/2024 23:32:59	Gathering primary keys for table types
+22/01/2024 23:33:00	Gathering indexes for table types
+22/01/2024 23:33:00	Gathering check constraints for table types
+22/01/2024 23:33:00	Gathering default constraints for table types
+22/01/2024 23:33:00	Gathering partition functions
+22/01/2024 23:33:00	Gathering partition schemes
+22/01/2024 23:33:00	Gathering functions
+22/01/2024 23:33:00	Gathering encrypted functions
+22/01/2024 23:33:00	Gathering aggregates
+22/01/2024 23:33:00	Gathering procedures
+22/01/2024 23:33:00	Gathering encrypted procedures
+22/01/2024 23:33:00	Gathering tables
+22/01/2024 23:33:00	Gathering primary keys
+22/01/2024 23:33:00	Gathering unique constraints
+22/01/2024 23:33:00	Gathering foreign keys
+22/01/2024 23:33:00	Gathering default constraints
+22/01/2024 23:33:00	Gathering check constraints
+22/01/2024 23:33:00	Gathering views
+22/01/2024 23:33:00	Gathering encrypted views
+22/01/2024 23:33:00	Gathering indexes
+22/01/2024 23:33:00	Gathering statistics
+22/01/2024 23:33:00	Gathering full-text index stoplists
+22/01/2024 23:33:00	Gathering search property lists
+22/01/2024 23:33:00	Gathering search properties
+22/01/2024 23:33:00	Gathering full-text indexes
+22/01/2024 23:33:00	Gathering column store indexes
+22/01/2024 23:33:00	Gathering spatial indexes
+22/01/2024 23:33:00	Gathering XML indexes
+22/01/2024 23:33:00	Gathering Selective XML indexes
+22/01/2024 23:33:00	Gathering encrypted triggers
+22/01/2024 23:33:00	Gathering triggers
+22/01/2024 23:33:00	Gathering encrypted and clr ddl triggers
+22/01/2024 23:33:00	Gathering ddl triggers
+22/01/2024 23:33:00	Creating edge constraints
+22/01/2024 23:33:00	Gathering synonyms
+22/01/2024 23:33:00	Gathering defaults
+22/01/2024 23:33:00	Gathering data constraint uddt bindings
+22/01/2024 23:33:00	Gathering rules
+22/01/2024 23:33:00	Gathering data constraint uddt bindings
+22/01/2024 23:33:00	Gathering message types
+22/01/2024 23:33:00	Gathering queues
+22/01/2024 23:33:00	Gathering contracts
+22/01/2024 23:33:00	Gathering services
+22/01/2024 23:33:00	Gathering event notifications
+22/01/2024 23:33:00	Gathering remote service bindings
+22/01/2024 23:33:00	Gathering broker priorities
+22/01/2024 23:33:00	Gathering signatures
+22/01/2024 23:33:00	Gathering compression options
+22/01/2024 23:33:00	Gathering sequence types
+22/01/2024 23:33:00	Gathering security policies
+22/01/2024 23:33:00	Gather column encryption keys
+22/01/2024 23:33:00	Gathering column master keys
+22/01/2024 23:33:00	Gathering external data sources
+22/01/2024 23:33:00	Gathering external file formats
+22/01/2024 23:33:00	Gathering external tables
+22/01/2024 23:33:00	Gathering XML index compression options
+22/01/2024 23:33:00	Gathering extended properties
+22/01/2024 23:33:00	Gathering assemblies
+22/01/2024 23:33:00	Scanning project for duplicate elements
+22/01/2024 23:33:00	Finished duplicate element processing
+22/01/2024 23:33:01	Finished importing database.
+22/01/2024 23:33:01	A summary of the import was saved to the following location: C:\Users\mig\source\repos\Badop\source\infrastructure\Badop.Infrastructure.Database\Import Schema Logs\Badop.Infrastructure_20240122113253.log
+22/01/2024 23:33:01	Click Finish to continue...
