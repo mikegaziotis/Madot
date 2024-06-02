@@ -1,0 +1,9 @@
+/home/mikerg/Documents/Code/ApiDocPortal/database/Badop.Database/bin/Debug/Badop.Database.dacpac
+/home/mikerg/Documents/Code/ApiDocPortal/database/Badop.Database/obj/Debug/Model.xml
+/home/mikerg/Documents/Code/ApiDocPortal/database/Badop.Database/obj/Debug/refactor.xml
+/home/mikerg/Documents/Code/ApiDocPortal/database/Badop.Database/obj/Debug/postdeploy.sql
+/home/mikerg/Documents/Code/ApiDocPortal/database/Badop.Database/obj/Debug/predeploy.sql
+/home/mikerg/Documents/Code/ApiDocPortal/database/Badop.Database/obj/Debug/Badop.Infrastructure.Database.dll
+/home/mikerg/Documents/Code/ApiDocPortal/database/Badop.Database/obj/Debug/Badop.Infrastructure.Database.pdb
+/home/mikerg/Documents/Code/ApiDocPortal/database/Badop.Database/bin/Debug/Badop.Infrastructure.Database.dll
+/home/mikerg/Documents/Code/ApiDocPortal/database/Badop.Database/bin/Debug/Badop.Infrastructure.Database.pdb

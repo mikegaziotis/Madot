@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{456873
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastructure", "{2EFC5980-2B24-49C1-B9BC-59AA00448C9E}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Badop.Infrastructure.Database", "source\infrastructure\Badop.Infrastructure.Database\Badop.Infrastructure.Database.sqlproj", "{2103B4B2-D9EE-4D4B-9664-E3CA8D6AE362}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Badop.Database", "database\Badop.Database\Badop.Database.sqlproj", "{2103B4B2-D9EE-4D4B-9664-E3CA8D6AE362}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Badop.Infrastructure.Storage", "source\infrastructure\Badop.Infrastructure.Storage\Badop.Infrastructure.Storage.csproj", "{9D5D1DC4-2D81-4175-822F-65EF46A87B08}"
 EndProject
@@ -39,6 +39,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Badop.Shell.CLI", "source\shell\Badop.Shell.CLI\Badop.Shell.CLI.csproj", "{E8AEB375-3B7B-4BC4-BCBF-F70F303AF859}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Badop.Shell.API", "source\shell\Badop.Shell.API\Badop.Shell.API.csproj", "{031D7E97-4202-47D5-832C-55468E62BB3F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{A786998D-3464-456E-B426-C0531DCC8735}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{155796A2-4A7B-4704-95D3-71D45DFCBA96}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution_items", "_solution_items", "{492DF390-F97D-4AE6-9CC5-A094EB68C60C}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		compose.yml = compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,7 +100,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2EFC5980-2B24-49C1-B9BC-59AA00448C9E} = {15909DCE-0F79-46B6-8862-4BEDC0AAA9C4}
-		{2103B4B2-D9EE-4D4B-9664-E3CA8D6AE362} = {2EFC5980-2B24-49C1-B9BC-59AA00448C9E}
+		{2103B4B2-D9EE-4D4B-9664-E3CA8D6AE362} = {A786998D-3464-456E-B426-C0531DCC8735}
 		{9D5D1DC4-2D81-4175-822F-65EF46A87B08} = {2EFC5980-2B24-49C1-B9BC-59AA00448C9E}
 		{33B1D520-D474-4AAA-AB2C-99B4F3D475BD} = {15909DCE-0F79-46B6-8862-4BEDC0AAA9C4}
 		{AA994BF9-3BE2-4157-AB2C-C04886009096} = {33B1D520-D474-4AAA-AB2C-99B4F3D475BD}
