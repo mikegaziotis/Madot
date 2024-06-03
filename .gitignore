@@ -5,10 +5,8 @@
 /source/core/Badop.Core.Application/obj/
 /source/core/Badop.Core.Domain/bin/
 /source/core/Badop.Core.Domain/obj/
-/source/infrastructure/Badop.Infrastructure.Database/bin/
-/source/infrastructure/Badop.Infrastructure.Database/obj/
-/source/infrastructure/Badop.Infrastructure.Storage/obj/
-/source/infrastructure/Badop.Infrastructure.Storage/bin/
+/database/Badop.Database/bin/
+/database/Badop.Database/obj/
 /source/shell/Badop.Shell.API/obj/
 /source/shell/Badop.Shell.API/bin/
 /source/shell/Badop.Shell.CLI/obj/
@@ -20,3 +18,13 @@
 /test/Badop.IntegrationTests/obj/
 /test/Badop.UnitTests/bin/
 /test/Badop.UnitTests/obj/
+/database/Badop.Database/bin/Debug/Badop.Database.dacpac
+/database/Badop.Database/obj/Debug/Badop.Database.sqlproj.FileListAbsolute.txt
+/database/Badop.Database/obj/Debug/Model.xml
+/database/Badop.Database/Badop.Database.jfm
+/database/Badop.Database/Badop.Database.dbmdl
+/source/shell/Badop.Shell.BlazorWebApp/Badop.Shell.BlazorWebApp.csproj.user
+/source/shell/Badop.Shell.API/Badop.Shell.API.csproj.user
+/database/Badop.Database/bin/Debug/Badop.Database.dacpac
+/database/Badop.Database/obj/Debug/Badop.Database.sqlproj.FileListAbsolute.txt
+/database/Badop.Database/obj/Debug/Model.xml

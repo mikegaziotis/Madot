@@ -1,0 +1,17 @@
+name: badop
+services:
+    database:
+        container_name: 'badop-database'
+        build:    
+            context: .
+            dockerfile: ./build/database.Dockerfile
+            args:
+                SQLPROJ_NAME: 'Badop.Database'
+                DATABASE_NAME: 'Badop'
+                DATABASE_SA_PASSWORD: 'Password123!'
+        ports:
+            - 1433:1433
+
+            
+            
+  
