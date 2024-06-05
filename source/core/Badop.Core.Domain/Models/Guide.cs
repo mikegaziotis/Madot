@@ -12,7 +12,7 @@ public record Guide
     public required string Title { get; init; }
 
     public bool IsDeleted { get; init; }
-
+    
     public required string CreatedBy { get; init; }
 
     public DateTime CreatedDate { get; init; }

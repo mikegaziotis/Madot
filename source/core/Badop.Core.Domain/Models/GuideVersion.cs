@@ -9,7 +9,7 @@ public record GuideVersion
 
     public required string GuideId { get; init; }
 
-    public int Version { get; init; }
+    public int Iteration { get; init; }
 
     public required string Data { get; init; }
 

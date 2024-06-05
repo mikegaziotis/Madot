@@ -9,7 +9,7 @@ public partial class GuideVersion
 
     public string GuideId { get; set; } = null!;
 
-    public int Version { get; set; }
+    public int Iteration { get; set; }
 
     public string Data { get; set; } = null!;
 

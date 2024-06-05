@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Badop.Core.Domain.Enums;
 
 namespace Badop.Core.Domain.Models;
 
@@ -9,9 +10,9 @@ public record VersionedDocument
 
     public required string ApiId { get; init; }
 
-    public VersionedDocumentType DocumentType { get; init; }
+    public required VersionedDocumentType DocumentType { get; init; }
 
-    public int Version { get; init; }
+    public int Iteration { get; init; }
 
     public required string Data { get; init; }
 

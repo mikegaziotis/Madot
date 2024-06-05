@@ -33,13 +33,15 @@ public record ApiVersion
 
     public DateTime LastModifiedDate { get; init; }
 
-    public virtual Api? Api { get; init; }
+    public virtual Api Api { get; init; } = null!;
 
     public virtual ICollection<ApiVersionGuideVersion> ApiVersionGuideVersions { get; init; } = new List<ApiVersionGuideVersion>();
+    
+    public virtual ICollection<ApiVersionFile> ApiVersionFiles { get; init; } = new List<ApiVersionFile>();
 
-    public virtual VersionedDocument? Changelog { get; init; }
+    public virtual VersionedDocument Changelog { get; init; } = null!;
 
-    public virtual VersionedDocument? Homepage { get; init; }
+    public virtual VersionedDocument Homepage { get; init; } = null!;
 
-    public virtual VersionedDocument? OpenApiSpec { get; init; }
+    public virtual VersionedDocument OpenApiSpec { get; init; } = null!;
 }

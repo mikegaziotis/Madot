@@ -25,6 +25,8 @@
     <ItemGroup>
       <ProjectReference Include="..\..\source\core\Badop.Core.Application\Badop.Core.Application.csproj" />
       <ProjectReference Include="..\..\source\core\Badop.Core.Domain\Badop.Core.Domain.csproj" />
+      <ProjectReference Include="..\..\source\infrastructure\Badop.Infrastructure.SqlServer\Badop.Infrastructure.SqlServer.csproj" />
+      <ProjectReference Include="..\..\source\shell\Badop.Shell.API\Badop.Shell.API.csproj" />
     </ItemGroup>
 
 </Project>

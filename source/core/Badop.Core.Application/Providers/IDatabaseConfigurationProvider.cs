@@ -1,6 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Badop.Core.Application.Providers;
 
-public class IDatabaseConfigurationProvider
+public interface IDatabaseConfigurationProvider
 {
-    
+    void ConfigureDbContextOptions(DbContextOptionsBuilder optionsBuilder);
+    void BuildModel(ModelBuilder builder);
 }

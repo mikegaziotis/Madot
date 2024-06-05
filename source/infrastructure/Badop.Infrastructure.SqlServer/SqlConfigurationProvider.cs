@@ -1,15 +1,20 @@
 ﻿using Badop.Core.Application.Providers;
+using Badop.Core.Domain.Enums;
 using Badop.Core.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using File = Badop.Core.Domain.Models.File;
+using OperatingSystem = Badop.Core.Domain.Enums.OperatingSystem;
 
-namespace Badop.Infrastructure.SqlConfiguration;
+namespace Badop.Infrastructure.SqlServer;
 
-public class DatabaseConfigurationProvider: IDatabaseConfigurationProvider
+public class SqlConfigurationProvider: IDatabaseConfigurationProvider
 {
     public void ConfigureDbContextOptions(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("server=localhost,1433;database=Badop;user=sa;password=Password123!;Encrypt=false;");
+        optionsBuilder
+            .UseSqlServer("server=localhost,1433;database=Badop;user=sa;password=Password123!;Encrypt=false;")
+            .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     }
 
     public void BuildModel(ModelBuilder modelBuilder)
@@ -32,7 +37,7 @@ public class DatabaseConfigurationProvider: IDatabaseConfigurationProvider
                     }));
 
             entity.Property(e => e.Id)
-                .HasMaxLength(20)
+                .HasMaxLength(30)
                 .IsUnicode(false);
             entity.Property(e => e.BaseUrlPath)
                 .HasMaxLength(100)
@@ -69,10 +74,10 @@ public class DatabaseConfigurationProvider: IDatabaseConfigurationProvider
             entity.HasIndex(e => new { e.ApiId, e.MajorVersion, e.MinorVersion }, "CK_ApiVersion_NameMajorMinor").IsUnique();
 
             entity.Property(e => e.Id)
-                .HasMaxLength(42)
+                .HasMaxLength(10)
                 .IsUnicode(false);
             entity.Property(e => e.ApiId)
-                .HasMaxLength(20)
+                .HasMaxLength(30)
                 .IsUnicode(false);
             entity.Property(e => e.BuildOrReleaseTag)
                 .HasMaxLength(20)
@@ -114,6 +119,45 @@ public class DatabaseConfigurationProvider: IDatabaseConfigurationProvider
                 .HasConstraintName("FK_ApiVersion_OpenApiSpec");
         });
 
+        modelBuilder.Entity<ApiVersionFile>(entity =>
+        {
+            entity.HasKey(e => new { e.ApiVersionId, e.FileId });
+
+            entity
+                .ToTable("ApiVersionFile")
+                .ToTable(tb => tb.IsTemporal(ttb =>
+                    {
+                        ttb.UseHistoryTable("ApiVersionFile_History", "dbo");
+                        ttb
+                            .HasPeriodStart("ValidFrom")
+                            .HasColumnName("ValidFrom");
+                        ttb
+                            .HasPeriodEnd("ValidTo")
+                            .HasColumnName("ValidTo");
+                    }));
+
+            entity.Property(e => e.ApiVersionId)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+            entity.Property(e => e.FileId)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+            entity.Property(e => e.CreatedBy)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getutcdate())");
+
+            entity.HasOne(d => d.ApiVersion).WithMany(p => p.ApiVersionFiles)
+                .HasForeignKey(d => d.ApiVersionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ApiVersionFile_ApiVersion");
+
+            entity.HasOne(d => d.File).WithMany(p => p.ApiVersionFiles)
+                .HasForeignKey(d => d.FileId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ApiVersionFile_File");
+        });
+
         modelBuilder.Entity<ApiVersionGuideVersion>(entity =>
         {
             entity.HasKey(e => new { e.ApiVersionId, e.GuideVersionId });
@@ -132,7 +176,7 @@ public class DatabaseConfigurationProvider: IDatabaseConfigurationProvider
                     }));
 
             entity.Property(e => e.ApiVersionId)
-                .HasMaxLength(42)
+                .HasMaxLength(10)
                 .IsUnicode(false);
             entity.Property(e => e.GuideVersionId)
                 .HasMaxLength(10)
@@ -172,32 +216,74 @@ public class DatabaseConfigurationProvider: IDatabaseConfigurationProvider
                 .HasMaxLength(10)
                 .IsUnicode(false);
             entity.Property(e => e.ApiId)
-                .HasMaxLength(20)
+                .HasMaxLength(30)
                 .IsUnicode(false);
             entity.Property(e => e.CreatedBy)
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getutcdate())");
+            entity.Property(e => e.Description).IsUnicode(false);
+            entity.Property(e => e.DisplayName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.ImageUrl)
+                .IsUnicode(false)
+                .HasColumnName("ImageURL");
             entity.Property(e => e.LastModifiedBy)
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.LastModifiedDate).HasDefaultValueSql("(getutcdate())");
-            entity.Property(e => e.Name)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Url)
-                .HasMaxLength(250)
-                .IsUnicode(false)
-                .HasColumnName("URL");
-            entity.Property(e => e.ImageUrl)
-                .HasMaxLength(250)
-                .IsUnicode(false)
-                .HasColumnName("ImageURL");
 
             entity.HasOne(d => d.Api).WithMany(p => p.Files)
                 .HasForeignKey(d => d.ApiId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_File_Api");
+        });
+
+        modelBuilder.Entity<FileLink>(entity =>
+        {
+            entity.HasKey(e => new { e.FileId, e.OperatingSystem, e.ChipArchitecture });
+
+            entity
+                .ToTable("FileLink")
+                .ToTable(tb => tb.IsTemporal(ttb =>
+                    {
+                        ttb.UseHistoryTable("FileLink_History", "dbo");
+                        ttb
+                            .HasPeriodStart("ValidFrom")
+                            .HasColumnName("ValidFrom");
+                        ttb
+                            .HasPeriodEnd("ValidTo")
+                            .HasColumnName("ValidTo");
+                    }));
+
+            entity.Property(e => e.FileId)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+            entity.Property(e => e.OperatingSystem)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasConversion(new EnumToStringConverter<OperatingSystem>());
+            entity.Property(e => e.ChipArchitecture)
+                .HasMaxLength(5)
+                .IsUnicode(false)
+                .HasConversion(new EnumToStringConverter<ChipArchitecture>());
+            entity.Property(e => e.CreatedBy)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getutcdate())");
+            entity.Property(e => e.DownloadUrl)
+                .IsUnicode(false)
+                .HasColumnName("DownloadURL");
+            entity.Property(e => e.LastModifiedBy)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.LastModifiedDate).HasDefaultValueSql("(getutcdate())");
+
+            entity.HasOne(d => d.File).WithMany(p => p.FileLinks)
+                .HasForeignKey(d => d.FileId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_FileLink_File");
         });
 
         modelBuilder.Entity<Guide>(entity =>
@@ -221,7 +307,7 @@ public class DatabaseConfigurationProvider: IDatabaseConfigurationProvider
                 .HasMaxLength(10)
                 .IsUnicode(false);
             entity.Property(e => e.ApiId)
-                .HasMaxLength(20)
+                .HasMaxLength(30)
                 .IsUnicode(false);
             entity.Property(e => e.CreatedBy)
                 .HasMaxLength(100)
@@ -256,7 +342,7 @@ public class DatabaseConfigurationProvider: IDatabaseConfigurationProvider
                             .HasColumnName("ValidTo");
                     }));
 
-            entity.HasIndex(e => new { e.GuideId, e.Version }, "UC_GuideVersion_Version").IsUnique();
+            entity.HasIndex(e => new { e.GuideId, e.Iteration }, "UC_GuideVersion_Iteration").IsUnique();
 
             entity.Property(e => e.Id)
                 .HasMaxLength(10)
@@ -295,13 +381,13 @@ public class DatabaseConfigurationProvider: IDatabaseConfigurationProvider
                             .HasColumnName("ValidTo");
                     }));
 
-            entity.HasIndex(e => new { e.ApiId, e.DocumentType, e.Version }, "UC_VersionedDocument").IsUnique();
+            entity.HasIndex(e => new { e.ApiId, e.DocumentType, e.Iteration }, "UC_VersionedDocument_Iteration").IsUnique();
 
             entity.Property(e => e.Id)
                 .HasMaxLength(10)
                 .IsUnicode(false);
             entity.Property(e => e.ApiId)
-                .HasMaxLength(20)
+                .HasMaxLength(30)
                 .IsUnicode(false);
             entity.Property(e => e.CreatedBy)
                 .HasMaxLength(100)
@@ -310,7 +396,8 @@ public class DatabaseConfigurationProvider: IDatabaseConfigurationProvider
             entity.Property(e => e.Data).IsUnicode(false);
             entity.Property(e => e.DocumentType)
                 .HasMaxLength(11)
-                .IsUnicode(false);
+                .IsUnicode(false)
+                .HasConversion(new EnumToStringConverter<VersionedDocumentType>());
             entity.Property(e => e.LastModifiedBy)
                 .HasMaxLength(100)
                 .IsUnicode(false);
@@ -321,6 +408,5 @@ public class DatabaseConfigurationProvider: IDatabaseConfigurationProvider
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_VersionedDocument_Api");
         });
-    
     }
 }

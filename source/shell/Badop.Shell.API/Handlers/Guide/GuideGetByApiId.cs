@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Badop.Shell.API.Handlers;
 
-public record GuideGetAllByApiIdRequest([FromRoute] string ApiId, [FromQuery] bool IncludeDeleted=false):IRequest;
+public record GuideGetByApiIdRequest([FromRoute(Name="api_id")] string ApiId, [FromQuery(Name="include_deleted")] bool IncludeDeleted=false):IRequest;
 
-public class GuideGetAllByApiIdHandler(
-    IQueryHandler<GuideGetAllByApiIdQuery,IEnumerable<Guide>> handler):IHandler<GuideGetAllByApiIdRequest,IResult>
+public class GuideGetByApiIdHandler(
+    IQueryHandler<GuideGetAllByApiIdQuery,IEnumerable<Guide>> handler):IHandler<GuideGetByApiIdRequest,IResult>
 {
-    public async Task<IResult> Handle(GuideGetAllByApiIdRequest request)
+    public async Task<IResult> Handle(GuideGetByApiIdRequest request)
     {
         var result = await handler.Handle(new GuideGetAllByApiIdQuery(request.ApiId, request.IncludeDeleted));
         return Results.Ok(result);

@@ -563,6 +563,7 @@
       "Badop.Core.Application/1.0.0": {
         "dependencies": {
           "Badop.Core.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "8.0.6",
           "Microsoft.Extensions.Logging.Abstractions": "8.0.0"
         },
         "runtime": {

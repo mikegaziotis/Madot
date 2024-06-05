@@ -35,6 +35,8 @@ public partial class ApiVersion
 
     public virtual Api Api { get; set; } = null!;
 
+    public virtual ICollection<ApiVersionFile> ApiVersionFiles { get; set; } = new List<ApiVersionFile>();
+
     public virtual ICollection<ApiVersionGuideVersion> ApiVersionGuideVersions { get; set; } = new List<ApiVersionGuideVersion>();
 
     public virtual VersionedDocument? Changelog { get; set; }

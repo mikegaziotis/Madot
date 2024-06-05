@@ -11,7 +11,7 @@ public partial class VersionedDocument
 
     public string DocumentType { get; set; } = null!;
 
-    public int Version { get; set; }
+    public int Iteration { get; set; }
 
     public string Data { get; set; } = null!;
 

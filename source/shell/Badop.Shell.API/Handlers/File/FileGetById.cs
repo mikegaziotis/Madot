@@ -1,12 +1,20 @@
-namespace Badop.Core.Application.Operations.Queries.File;
+using Badop.Core.Application.Operations.Queries;
+using Badop.Core.Application.Operations.Queries.File;
+using Microsoft.AspNetCore.Mvc;
+using File = Badop.Core.Domain.Models.File;
 
-public record FileGetByIdQuery(string Id):IQuery;
+namespace Badop.Shell.API.Handlers;
+public record FileGetByIdRequest([FromRoute(Name="file_id")] string Id):IRequest;
 
-public class FileGetByIdQueryHandler(
-    BadopDbContext dbDbContext):IQueryHandler<FileGetByIdQuery,Domain.Models.File?>
+public class FileGetByIdHandler(
+    IQueryHandler<FileGetByIdQuery,File?> handler):IHandler<FileGetByIdRequest,IResult>
 {
-    public async Task<Domain.Models.File?> Handle(FileGetByIdQuery query)
+    public async Task<IResult> Handle(FileGetByIdRequest request)
     {
-        return await dbDbContext.Files.FindAsync(query.Id);
+        var result = await handler.Handle(new FileGetByIdQuery(request.Id));
+        if(result is null)
+            return Results.NotFound();
+        
+        return Results.Ok(result);
     }
 }

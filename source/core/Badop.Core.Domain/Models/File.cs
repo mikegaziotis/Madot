@@ -9,9 +9,9 @@ public record File
 
     public required string ApiId { get; init; }
 
-    public required string Name { get; init; }
-
-    public required string Url { get; init; }
+    public required string DisplayName { get; init; }
+    public string? Description { get; init; }
+    public string? ImageUrl { get; init; }
 
     public bool IsDeleted { get; init; }
 
@@ -23,5 +23,8 @@ public record File
 
     public DateTime LastModifiedDate { get; init; }
 
-    public virtual Api? Api { get; init; }
+    public virtual Api Api { get; init; } = null!;
+    public virtual ICollection<ApiVersionFile> ApiVersionFiles { get; init; } = new List<ApiVersionFile>();
+
+    public virtual ICollection<FileLink> FileLinks { get; init; } = new List<FileLink>();
 }

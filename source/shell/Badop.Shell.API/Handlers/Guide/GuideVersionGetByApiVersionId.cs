@@ -1,20 +1,18 @@
+using Badop.Core.Application.Operations.Queries;
+using Badop.Core.Application.Operations.Queries.GuideVersion;
 using Badop.Core.Domain.ShortTypes;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Badop.Core.Application.Operations.Queries.GuideVersion;
+namespace Badop.Shell.API.Handlers;
 
-public record GuideVersionGetByApiVersionIdQuery(string ApiVersionId):IQuery;
+public record GuideVersionGetByApiVersionIdRequest([FromRoute(Name="api_version_id")] string ApiVersionId):IRequest;
 
-public class GuideVersionGetByApiVersionIdQueryHandler(
-    BadopDbContext dbContext):IQueryHandler<GuideVersionGetByApiVersionIdQuery,IEnumerable<GuideVersionShort>>
+public class GuideVersionGetByApiVersionIdHandler(
+    IQueryHandler<GuideVersionGetByApiVersionIdQuery,IEnumerable<GuideVersionShort>> handler):IHandler<GuideVersionGetByApiVersionIdRequest,IResult>
 {
-    public async Task<IEnumerable<GuideVersionShort>> Handle(GuideVersionGetByApiVersionIdQuery query)
+    public async Task<IResult> Handle(GuideVersionGetByApiVersionIdRequest request)
     {
-        return await dbContext.ApiVersionGuideVersions
-            .Include(x => x.GuideVersion)
-            .Include(x=>x.GuideVersion.Version)
-            .Where(x => x.ApiVersionId == query.ApiVersionId)
-            .Select(x => new GuideVersionShort(x.GuideVersion!))
-            .ToListAsync();
+        var result = await handler.Handle(new GuideVersionGetByApiVersionIdQuery(request.ApiVersionId));
+        return Results.Ok(result);
     }
 }

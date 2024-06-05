@@ -1,19 +1,21 @@
-using Microsoft.EntityFrameworkCore;
+using Badop.Core.Application.Operations.Queries;
+using Badop.Core.Application.Operations.Queries.ApiVersion;
+using Badop.Core.Domain.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Badop.Core.Application.Operations.Queries.ApiVersion;
+namespace Badop.Shell.API.Handlers;
 
-public record ApiVersionGetLatestByApiIdQuery(string ApiId, bool IncludeHidden=false):IQuery;
+public record ApiVersionGetLatestByApiIdRequest([FromRoute(Name="api_id")] string ApiId, [FromQuery(Name="include_hidden")] bool IncludeHidden=false):IRequest;
 
-public class ApiVersionGetLatestByApiIdQueryHandler(
-    BadopDbContext dbDbContext): IQueryHandler<ApiVersionGetLatestByApiIdQuery,Domain.Models.ApiVersion?>
+public class ApiVersionGetLatestByApiIdHandler(
+    IQueryHandler<ApiVersionGetLatestByApiIdQuery,ApiVersion?> handler): IHandler<ApiVersionGetLatestByApiIdRequest,IResult>
 {
-    public async Task<Domain.Models.ApiVersion?> Handle(ApiVersionGetLatestByApiIdQuery query)
+    public async Task<IResult> Handle(ApiVersionGetLatestByApiIdRequest request)
     {
-        return await dbDbContext.ApiVersions
-            .Where(x => x.ApiId == query.ApiId)
-            .Where(x => !x.IsHidden || query.IncludeHidden)
-            .OrderByDescending(x => x.MajorVersion)
-            .ThenByDescending(x => x.MinorVersion)
-            .FirstOrDefaultAsync();
+        var result = await handler.Handle(new ApiVersionGetLatestByApiIdQuery(request.ApiId, request.IncludeHidden));
+        if (result is null)
+            return Results.NotFound();
+
+        return Results.Ok(result);
     }
 }

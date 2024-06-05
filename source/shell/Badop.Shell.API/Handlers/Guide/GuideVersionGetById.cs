@@ -1,16 +1,22 @@
-using Microsoft.EntityFrameworkCore;
+using Badop.Core.Application.Operations.Queries;
+using Badop.Core.Application.Operations.Queries.GuideVersion;
+using Badop.Core.Domain.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Badop.Core.Application.Operations.Queries.GuideVersion;
+namespace Badop.Shell.API.Handlers;
 
-public record GuideVersionGetbyIdQuery(string Id) : IQuery;
+public record GuideVersionGetByIdRequest([FromRoute(Name="guide_version_id")] string Id) : IRequest;
 
-public class GuideVersionGetByIdQueryHandler(
-    BadopDbContext dbDbContext): IQueryHandler<GuideVersionGetbyIdQuery,Domain.Models.GuideVersion?>
+public class GuideVersionGetByIdHandler(
+    IQueryHandler<GuideVersionGetbyIdQuery, GuideVersion?> handler) : IHandler<GuideVersionGetByIdRequest,IResult> 
 {
-    public async Task<Domain.Models.GuideVersion?> Handle(GuideVersionGetbyIdQuery query)
+    public async Task<IResult> Handle(GuideVersionGetByIdRequest request)
     {
-        return await dbDbContext.GuideVersions
-            .FirstOrDefaultAsync(x=>x.Id==query.Id);
+        var result = await handler.Handle(new GuideVersionGetbyIdQuery(request.Id));
+        if(result is null)
+            return Results.NotFound();
+        
+        return Results.Ok(result);
     }
 }
 

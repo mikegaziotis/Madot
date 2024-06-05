@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Badop.Core.Application.Operations.Queries.Homepage;
 
-public record VersionedDocumentShortGetAllByApiIdQuery(string ApiId, VersionedDocumentType Type):IQuery;
+public record VersionedDocumentShortGetByApiIdQuery(string ApiId, VersionedDocumentType Type):IQuery;
 
 public class VersionedDocumentShortGetAllByApiIdQueryHandler(
-    BadopContext dbContext): IQueryHandler<VersionedDocumentShortGetAllByApiIdQuery,IEnumerable<VersionedDocumentShort>>
+    BadopDbContext dbDbContext): IQueryHandler<VersionedDocumentShortGetByApiIdQuery,IEnumerable<VersionedDocumentShort>>
 {
-    public async Task<IEnumerable<VersionedDocumentShort>> Handle(VersionedDocumentShortGetAllByApiIdQuery query)
+    public async Task<IEnumerable<VersionedDocumentShort>> Handle(VersionedDocumentShortGetByApiIdQuery query)
     {
-        return await dbContext.VersionedDocuments
+        return await dbDbContext.VersionedDocuments
             .Where(x => x.DocumentType == query.Type)
             .Where(x => x.ApiId == query.ApiId)
             .Select(x=>new VersionedDocumentShort(x))

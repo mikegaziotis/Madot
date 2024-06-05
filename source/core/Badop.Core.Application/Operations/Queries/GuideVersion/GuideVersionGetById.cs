@@ -1,13 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Badop.Core.Application.Operations.Queries.GuideVersion;
 
-public record GuideVersionGetSpecificQuery(string Id) : IQuery;
+public record GuideVersionGetbyIdQuery(string Id) : IQuery;
 
-public class GuideVersionGetSpecificQueryHandler(
-    BadopContext dbContext): IQueryHandler<GuideVersionGetSpecificQuery,Domain.Models.GuideVersion?>
+public class GuideVersionGetByIdQueryHandler(
+    BadopDbContext dbDbContext): IQueryHandler<GuideVersionGetbyIdQuery,Domain.Models.GuideVersion?>
 {
-    public async Task<Domain.Models.GuideVersion?> Handle(GuideVersionGetSpecificQuery query)
+    public async Task<Domain.Models.GuideVersion?> Handle(GuideVersionGetbyIdQuery query)
     {
-        return await dbContext.GuideVersions.FindAsync(query.Id);
+        return await dbDbContext.GuideVersions
+            .FirstOrDefaultAsync(x=>x.Id==query.Id);
     }
 }
 

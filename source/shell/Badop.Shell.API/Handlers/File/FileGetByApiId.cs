@@ -1,14 +1,17 @@
-using Microsoft.EntityFrameworkCore;
+using Badop.Core.Application.Operations.Queries;
+using Badop.Core.Application.Operations.Queries.File;
+using Microsoft.AspNetCore.Mvc;
+using File = Badop.Core.Domain.Models.File;
 
-namespace Badop.Core.Application.Operations.Queries.File;
+namespace Badop.Shell.API.Handlers;
+public record FileGetByApiIdRequest([FromRoute(Name="api_id")] string ApiId): IRequest;
 
-public record FileGetByApiIdQuery(string ApiId) : IQuery;
-
-public class FileGetByApiId(
-    BadopDbContext dbDbContext): IQueryHandler<FileGetByApiIdQuery,IEnumerable<Domain.Models.File>>
+public class FileGetByApiIdHandler(
+    IQueryHandler<FileGetByApiIdQuery,IEnumerable<File>> handler):IHandler<FileGetByApiIdRequest,IResult> 
 {
-    public async Task<IEnumerable<Domain.Models.File>> Handle(FileGetByApiIdQuery query)
+    public async Task<IResult> Handle(FileGetByApiIdRequest request)
     {
-        return await dbDbContext.Files.Where(x => x.ApiId == query.ApiId).ToListAsync();
+        var result = await handler.Handle(new FileGetByApiIdQuery(request.ApiId));
+        return Results.Ok(result);
     }
 }

@@ -20,9 +20,13 @@ public partial class BadopDbContext : DbContext
 
     public virtual DbSet<ApiVersion> ApiVersions { get; set; }
 
+    public virtual DbSet<ApiVersionFile> ApiVersionFiles { get; set; }
+
     public virtual DbSet<ApiVersionGuideVersion> ApiVersionGuideVersions { get; set; }
 
     public virtual DbSet<File> Files { get; set; }
+
+    public virtual DbSet<FileLink> FileLinks { get; set; }
 
     public virtual DbSet<Guide> Guides { get; set; }
 
@@ -32,7 +36,7 @@ public partial class BadopDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("server=localhost,1433;database=Badop;user=sa;password=Password123!;Encrypt=false;");
+        => optionsBuilder.UseSqlServer("Server=localhost,1433;Database=Badop;User=sa;Password=Password123!;Encrypt=false;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -54,7 +58,7 @@ public partial class BadopDbContext : DbContext
                     }));
 
             entity.Property(e => e.Id)
-                .HasMaxLength(20)
+                .HasMaxLength(30)
                 .IsUnicode(false);
             entity.Property(e => e.BaseUrlPath)
                 .HasMaxLength(100)
@@ -91,10 +95,10 @@ public partial class BadopDbContext : DbContext
             entity.HasIndex(e => new { e.ApiId, e.MajorVersion, e.MinorVersion }, "CK_ApiVersion_NameMajorMinor").IsUnique();
 
             entity.Property(e => e.Id)
-                .HasMaxLength(42)
+                .HasMaxLength(10)
                 .IsUnicode(false);
             entity.Property(e => e.ApiId)
-                .HasMaxLength(20)
+                .HasMaxLength(30)
                 .IsUnicode(false);
             entity.Property(e => e.BuildOrReleaseTag)
                 .HasMaxLength(20)
@@ -136,6 +140,45 @@ public partial class BadopDbContext : DbContext
                 .HasConstraintName("FK_ApiVersion_OpenApiSpec");
         });
 
+        modelBuilder.Entity<ApiVersionFile>(entity =>
+        {
+            entity.HasKey(e => new { e.ApiVersionId, e.FileId });
+
+            entity
+                .ToTable("ApiVersionFile")
+                .ToTable(tb => tb.IsTemporal(ttb =>
+                    {
+                        ttb.UseHistoryTable("ApiVersionFile_History", "dbo");
+                        ttb
+                            .HasPeriodStart("ValidFrom")
+                            .HasColumnName("ValidFrom");
+                        ttb
+                            .HasPeriodEnd("ValidTo")
+                            .HasColumnName("ValidTo");
+                    }));
+
+            entity.Property(e => e.ApiVersionId)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+            entity.Property(e => e.FileId)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+            entity.Property(e => e.CreatedBy)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getutcdate())");
+
+            entity.HasOne(d => d.ApiVersion).WithMany(p => p.ApiVersionFiles)
+                .HasForeignKey(d => d.ApiVersionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ApiVersionFile_ApiVersion");
+
+            entity.HasOne(d => d.File).WithMany(p => p.ApiVersionFiles)
+                .HasForeignKey(d => d.FileId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ApiVersionFile_File");
+        });
+
         modelBuilder.Entity<ApiVersionGuideVersion>(entity =>
         {
             entity.HasKey(e => new { e.ApiVersionId, e.GuideVersionId });
@@ -154,7 +197,7 @@ public partial class BadopDbContext : DbContext
                     }));
 
             entity.Property(e => e.ApiVersionId)
-                .HasMaxLength(42)
+                .HasMaxLength(10)
                 .IsUnicode(false);
             entity.Property(e => e.GuideVersionId)
                 .HasMaxLength(10)
@@ -194,28 +237,72 @@ public partial class BadopDbContext : DbContext
                 .HasMaxLength(10)
                 .IsUnicode(false);
             entity.Property(e => e.ApiId)
-                .HasMaxLength(20)
+                .HasMaxLength(30)
                 .IsUnicode(false);
             entity.Property(e => e.CreatedBy)
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getutcdate())");
+            entity.Property(e => e.Description).IsUnicode(false);
+            entity.Property(e => e.DisplayName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.ImageUrl)
+                .IsUnicode(false)
+                .HasColumnName("ImageURL");
             entity.Property(e => e.LastModifiedBy)
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.LastModifiedDate).HasDefaultValueSql("(getutcdate())");
-            entity.Property(e => e.Name)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Url)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("URL");
 
             entity.HasOne(d => d.Api).WithMany(p => p.Files)
                 .HasForeignKey(d => d.ApiId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_File_Api");
+        });
+
+        modelBuilder.Entity<FileLink>(entity =>
+        {
+            entity.HasKey(e => new { e.FileId, e.OperatingSystem, e.ChipArchitecture });
+
+            entity
+                .ToTable("FileLink")
+                .ToTable(tb => tb.IsTemporal(ttb =>
+                    {
+                        ttb.UseHistoryTable("FileLink_History", "dbo");
+                        ttb
+                            .HasPeriodStart("ValidFrom")
+                            .HasColumnName("ValidFrom");
+                        ttb
+                            .HasPeriodEnd("ValidTo")
+                            .HasColumnName("ValidTo");
+                    }));
+
+            entity.Property(e => e.FileId)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+            entity.Property(e => e.OperatingSystem)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+            entity.Property(e => e.ChipArchitecture)
+                .HasMaxLength(5)
+                .IsUnicode(false);
+            entity.Property(e => e.CreatedBy)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getutcdate())");
+            entity.Property(e => e.DownloadUrl)
+                .IsUnicode(false)
+                .HasColumnName("DownloadURL");
+            entity.Property(e => e.LastModifiedBy)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.LastModifiedDate).HasDefaultValueSql("(getutcdate())");
+
+            entity.HasOne(d => d.File).WithMany(p => p.FileLinks)
+                .HasForeignKey(d => d.FileId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_FileLink_File");
         });
 
         modelBuilder.Entity<Guide>(entity =>
@@ -239,7 +326,7 @@ public partial class BadopDbContext : DbContext
                 .HasMaxLength(10)
                 .IsUnicode(false);
             entity.Property(e => e.ApiId)
-                .HasMaxLength(20)
+                .HasMaxLength(30)
                 .IsUnicode(false);
             entity.Property(e => e.CreatedBy)
                 .HasMaxLength(100)
@@ -274,7 +361,7 @@ public partial class BadopDbContext : DbContext
                             .HasColumnName("ValidTo");
                     }));
 
-            entity.HasIndex(e => new { e.GuideId, e.Version }, "UC_GuideVersion_Version").IsUnique();
+            entity.HasIndex(e => new { e.GuideId, e.Iteration }, "UC_GuideVersion_Iteration").IsUnique();
 
             entity.Property(e => e.Id)
                 .HasMaxLength(10)
@@ -313,13 +400,13 @@ public partial class BadopDbContext : DbContext
                             .HasColumnName("ValidTo");
                     }));
 
-            entity.HasIndex(e => new { e.ApiId, e.DocumentType, e.Version }, "UC_VersionedDocument").IsUnique();
+            entity.HasIndex(e => new { e.ApiId, e.DocumentType, e.Iteration }, "UC_VersionedDocument_Iteration").IsUnique();
 
             entity.Property(e => e.Id)
                 .HasMaxLength(10)
                 .IsUnicode(false);
             entity.Property(e => e.ApiId)
-                .HasMaxLength(20)
+                .HasMaxLength(30)
                 .IsUnicode(false);
             entity.Property(e => e.CreatedBy)
                 .HasMaxLength(100)

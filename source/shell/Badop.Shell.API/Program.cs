@@ -1,6 +1,8 @@
+using Badop.Core.Application;
+using Badop.Infrastructure.SqlServer;
 using Badop.Shell.API.Handlers;
 using OpenTelemetry.Logs;
-using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
+
+
+builder.Services.AddDatabaseConfiguration();
+builder.Services.RegisterApplicationContext();
 builder.Services.RegisterHandlers();
+
 builder.Services.ConfigureHttpJsonOptions(options => {
     options.SerializerOptions.WriteIndented = true;
     options.SerializerOptions.IncludeFields = true;

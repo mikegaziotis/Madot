@@ -9,6 +9,8 @@ public partial class ApiVersionGuideVersion
 
     public string GuideVersionId { get; set; } = null!;
 
+    public int OrderId { get; set; }
+
     public string CreatedBy { get; set; } = null!;
 
     public DateTime CreatedDate { get; set; }

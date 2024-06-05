@@ -1,12 +1,21 @@
-namespace Badop.Core.Application.Operations.Queries.Guide;
+using Badop.Core.Application.Operations.Queries;
+using Badop.Core.Application.Operations.Queries.Guide;
+using Badop.Core.Domain.Models;
+using Microsoft.AspNetCore.Mvc;
 
-public record GuideGetByIdQuery(string Id) : IQuery;
+namespace Badop.Shell.API.Handlers;
 
-public class GuideGetByIdQueryHandler(
-    BadopDbContext dbDbContext): IQueryHandler<GuideGetByIdQuery,Domain.Models.Guide?>
+public record GuideGetByIdRequest([FromRoute(Name="guide_id")] string Id) : IRequest;
+
+public class GuideGetByIdHandler(
+    IQueryHandler<GuideGetByIdQuery,Guide?> handler):IHandler<GuideGetByIdRequest,IResult> 
 {
-    public async Task<Domain.Models.Guide?> Handle(GuideGetByIdQuery query)
+    public async Task<IResult> Handle(GuideGetByIdRequest request)
     {
-        return await dbDbContext.Guides.FindAsync(query.Id);
+        var result = await handler.Handle(new GuideGetByIdQuery(request.Id));
+        if (result is null)
+            return Results.NotFound();
+        
+        return Results.Ok(result);
     }
 }

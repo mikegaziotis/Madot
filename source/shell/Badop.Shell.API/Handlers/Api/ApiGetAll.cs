@@ -5,10 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Badop.Shell.API.Handlers;
 
-public class ApiGetAllRequest: IRequest
-{
-    [FromQuery] public bool VisibleOnly { get; set; } = false;
-}
+public record ApiGetAllRequest([FromQuery(Name="visible_only")] bool VisibleOnly=false):IRequest;
+
 
 public class ApiGetAllHandler(IQueryHandler<ApiGetAllQuery, IEnumerable<Api>> handler): IHandler<ApiGetAllRequest,IResult> 
 {

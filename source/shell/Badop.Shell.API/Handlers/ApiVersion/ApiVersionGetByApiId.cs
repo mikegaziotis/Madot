@@ -1,14 +1,18 @@
-using Microsoft.EntityFrameworkCore;
+using Badop.Core.Application.Operations.Queries;
+using Badop.Core.Application.Operations.Queries.ApiVersion;
+using Badop.Core.Domain.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Badop.Core.Application.Operations.Queries.ApiVersion;
+namespace Badop.Shell.API.Handlers;
 
-public record ApiVersionGetByApiIdQuery(string ApiId): IQuery;
+public record ApiVersionGetByApiIdRequest([FromRoute(Name="api_id")] string ApiId): IRequest;
 
-public class ApiVersionGetByApiIdQueryHandler(
-    BadopDbContext dbDbContext): IQueryHandler<ApiVersionGetByApiIdQuery,IEnumerable<Domain.Models.ApiVersion>>
+public class ApiVersionGetByApiIdHandler(
+    IQueryHandler<ApiVersionGetByApiIdQuery,IEnumerable<ApiVersion>> handler): IHandler<ApiVersionGetByApiIdRequest,IResult>
 {
-    public async Task<IEnumerable<Domain.Models.ApiVersion>> Handle(ApiVersionGetByApiIdQuery query)
+    public async Task<IResult> Handle(ApiVersionGetByApiIdRequest request)
     {
-        return await dbDbContext.ApiVersions.Where(x => x.ApiId == query.ApiId).ToListAsync();
+        var result = await handler.Handle(new ApiVersionGetByApiIdQuery(request.ApiId));
+        return Results.Ok(result);
     }
 }

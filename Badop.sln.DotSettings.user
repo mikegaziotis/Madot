@@ -1,2 +1,26 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=14c394b8_002Db82d_002D4e69_002Dbe7f_002D8d81e447d728_0023Scaffold/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+	
+	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/CustomBuildToolPath/@EntryValue">/usr/lib/dotnet/sdk/8.0.301/MSBuild.dll</s:String>
+	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/DotNetCliExePath/@EntryValue">/usr/lib/dotnet/dotnet</s:String>
+	
+	<s:Boolean x:Key="/Default/Environment/Hierarchy/Build/SolBuilderDuo/RunBuildOnSolutionLoaded/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4c568e26_002Dc22c_002D49cf_002D890f_002Dad4e13923167/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetApi" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::D701B4F6-581A-4115-904A-0AF37642176D::net8.0::Badop.IntegrationTests.CQRS_Handlers.ApiTests.GetAllApis&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::D701B4F6-581A-4115-904A-0AF37642176D::net8.0::Badop.IntegrationTests.CQRS_Handlers.FileTests.GetFilesByApiId&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::D701B4F6-581A-4115-904A-0AF37642176D::net8.0::Badop.IntegrationTests.CQRS_Handlers.FileTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4f470171_002D21ea_002D488d_002Dbc2e_002D09a564537de7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetFilesByApiVersionId" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::D701B4F6-581A-4115-904A-0AF37642176D::net8.0::Badop.IntegrationTests.CQRS_Handlers.FileTests.GetFilesByApiVersionId&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::D701B4F6-581A-4115-904A-0AF37642176D::net8.0::Badop.IntegrationTests.CQRS_Handlers.ApiVersionTests.GetApiVersion&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::D701B4F6-581A-4115-904A-0AF37642176D::net8.0::Badop.IntegrationTests.CQRS_Handlers.ApiVersionTests.GetAllApiVersions&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::D701B4F6-581A-4115-904A-0AF37642176D::net8.0::Badop.IntegrationTests.CQRS_Handlers.ApiTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::D701B4F6-581A-4115-904A-0AF37642176D::net8.0::Badop.IntegrationTests.CQRS_Handlers.ApiVersionTests.GetShortApiVersions&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::D701B4F6-581A-4115-904A-0AF37642176D::net8.0::Badop.IntegrationTests.CQRS_Handlers.ApiVersionTests.GetLatestApiVersion&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=14c394b8_002Db82d_002D4e69_002Dbe7f_002D8d81e447d728_0023Scaffold/@EntryIndexedValue">True</s:Boolean>
+	
+	</wpf:ResourceDictionary>

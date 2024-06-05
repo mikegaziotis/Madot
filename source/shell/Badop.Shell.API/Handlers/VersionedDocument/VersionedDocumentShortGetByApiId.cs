@@ -1,20 +1,19 @@
+using Badop.Core.Application.Operations.Queries;
+using Badop.Core.Application.Operations.Queries.Homepage;
 using Badop.Core.Domain.Enums;
 using Badop.Core.Domain.ShortTypes;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Badop.Core.Application.Operations.Queries.Homepage;
+namespace Badop.Shell.API.Handlers;
 
-public record VersionedDocumentShortGetByApiIdQuery(string ApiId, VersionedDocumentType Type):IQuery;
+public record VersionedDocumentShortGetByApiIdRequest(string ApiId, VersionedDocumentType Type):IRequest;
 
-public class VersionedDocumentShortGetAllByApiIdQueryHandler(
-    BadopDbContext dbDbContext): IQueryHandler<VersionedDocumentShortGetByApiIdQuery,IEnumerable<VersionedDocumentShort>>
+public class VersionedDocumentShortGetByApiIdHandler(
+    IQueryHandler<VersionedDocumentShortGetByApiIdQuery,IEnumerable<VersionedDocumentShort>> handler): IHandler<VersionedDocumentShortGetByApiIdRequest,IResult> 
 {
-    public async Task<IEnumerable<VersionedDocumentShort>> Handle(VersionedDocumentShortGetByApiIdQuery query)
+    public async Task<IResult> Handle(VersionedDocumentShortGetByApiIdRequest request)
     {
-        return await dbDbContext.VersionedDocuments
-            .Where(x => x.DocumentType == query.Type)
-            .Where(x => x.ApiId == query.ApiId)
-            .Select(x=>new VersionedDocumentShort(x))
-            .ToListAsync();
+        var result = await handler.Handle(new VersionedDocumentShortGetByApiIdQuery(request.ApiId, request.Type));
+        return Results.Ok(result);
     }
 }

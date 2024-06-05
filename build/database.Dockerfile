@@ -4,15 +4,16 @@ ARG SQLPROJ_NAME
 WORKDIR /app
 RUN echo pwd
 COPY ./database/$SQLPROJ_NAME/ .
-RUN sed -i '/<Project /a <Sdk Name="Microsoft.Build.Sql" Version="0.1.14-preview" />' $SQLPROJ_NAME.sqlproj
+RUN sed -i '/<Project /a <Sdk Name="Microsoft.Build.Sql" Version="0.1.14-preview" />' "$SQLPROJ_NAME.sqlproj"
 RUN sed -i -e '/Import.*Microsoft\.Data\.Tools\.Schema\.SqlTasks\.targets/d' \
-           -e '/Import.*Microsoft\.Common\.props/d' $SQLPROJ_NAME.sqlproj
-RUN dotnet build $SQLPROJ_NAME.sqlproj /p:NetCoreBuild=true /p:OutputPath=/app/dacpac
+           -e '/Import.*Microsoft\.Common\.props/d' "$SQLPROJ_NAME.sqlproj"
+RUN dotnet build "$SQLPROJ_NAME.sqlproj" /p:NetCoreBuild=true /p:OutputPath=/app/dacpac
 
 # STEP II: DEPLOY DATABASE
 FROM mcr.microsoft.com/mssql/server:2022-latest
 ARG SQLPROJ_NAME
 ARG DATABASE_NAME
+ARG DATABASE_SEED_DATA
 ARG DATABASE_SA_PASSWORD
 ENV SA_PASSWORD=$DATABASE_SA_PASSWORD
 ENV ACCEPT_EULA=Y
@@ -39,9 +40,10 @@ RUN ( /opt/mssql/bin/sqlservr & ) | grep -q "Service Broker manager has started"
     /TargetServerName:localhost \
     /TargetDatabaseName:${DATABASE_NAME} \
     /TargetUser:sa \
-    /TargetPassword:$SA_PASSWORD \
+    /TargetPassword:"$SA_PASSWORD" \
     /TargetTrustServerCertificate:True \
     /SourceFile:/tmp/db/db.dacpac \
+    /Variables:SeedData=${DATABASE_SEED_DATA} \
     && rm -r /tmp/db \
     && pkill sqlservr \
     && rm -r /opt/sqlpackage

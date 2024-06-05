@@ -1,11 +1,13 @@
+using System.Reflection;
+using Badop.Core.Application;
+using Badop.Core.Application.Enums;
+
 namespace Badop.Shell.API.Handlers;
 
 public static class DependencyInjection
 {
-    public static void RegisterHandlers(this IServiceCollection serviceCollection)
+    public static void RegisterHandlers(this IServiceCollection services)
     {
-        serviceCollection.AddScoped<ApiGetHandler>();
-        serviceCollection.AddScoped<ApiPostHandler>();
-        serviceCollection.AddScoped<ApiPatchHandler>();
+        services.RegisterTypesByGenericInterface(Assembly.GetExecutingAssembly(),typeof(IHandler<,>),Scope.Transient);
     }
 }

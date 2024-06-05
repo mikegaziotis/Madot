@@ -4,7 +4,6 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <InvariantGlobalization>true</InvariantGlobalization>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
@@ -26,10 +25,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\core\Badop.Core.Application\Badop.Core.Application.csproj" />
       <ProjectReference Include="..\..\core\Badop.Core.Domain\Badop.Core.Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Validators\" />
+      <ProjectReference Include="..\..\infrastructure\Badop.Infrastructure.SqlServer\Badop.Infrastructure.SqlServer.csproj" />
     </ItemGroup>
 
 </Project>

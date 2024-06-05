@@ -1,17 +1,21 @@
-using Microsoft.EntityFrameworkCore;
+using Badop.Core.Application.Operations.Queries;
+using Badop.Core.Application.Operations.Queries.Homepage;
+using Badop.Core.Domain.Enums;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Badop.Core.Application.Operations.Queries.Homepage;
+namespace Badop.Shell.API.Handlers;
 
-public record VersionedDocumentDataGetByIdQuery(string Id):IQuery;
+public record VersionedDocumentDataGetByIdRequest(string Id, VersionedDocumentType Type):IRequest;
 
-public class VersionedDocumentDataGetByIdQueryHandler(
-    BadopDbContext dbDbContext): IQueryHandler<VersionedDocumentDataGetByIdQuery,string?>
+public class VersionedDocumentDataGetByIdHandler(
+    IQueryHandler<VersionedDocumentDataGetByIdQuery,string?> handler): IHandler<VersionedDocumentDataGetByIdRequest,IResult>
 {
-    public async Task<string?> Handle(VersionedDocumentDataGetByIdQuery query)
+    public async Task<IResult> Handle(VersionedDocumentDataGetByIdRequest request)
     {
-        return await dbDbContext.VersionedDocuments
-            .Where(x => x.Id == query.Id)
-            .Select(x => x.Data)
-            .FirstOrDefaultAsync();
+        var result = await handler.Handle(new VersionedDocumentDataGetByIdQuery(request.Id, request.Type));
+        if (string.IsNullOrEmpty(result))
+            return Results.NotFound();
+        
+        return Results.Ok(result);
     }
 }

@@ -9,9 +9,11 @@ public partial class File
 
     public string ApiId { get; set; } = null!;
 
-    public string Name { get; set; } = null!;
+    public string DisplayName { get; set; } = null!;
 
-    public string Url { get; set; } = null!;
+    public string Description { get; set; } = null!;
+
+    public string? ImageUrl { get; set; }
 
     public bool IsDeleted { get; set; }
 
@@ -24,4 +26,8 @@ public partial class File
     public DateTime LastModifiedDate { get; set; }
 
     public virtual Api Api { get; set; } = null!;
+
+    public virtual ICollection<ApiVersionFile> ApiVersionFiles { get; set; } = new List<ApiVersionFile>();
+
+    public virtual ICollection<FileLink> FileLinks { get; set; } = new List<FileLink>();
 }

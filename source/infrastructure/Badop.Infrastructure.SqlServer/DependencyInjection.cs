@@ -1,12 +1,12 @@
 using Badop.Core.Application.Providers;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Badop.Infrastrupture.DataConfig;
+namespace Badop.Infrastructure.SqlServer;
 
 public static class DependencyInjection
 {
-    static void AddDatabaseConfiguration(IServiceCollection serviceCollection)
+    public static void AddDatabaseConfiguration(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddScoped<IDatabaseConfigurationProvider, DatabaseConfigurationProvider>();
+        serviceCollection.AddScoped<IDatabaseConfigurationProvider, SqlConfigurationProvider>();
     }
 }

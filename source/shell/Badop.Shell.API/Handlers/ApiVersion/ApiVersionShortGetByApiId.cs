@@ -1,19 +1,19 @@
+using Badop.Core.Application.Operations.Queries;
+using Badop.Core.Application.Operations.Queries.ApiVersion;
 using Badop.Core.Domain.ShortTypes;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Badop.Core.Application.Operations.Queries.ApiVersion;
+namespace Badop.Shell.API.Handlers;
 
-public record ApiVersionShortGetByApiIdQuery(string ApiId, bool IncludeHidden=false):IQuery;
+public record ApiVersionShortGetByApiIdRequest([FromRoute(Name="api_id")] string ApiId, [FromQuery(Name="include_hidden")] bool IncludeHidden=false):IRequest;
 
-public class ApiVersionShortGetByApiIdQueryHandler(
-    BadopDbContext dbDbContext): IQueryHandler<ApiVersionShortGetByApiIdQuery, IEnumerable<ApiVersionShort>>
+public class ApiVersionShortGetByApiIdHandler(
+    IQueryHandler<ApiVersionShortGetByApiIdQuery, IEnumerable<ApiVersionShort>> handler): IHandler<ApiVersionShortGetByApiIdRequest, IResult>
 {
-    public async Task<IEnumerable<ApiVersionShort>> Handle(ApiVersionShortGetByApiIdQuery query)
+
+    public async Task<IResult> Handle(ApiVersionShortGetByApiIdRequest request)
     {
-        return await dbDbContext.ApiVersions
-            .Where(x => x.ApiId == query.ApiId)
-            .Where(x=> !x.IsHidden || query.IncludeHidden)
-            .Select(x => new ApiVersionShort(x))
-            .ToListAsync();
+        var result = await handler.Handle(new ApiVersionShortGetByApiIdQuery(request.ApiId, request.IncludeHidden));
+        return Results.Ok(result);
     }
 }

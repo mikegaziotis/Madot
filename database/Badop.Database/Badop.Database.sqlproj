@@ -69,16 +69,23 @@
   <ItemGroup>
     <Build Include="dbo\Tables\ApiVersion.sql" />
     <Build Include="dbo\Tables\Api.sql" />
+    <Build Include="dbo\Tables\ApiVersionFile.sql" />
+    <Build Include="dbo\Tables\ApiVersionGuideVersion.sql" />
     <Build Include="dbo\Tables\File.sql" />
+    <Build Include="dbo\Tables\FileLink.sql" />
     <Build Include="dbo\Tables\Guide.sql" />
     <Build Include="dbo\Tables\GuideVersion.sql" />
     <Build Include="dbo\Tables\VersionedDocument.sql" />
+    <None Include="Scripts\PostDeploy\SeedData.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Condition="'$(NetCoreBuild)' == 'true'">
-      <Version>1.0.0</Version>
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
+    <SqlCmdVariable Include="SeedData">
+      <Value>$(SqlCmdVar__1)</Value>
+      <DefaultValue>1</DefaultValue>
+    </SqlCmdVariable>
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\PostDeploy\Script.PostDeployment.sql" />
   </ItemGroup>
   <Import Project="$(NETCoreTargetsPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" Condition="'$(NetCoreBuild)' == 'true'" />
   <Target Name="BeforeBuild">

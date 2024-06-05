@@ -1,14 +1,16 @@
-using Badop.Core.Application.Operations.Queries;
+using Microsoft.EntityFrameworkCore;
 
-namespace Badop.Core.Application.Operations.Commands.File;
+namespace Badop.Core.Application.Operations.Queries.File;
 
 public record FileGetByIdQuery(string Id):IQuery;
 
 public class FileGetByIdQueryHandler(
-    BadopContext dbContext):IQueryHandler<FileGetByIdQuery,Domain.Models.File?>
+    BadopDbContext dbDbContext):IQueryHandler<FileGetByIdQuery,Domain.Models.File?>
 {
     public async Task<Domain.Models.File?> Handle(FileGetByIdQuery query)
     {
-        return await dbContext.Files.FindAsync(query.Id);
+        return await dbDbContext.Files
+            .Include(x=>x.FileLinks)
+            .FirstOrDefaultAsync(x=>x.Id==query.Id);
     }
 }
