@@ -10,6 +10,7 @@ public class GuideVersionGetByIdQueryHandler(
     public async Task<Domain.Models.GuideVersion?> Handle(GuideVersionGetbyIdQuery query)
     {
         return await dbDbContext.GuideVersions
+            .Include(x=>x.Guide)
             .FirstOrDefaultAsync(x=>x.Id==query.Id);
     }
 }

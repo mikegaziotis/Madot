@@ -1,7 +1,9 @@
+using System.Text.Json.Serialization;
 using Badop.Core.Application;
 using Badop.Infrastructure.SqlServer;
-using Badop.Shell.API.Handlers;
+using Badop.Shell.API.Endpoints;
 using OpenTelemetry.Logs;
+using Badop.Shell.API.Automapper;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
-
+builder.Services.AddControllers().AddJsonOptions(options => 
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 builder.Services.AddDatabaseConfiguration();
 builder.Services.RegisterApplicationContext();
@@ -21,6 +24,8 @@ builder.Services.ConfigureHttpJsonOptions(options => {
     options.SerializerOptions.WriteIndented = true;
     options.SerializerOptions.IncludeFields = true;
 });
+
+builder.Services.AddAutomapper();
 
 
 var app = builder.Build();

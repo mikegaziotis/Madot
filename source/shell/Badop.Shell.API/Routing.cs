@@ -1,7 +1,4 @@
-using Badop.Core.Domain.Enums;
-using Badop.Shell.API.Handlers;
-using Badop.Shell.API.Requests;
-using Microsoft.AspNetCore.Mvc;
+using Badop.Shell.API.Endpoints;
 
 
 public static class Routing
@@ -10,127 +7,84 @@ public static class Routing
     {
         //Api
         #region Api
-        app.MapGet("api/{api_id}", async (ApiGetByIdHandler handler, [AsParameters] ApiGetByIdRequest request) => await handler.Handle(request))
-            .WithTags("Api");
 
-        app.MapGet("api/get-all", async (ApiGetAllHandler handler, [AsParameters] ApiGetAllRequest request) => await handler.Handle(request))
-            .WithTags("Api");
-        //app.MapPost("api", async (ApiPostHandler handler, [AsParameters] ApiPostRequest request) => await handler.Handle(request)).WithTags("Api");
+        app.MapGet("api/{id}", EndpointExtensions.ApiGetByIdEndpoint).ApiGetByIdEndpointConfiguration();
+
+        app.MapGet("api/list", EndpointExtensions.ApiGetAllEndpoint).ApiGetAllEndpointConfiguration();
+        
+        app.MapGet("api/search-by-name",EndpointExtensions.ApiSearchByNameEndpoint).ApiSearchByNameEndpointConfiguration();
+        
         #endregion
         
         //Api Version
         #region Api Version
 
-        app.MapGet("api-version/{api_version_id}", async (ApiVersionGetByIdHandler handler, [AsParameters] ApiVersionGetByIdRequest request) => await handler.Handle(request))
-            .WithTags(("Api Version"));
+        app.MapGet("api-version/{id}", EndpointExtensions.ApiVersionGetByIdEndpoint).ApiVersionGetByIdEndpointConfiguration();
+
+        app.MapGet("api-version/latest/{api_id}", EndpointExtensions.ApiVersionGetLatestByApiIdEndpoint).ApiVersionGetLatestByApiIdEndpointConfiguration(); 
         
-        app.MapGet("api-version/all-history/{api_id}", async (ApiVersionGetByApiIdHandler handler, [AsParameters] ApiVersionGetByApiIdRequest request) => await handler.Handle(request))
-            .WithTags(("Api Version"));
-        
-        app.MapGet("api-version/latest/{api_id}", async (ApiVersionGetLatestByApiIdHandler handler, [AsParameters] ApiVersionGetLatestByApiIdRequest request) => await handler.Handle(request))
-            .WithTags(("Api Version"));
-        
-        app.MapGet("api-version/short-history/{api_id}", async (ApiVersionShortGetByApiIdHandler handler, [AsParameters] ApiVersionShortGetByApiIdRequest request) => await handler.Handle(request))
-            .WithTags(("Api Version"));
-        
+        app.MapGet("api-version/list/{api_id}", EndpointExtensions.ApiVersionsGetByApiIdEndpoint).ApiVersionsGetByApiIdEndpointConfiguration();
+
         #endregion
         
         //Changelog
         #region Changelog
 
-        app.MapGet("changelog/{log_id}",
-            async (VersionedDocumentDataGetByIdHandler handler, [FromRoute(Name="log_id")] string id) =>
-            await handler.Handle(new VersionedDocumentDataGetByIdRequest(id, VersionedDocumentType.Changelog)))
-        .WithTags("Changelog");
+        app.MapGet("changelog/{id}",EndpointExtensions.ChangelogGetByIdEndpoint).ChangelogGetByIdEndpointConfiguration();
 
-        app.MapGet("changelog/for-api-version/{api_version_id}", 
-                async (VersionedDocumentGetByApiVersionIdHandler handler, [FromRoute(Name="api_version_id")] string apiVersionId) => 
-                await handler.Handle(new VersionedDocumentGetByApiVersionIdRequest(apiVersionId, VersionedDocumentType.Changelog)))
-        .WithTags("Changelog");
+        app.MapGet("changelog/by-api-version/{api_version_id}", EndpointExtensions.ChangelogGetByApiVersionIdEndpoint).ChangelogGetByApiVersionIdEndpointConfiguration();
 
-        app.MapGet("changelog/change-history/{api_id}", 
-                async (VersionedDocumentShortGetByApiIdHandler handler, [FromRoute(Name="api_id")] string apiId) => 
-                await handler.Handle(new VersionedDocumentShortGetByApiIdRequest(apiId, VersionedDocumentType.Changelog)))
-            .WithTags("Changelog");
-        
+        app.MapGet("changelog/by-api/{api_id}", EndpointExtensions.ChangelogGetByApiIdEndpoint).ChangelogGetByApiIdEndpointConfiguration();
         #endregion
         
         //Homepage
         #region Homepage
 
-        app.MapGet("homepage/{page_id}",
-                async (VersionedDocumentDataGetByIdHandler handler, [FromRoute(Name="page_id")] string id) =>
-                await handler.Handle(new VersionedDocumentDataGetByIdRequest(id, VersionedDocumentType.Homepage)))
-            .WithTags("Homepage");
+        app.MapGet("homepage/{id}",EndpointExtensions.HomepageGetByIdEndpoint).HomepageGetByIdEndpointConfiguration();
 
-        app.MapGet("homepage/for-api-version/{api_version_id}", 
-                async (VersionedDocumentGetByApiVersionIdHandler handler, [FromRoute(Name="api_version_id")] string apiVersionId) => 
-                await handler.Handle(new VersionedDocumentGetByApiVersionIdRequest(apiVersionId, VersionedDocumentType.Homepage)))
-            .WithTags("Homepage");
-
-        app.MapGet("homepage/change-history/{api_id}", 
-                async (VersionedDocumentShortGetByApiIdHandler handler, [FromRoute(Name="api_id")] string apiId) => 
-                await handler.Handle(new VersionedDocumentShortGetByApiIdRequest(apiId, VersionedDocumentType.Homepage)))
-            .WithTags("Homepage");
+        app.MapGet("homepage/by-api-version/{api_version_id}", EndpointExtensions.HomepageGetByApiVersionIdEndpoint).HomepageGetByApiVersionIdEndpointConfiguration();
         
+        app.MapGet("homepage/by-api/{api_id}", EndpointExtensions.HomepageGetByApiIdEndpoint).HomepageGetByApiIdEndpointConfiguration();
+
         #endregion
-        
+
         //Open Api Specification
         #region Open Api Specification
 
-        app.MapGet("open-api-spec/{oas_id}",
-                async (VersionedDocumentDataGetByIdHandler handler, [FromRoute(Name="oas_id")] string id) =>
-                await handler.Handle(new VersionedDocumentDataGetByIdRequest(id, VersionedDocumentType.OpenApiSpec)))
-            .WithTags("Open Api Specification");
+        app.MapGet("open-api-spec/{id}",EndpointExtensions.OpenApiSpecGetByIdEndpoint).OpenApiSpecGetByIdEndpointConfiguration();
 
-        app.MapGet("open-api-spec/for-api-version/{api_version_id}", 
-                async (VersionedDocumentGetByApiVersionIdHandler handler, [FromRoute(Name="api_version_id")] string apiVersionId) => 
-                await handler.Handle(new VersionedDocumentGetByApiVersionIdRequest(apiVersionId, VersionedDocumentType.OpenApiSpec)))
-            .WithTags("Open Api Specification");
-
-        app.MapGet("open-api-spec/change-history/{api_id}", 
-                async (VersionedDocumentShortGetByApiIdHandler handler, [FromRoute(Name="api_id")] string apiId) => 
-                await handler.Handle(new VersionedDocumentShortGetByApiIdRequest(apiId, VersionedDocumentType.OpenApiSpec)))
-            .WithTags("Open Api Specification");
+        app.MapGet("open-api-spec/by-api-version/{api_version_id}", EndpointExtensions.OpenApiSpecGetByApiVersionIdEndpoint).OpenApiSpecGetByApiVersionIdEndpointConfiguration();
         
+        app.MapGet("open-api-spec/by-api/{api_id}", EndpointExtensions.OpenApiSpecGetByApiIdEndpoint).OpenApiSpecGetByApiIdEndpointConfiguration();
+
         #endregion
-        
+
         //File
         #region File
 
-        app.MapGet("file/{file_id}",
-            async (FileGetByIdHandler handler, [AsParameters] FileGetByIdRequest request) => await handler.Handle(request))
-            .WithTags("File");
+        app.MapGet("file/{id}", EndpointExtensions.FileGetByIdEndpoint).FileGetByIdEndpointConfiguration();
 
-        app.MapGet("file/for-api/{api_id}",
-                async (FileGetByApiIdHandler handler, [AsParameters] FileGetByApiIdRequest request) => await handler.Handle(request))
-            .WithTags("File");
+        app.MapGet("file/list/by-api/{api_id}",EndpointExtensions.FilesGetByApiIdEndpoint).FilesGetByApiIdEndpointConfiguration();
+
+        app.MapGet("file/list/by-api-version/{api_version_id}", EndpointExtensions.FilesGetByApiVersionIdEndpoint).FilesGetByApiVersionIdEndpointConfiguration();
+
         #endregion
-        
+
         //Guide
         #region Guide
 
-        app.MapGet("guide/for-api/{api_id}",
-            async (GuideGetByApiIdHandler handler, [AsParameters] GuideGetByApiIdRequest request) => await handler.Handle(request))
-            .WithTags("Guide");
-        
-        app.MapGet("guide/{guide_id}",
-                async (GuideGetByIdHandler handler, [AsParameters] GuideGetByIdRequest request) => await handler.Handle(request))
-            .WithTags("Guide");
+        app.MapGet("guide/{id}", EndpointExtensions.GuideGetByIdEndpoint).GuideGetByIdEndpointConfiguration();
+
+        app.MapGet("guide/list/{api_id}", EndpointExtensions.GuidesGetByApiIdEndpoint).GuidesGetByApiIdEndpointConfiguration();
 
         #endregion
 
-        
-        //Guide Version
-        #region Guide Version
-        
-        app.MapGet("guide-version/{guide_version_id}",
-                async (GuideVersionGetByIdHandler handler, [AsParameters] GuideVersionGetByIdRequest request) => await handler.Handle(request))
-            .WithTags("Guide Version");
-        
-        app.MapGet("guide-version/for-api-version/{api_version_id}",
-                async (GuideVersionGetByApiVersionIdHandler handler, [AsParameters] GuideVersionGetByApiVersionIdRequest request) => await handler.Handle(request))
-            .WithTags("Guide Version");
+        //GuideVersion
+        #region GuideVersion
+        app.MapGet("guide-version/{id}", EndpointExtensions.GuideVersionGetByIdEndpoint).GuideVersionGetByIdEndpointConfiguration();
+
+        app.MapGet("guide-version/latest/{guide_id}", EndpointExtensions.GuideVersionLatestGetByGuideIdEndpoint).GuideVersionLatestGetByGuideIdEndpointConfiguration();
+
         #endregion
 
     }

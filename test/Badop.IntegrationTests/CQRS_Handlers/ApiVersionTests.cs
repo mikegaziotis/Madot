@@ -53,20 +53,4 @@ public class ApiVersionTests
         Assert.NotNull(result);
         Assert.Contains(apiId, result.Select(x => x.ApiId));
     }
-    
-    [Fact]
-    public async void GetShortApiVersions()
-    {
-        //Arrange
-        string apiId = "petstore";
-        var queryHandler = new ApiVersionShortGetByApiIdQueryHandler(new BadopDbContext(new SqlConfigurationProvider()));
-        var query = new ApiVersionShortGetByApiIdQuery(apiId);
-
-        //Act
-        var result = await queryHandler.Handle(query);
-        
-        //Assert
-        Assert.NotNull(result);
-        Assert.Contains("1.0", result.Select(x => x.Version));
-    }
 }

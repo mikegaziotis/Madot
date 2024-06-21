@@ -1,0 +1,46 @@
+@page "/api/{ApiId}/{SectionName?}/{VersionId?}"
+@rendermode InteractiveServer
+@using Badop.Shell.BlazorWebApp.Components.ApiComponents
+
+@if (_api is not null && _apiVersion is not null)
+{
+    <ApiHeader Api="@_api" SelectedVersion="@_apiVersion.Id"/>
+}
+
+<Tabs EnableFadeEffect="true">
+    <Tab IsActive="true">
+        <TitleTemplate>
+            <Icon Name="IconName.HouseFill" /> Homepage
+        </TitleTemplate>
+        <Content>
+            @if (_apiVersion is not null)
+            {
+                <ApiHomepage HomepageId="@_apiVersion.HomepageId"/>
+            }
+        </Content>
+    </Tab>
+    <Tab>
+        <TitleTemplate>
+            <Icon Name="IconName.Book" /> Guides
+        </TitleTemplate>
+        <Content>
+            <p class="mt-3">This is the placeholder content for the <b>Guide</b> tab.</p>
+        </Content>
+    </Tab>
+    <Tab>
+        <TitleTemplate>
+            <Icon Name="IconName.CodeSlash" /> Api Reference
+        </TitleTemplate>
+        <Content>
+            <p class="mt-3">This is the placeholder content for the <b>Api Reference</b> tab.</p>
+        </Content>
+    </Tab>
+    <Tab>
+        <TitleTemplate>
+            <Icon Name="IconName.Files" /> Files
+        </TitleTemplate>
+        <Content>
+            <p class="mt-3">This is the placeholder content for the <b>Files</b> tab.</p>
+        </Content>
+    </Tab>
+</Tabs>

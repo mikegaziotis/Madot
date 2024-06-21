@@ -15,3 +15,4 @@ public class ApiGetAllQueryHandler(
         return await dbDbContext.Apis.ToListAsync();
     }
 }
+

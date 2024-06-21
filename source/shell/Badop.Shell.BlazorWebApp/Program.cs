@@ -1,11 +1,14 @@
+using Badop.Shell.API;
 using Badop.Shell.BlazorWebApp.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddBlazorBootstrap();
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.ConfigureRefitClients();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

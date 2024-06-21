@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Badop.Infrastructure.SqlServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2d884c7c27d5d9ec7193996a39984e9b6fef95b8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e15c7e22969dce5e7fee1e0ffb8dee1254346b33")]
 [assembly: System.Reflection.AssemblyProductAttribute("Badop.Infrastructure.SqlServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Badop.Infrastructure.SqlServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
