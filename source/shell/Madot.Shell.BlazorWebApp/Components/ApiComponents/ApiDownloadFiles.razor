@@ -1,0 +1,89 @@
+@using Madot.Shell.API
+@using OperatingSystem = Madot.Shell.API.OperatingSystem
+<div class="api-files">
+    @if (_files is not null && _files.Any(x => !x.IsDeleted))
+    {
+        <table class="api-files-table">
+            <tr>
+                <th colspan="2">File Content</th>
+                <th>Link</th>
+            </tr>
+            @foreach (var file in _files.Where(x=>!x.IsDeleted))
+            {
+                <tr>
+                    <td>
+                        <img class="api-file-image" src="@file.ImageUrl" alt="@file.DisplayName"/>
+                    </td>
+                    <td>
+                        @file.Description
+                    </td>
+                    <td>
+                        @if (file.FileLinks.Count > 1)
+                        {
+                            var systemGroupedLinks = file.FileLinks.GroupBy(x => x.OperatingSystem).ToList();
+                            
+                            <table class="api-file-links-table">
+                                @foreach (var osGroup in systemGroupedLinks.OrderBy(x =>
+                                          {
+                                              return x.Key switch
+                                              {
+                                                  OperatingSystem.Windows => 1,
+                                                  OperatingSystem.MacOS => 2,
+                                                  OperatingSystem.Linux => 3,
+                                                  OperatingSystem.Any => 4,
+                                                  _ => 5,
+                                              };
+                                          }))
+                                {
+                                    var linkArray = osGroup.OrderBy(x =>
+                                        {
+                                            return x.ChipArchitecture switch
+                                            {
+                                                ChipArchitecture.Arm64 => 1,
+                                                ChipArchitecture.X64 => 1,
+                                                ChipArchitecture.Any => 3,
+                                                _ => 4,
+                                            };
+                                        }).ToArray();
+                                    <tr>
+                                        <th rowspan="@linkArray.Length">
+                                            @switch (osGroup.Key)
+                                            {
+                                                case OperatingSystem.Windows:
+                                                    <Icon Name="IconName.Windows" alt="Windows"/>
+                                                    break;
+                                                case OperatingSystem.Linux:
+                                                    <img src="linux.png" alt="Linux" style="width:16px;height: 16px;"/>
+                                                    break;
+                                                case OperatingSystem.MacOS:
+                                                    <Icon Name="IconName.Apple" alt="MacOs"/>
+                                                    break;
+                                                default:
+                                                    <p></p>
+                                                    break;
+                                            }
+                                        </th>
+                                        <td>
+                                            <a href="@linkArray[0].DownloadUrl">@linkArray[0].ChipArchitecture.ToString()</a>
+                                        </td>
+                                    </tr>
+                                    for (int i = 1; i < linkArray.Length; i++)
+                                    {
+                                        <tr>
+                                            <td><a href="@linkArray[i].DownloadUrl">@linkArray[i].ChipArchitecture.ToString()</a></td>
+                                        </tr>
+                                    }
+                                
+                                }
+                            </table>
+                        }
+                        else
+                        {
+                            <a href="@file.FileLinks.First().DownloadUrl">download</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>

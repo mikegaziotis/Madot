@@ -1,0 +1,32 @@
+@if (Api is not null)
+{
+    <div class="api-header">
+        <div class="api-title">
+            @Api.DisplayName
+        </div>
+        <div class="api-version">
+            <label>Version:</label>
+            @if (SelectedVersion != AppSettings.PreviewKeyword && _versions is not null)
+            {
+                <select id="" @onchange="VersionChanged" >
+                    @foreach (var version in _versions.OrderByDescending(x => x.MajorVersion).ThenByDescending(x => x.MinorVersion))
+                    {
+                        var optionAttributes = new Dictionary<string, object>();
+                        if (SelectedVersion == version.Id)
+                        {
+                            optionAttributes.Add("selected","true");
+                        }
+                        var displayText = $"{version.MajorVersion}.{version.MinorVersion}";
+                        if (version.IsBeta)
+                            displayText = displayText + " <em>(beta)</em>";
+                        <option value="@version.Id" @attributes="optionAttributes">@((MarkupString)displayText)</option>
+                    }
+                </select>
+            }
+            else if (SelectedVersion == AppSettings.PreviewKeyword)
+            {
+                <div class="api-version-preview">Previewing latest files</div>
+            }
+        </div>
+    </div>
+}

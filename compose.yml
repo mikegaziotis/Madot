@@ -1,13 +1,13 @@
-name: badop
+name: madot
 services:
     database:
-        container_name: 'badop-database'
+        container_name: 'madot-database'
         build:    
             context: .
             dockerfile: ./build/database.Dockerfile
             args:
-                SQLPROJ_NAME: 'Badop.Database'
-                DATABASE_NAME: 'Badop'
+                SQLPROJ_NAME: 'Madot.Database'
+                DATABASE_NAME: 'Madot'
                 DATABASE_SEED_DATA: 1
                 DATABASE_SA_PASSWORD: 'Password123!'
         ports:

@@ -1,0 +1,113 @@
+<script language="JavaScript">
+    const _apiDictionary = [
+    @if (_apis is not null)
+    {
+        bool first = true;
+        foreach (var api in _apis)
+        {
+            var myString = $"{(first?"":",")}{{DisplayName: \"{api.DisplayName}\", Id: \"{api.Id}\"}}";
+            @((MarkupString)myString)
+            if (first)
+                first = false;
+        }
+    }
+    ];
+
+    function apiFilterKeyPressed(evt, input) {
+        const code = evt.charCode || evt.keyCode;
+        if (code === 27) {
+            btnClearClick();
+        }
+    }
+    function btnClearClick(){
+        document.getElementById("api-filter-textbox").value='';
+        if(!document.getElementById("api-filter-clear").classList.contains('hidden'))
+        {
+            document.getElementById("api-filter-clear").classList.add('hidden');
+            document.getElementById("api-filter-icon").classList.remove('bi-funnel-fill');
+            document.getElementById("api-filter-icon").classList.add('bi-funnel');
+        }
+        filterApiList('');
+    }
+    function apiFilterOnInput(control)
+    {
+        if (control.value.length>0) {
+            if (document.getElementById("api-filter-clear").classList.contains('hidden')) {
+                document.getElementById("api-filter-clear").classList.remove('hidden');
+                document.getElementById("api-filter-icon").classList.remove('bi-funnel');
+                document.getElementById("api-filter-icon").classList.add('bi-funnel-fill');
+            }
+        }
+        else {
+            if (!document.getElementById("api-filter-clear").classList.contains('hidden')) {
+                document.getElementById("api-filter-clear").classList.add('hidden');
+                document.getElementById("api-filter-icon").classList.remove('bi-funnel-fill');
+                document.getElementById("api-filter-icon").classList.add('bi-funnel');
+            }
+        }
+        filterApiList(control.value)
+    }
+
+    function filterApiList(keyword) {
+        if(keyword==='') {
+            document.querySelectorAll('.madot-menuitem').forEach((item)=>{
+                if(item.classList.contains('hidden')) {
+                    item.classList.remove('hidden');
+                }
+            });
+        }
+        else {
+            const matches = _apiDictionary.filter((api) => api.DisplayName.toLowerCase().includes(keyword));
+            const nonMatches = _apiDictionary.filter((api) => !api.DisplayName.toLowerCase().includes(keyword))
+            matches.forEach((match)=>{
+                const itemId = 'api-menuitem-' + match.Id;
+                if (document.getElementById(itemId).classList.contains('hidden')) {
+                    document.getElementById(itemId).classList.remove('hidden');
+                }
+            });
+            nonMatches.forEach((nonMatch)=>{
+                const itemId = 'api-menuitem-' + nonMatch.Id;
+                if (!document.getElementById(itemId).classList.contains('hidden')) {
+                    document.getElementById(itemId).classList.add('hidden');
+                }
+            });
+        }
+    }
+
+</script>
+<div class="container-sm">
+    <div id="api-search-group" class="input-group">
+        <span id="api-search-addon" class="input-group-addon">
+            <i id="api-filter-icon" class="bi bi-funnel"></i>
+        </span>
+        <input id="api-filter-textbox" type="text" class="form-control" placeholder="Filter APIs..." oninput="apiFilterOnInput(this)" onkeydown="apiFilterKeyPressed(event, this);"/>
+        <button id="api-filter-clear" type="button" class="btn hidden" onclick="btnClearClick()">
+            <Icon Name="IconName.X"></Icon>
+        </button>
+    </div>
+</div>
+<div class="api-section">
+    @if (_apis is null)
+    { 
+        <em>Loading...</em>
+    }
+    else
+    {
+        foreach (var api in _apis)
+        {
+            var link = $"api/{@api.Id}";
+            var cssClass = "madot-api-link" + (api.IsPreview ? "-preview" : "");
+            var displayTitle = @api.DisplayName + (api.IsPreview ? " <em>(preview)</em>" : "");
+            <div id="api-menuitem-@api.Id" class="madot-menuitem">
+                <div class="madot-menuitem-icon">
+                    <Icon Name="IconName.ChevronRight"/>
+                </div>
+                <NavLink class="nav-link" Match="NavLinkMatch.Prefix" href="@link">
+                    <div class="@cssClass">
+                        <div class="madot-api-name">@((MarkupString)displayTitle)</div>
+                    </div>
+                </NavLink>
+            </div>
+        }
+    }
+</div>

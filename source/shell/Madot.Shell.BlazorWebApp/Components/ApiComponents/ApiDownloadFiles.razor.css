@@ -1,0 +1,12 @@
+table.api-files-table, table.api-files-table th, table.api-files-table td {
+    border: 1px solid;
+}
+
+table.api-files-table th, table.api-files-table td {
+    padding: 0.3rem;
+}
+
+.api-file-image {
+    width: 64px;
+    height: 64px;
+}

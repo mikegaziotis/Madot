@@ -1,0 +1,9 @@
+@using Markdig
+
+<div class="api-homepage">
+@if (_homepage is not null)
+{
+    @((MarkupString)Markdown.ToHtml(_homepage!.Data))
+}
+</div>
+
