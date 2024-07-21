@@ -1,6 +1,5 @@
 using Madot.Core.Application;
-using Madot.Core.Application.Operations.Queries.Api;
-using Madot.Core.Application.Operations.Queries.ApiVersion;
+using Madot.Core.Application.Operations.Queries;
 using Madot.Infrastructure.SqlServer;
 
 namespace Madot.IntegrationTests.CQRS_Handlers;

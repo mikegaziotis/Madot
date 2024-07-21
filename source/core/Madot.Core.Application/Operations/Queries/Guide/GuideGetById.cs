@@ -1,4 +1,4 @@
-namespace Madot.Core.Application.Operations.Queries.Guide;
+namespace Madot.Core.Application.Operations.Queries;
 
 public record GuideGetByIdQuery(string Id) : IQuery;
 

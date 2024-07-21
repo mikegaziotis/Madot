@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rSKF4FekwfKD18D5CcHnhP7iXSZ/rohOrHTWp7v/1/T/+6GQvActXJdnX1tkxbpDavTwgOYJLFBqtsfA/okejw==",
+  "dgSpecHash": "5megIb3TFbVWRDnLzNASHy7BBUnCg7FLRvSaUlrBjj8ai5hV+/gwAWNRSp0Gp8LGnzRLQWhjo0Tby1sM9iNoNA==",
   "success": true,
-  "projectFilePath": "/home/mikerg/Documents/Code/ApiDocPortal/source/infrastructure/Madot.Infrastructure.SqlServer/Madot.Infrastructure.SqlServer.csproj",
+  "projectFilePath": "/home/mikerg/Documents/Code/Madot/source/infrastructure/Madot.Infrastructure.SqlServer/Madot.Infrastructure.SqlServer.csproj",
   "expectedPackageFiles": [
     "/home/mikerg/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
     "/home/mikerg/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",

@@ -2,7 +2,7 @@ using Madot.Core.Application.Exceptions;
 using Madot.Core.Application.Providers;
 using Microsoft.EntityFrameworkCore;
 
-namespace Madot.Core.Application.Operations.Commands.Api;
+namespace Madot.Core.Application.Operations.Commands;
 
 public record ApiInsertCommand: ICommand
 {

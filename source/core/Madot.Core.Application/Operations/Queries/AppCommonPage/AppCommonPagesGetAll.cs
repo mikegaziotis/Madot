@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Madot.Core.Application.Operations.Queries.AppCommonPage;
+namespace Madot.Core.Application.Operations.Queries;
 
 
 public record AppCommonPagesGetAllQuery(bool includeDeleted): IQuery;

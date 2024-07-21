@@ -1,0 +1,15 @@
+@if (_commonPages is not null)
+{
+    <div class="static-section">
+        @foreach (var commonPage in _commonPages)
+        {
+            var link = $"/static-page/{commonPage.Id}";
+            <div class="madot-menuitem">
+                <div class="madot-menuitem-icon">
+                    <Icon Name="IconName.ChevronRight"/>
+                </div>
+                <NavLink href="@link" Match="NavLinkMatch.All">@commonPage.Title</NavLink>
+            </div>
+        }
+    </div>
+}

@@ -2,11 +2,13 @@ using Madot.Core.Application.Exceptions;
 using Madot.Core.Application.Providers;
 using Madot.Core.Domain.Enums;
 
-namespace Madot.Core.Application.Operations.Commands.Api;
+namespace Madot.Core.Application.Operations.Commands;
 
 public record VersionedDocumentUpdateCommand: ICommand
 {
     public required string Id { get; init; }
+    
+    public VersionedDocumentType DocumentType { get; init; }
 
     public required string Data { get; init; }
 }
@@ -19,9 +21,9 @@ public class VersionedDocumentUpdateCommandHandler(
     public override async Task Handle(VersionedDocumentUpdateCommand command)
     {
         var versionedDocument = await SafeDbExecuteAsync(async () => await dbContext.VersionedDocuments.FindAsync(command.Id));
-        if (versionedDocument is null)
-            throw new EntityNotFoundException("An VersionedDocument with that Id does not exist");
-        
+        if (versionedDocument is null || versionedDocument.DocumentType!=command.DocumentType)
+            throw new EntityNotFoundException($"An VersionedDocument with Id:\"{command.Id}\" and of Type:\"{command.DocumentType.ToString()}\" does not exist");
+
         var success = await SafeDbExecuteAsync(async () =>
         {
             dbContext.VersionedDocuments.Update(GetEntity(command, versionedDocument));

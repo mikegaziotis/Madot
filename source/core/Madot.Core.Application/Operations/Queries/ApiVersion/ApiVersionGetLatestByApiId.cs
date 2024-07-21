@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Madot.Core.Application.Operations.Queries.ApiVersion;
+namespace Madot.Core.Application.Operations.Queries;
 
 public record ApiVersionGetLatestByApiIdQuery(string ApiId, bool IncludeHidden=false):IQuery;
 

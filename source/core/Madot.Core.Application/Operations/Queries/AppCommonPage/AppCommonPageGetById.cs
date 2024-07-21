@@ -1,4 +1,4 @@
-namespace Madot.Core.Application.Operations.Queries.AppCommonPage;
+namespace Madot.Core.Application.Operations.Queries;
 
 public record AppCommonPageGetByIdQuery(int Id): IQuery;
 

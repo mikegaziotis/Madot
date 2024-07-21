@@ -2,7 +2,7 @@ using Madot.Core.Application.Exceptions;
 using Madot.Core.Application.Providers;
 using Microsoft.EntityFrameworkCore;
 
-namespace Madot.Core.Application.Operations.Commands.ApiVersion;
+namespace Madot.Core.Application.Operations.Commands;
 
 public record ApiVersionInsertCommand: ICommand
 {
@@ -23,6 +23,10 @@ public record ApiVersionInsertCommand: ICommand
     public bool IsBeta { get; init; }
 
     public bool IsHidden { get; init; }
+
+    public GuideVersionItem[] GuideVersionItems { get; init; } = [];
+    
+    public FileItem[] FileItems { get; init; } = [];
 }
 
 public class ApiVersionInsertCommandHandler(
@@ -49,9 +53,13 @@ public class ApiVersionInsertCommandHandler(
             var result = await dbContext.SaveChangesAsync();
             return result == 1;
         });
+        
         if (!success)
             throw new UnexpectedDatabaseResultException("Failed to add new ApiVersion entity");
-        
+
+        await SaveFileItems(newEntity.Id,command.FileItems);
+        await SaveGuideVersionItems(newEntity.Id,command.GuideVersionItems);
+            
         return newEntity.Id;
     }
 
@@ -78,4 +86,65 @@ public class ApiVersionInsertCommandHandler(
             LastModifiedDate = timestamp
         };
     }
+
+    private async Task SaveFileItems(string apiVersionId, FileItem[] fileItems)
+    {
+        foreach (var fileItem in fileItems)
+        {
+            if (!await SafeDbExecuteAsync(async () => await dbContext.Files.Where(x => x.Id == fileItem.FileId).AnyAsync()))
+                throw new EntityNotFoundException("No File entity exists for the provided FileId");
+
+            var userId = userProvider.GetUser().UserId;
+            var timestamp = dateTimeProvider.GetUtcNow();
+            
+            var newEntity = new Domain.Models.ApiVersionFile
+            {
+                ApiVersionId = apiVersionId,
+                FileId = fileItem.FileId,
+                OrderId = fileItem.OrderId,
+                CreatedBy = userId,
+                CreatedDate = timestamp,
+            };
+            var success = await SafeDbExecuteAsync(async () =>
+            {
+                dbContext.ApiVersionFiles.Add(newEntity);
+                var result = await dbContext.SaveChangesAsync();
+                return result == 1;
+            });
+            if (!success)
+                throw new UnexpectedDatabaseResultException("Failed to add new ApiVersionFile entity");    
+        }
+    }
+
+    private async Task SaveGuideVersionItems(string apiVersionId, GuideVersionItem[] guideVersionItems)
+    {
+        foreach (var guideVersionItem in guideVersionItems)
+        {
+            if (!await SafeDbExecuteAsync(async () =>
+                    await dbContext.GuideVersions.Where(x => x.Id == guideVersionItem.GuideVersionId).AnyAsync()))
+                throw new EntityNotFoundException("No GuideVersion entity exists for the provided GuideVersionId");
+            
+            var userId = userProvider.GetUser().UserId;
+            var timestamp = dateTimeProvider.GetUtcNow();
+            
+            var newEntity = new Domain.Models.ApiVersionGuideVersion
+            {
+                ApiVersionId = apiVersionId,
+                GuideVersionId = guideVersionItem.GuideVersionId,
+                OrderId = guideVersionItem.OrderId,
+                CreatedBy = userId,
+                CreatedDate = timestamp,
+            };
+        
+            var success = await SafeDbExecuteAsync(async () =>
+            {
+                dbContext.ApiVersionGuideVersions.Add(newEntity);
+                var result = await dbContext.SaveChangesAsync();
+                return result == 1;
+            });
+            if (!success)
+                throw new UnexpectedDatabaseResultException("Failed to add new ApiVersionGuideVersion entity");
+        }
+    }
+    
 }

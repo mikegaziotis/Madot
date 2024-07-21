@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Madot.Core.Application.Operations.Queries.Api;
+namespace Madot.Core.Application.Operations.Queries;
 
 public record ApiGetAllQuery(bool VisibleOnly=true): IQuery;
 

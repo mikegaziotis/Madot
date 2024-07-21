@@ -1,7 +1,7 @@
 using Madot.Core.Domain.OtherTypes;
 using Microsoft.EntityFrameworkCore;
 
-namespace Madot.Core.Application.Operations.Queries.GuideVersion;
+namespace Madot.Core.Application.Operations.Queries;
 
 public record GuideVersionGetByApiVersionIdQuery(string ApiVersionId):IQuery;
 

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Madot.Core.Application.Operations.Queries.DocumentStatus;
+namespace Madot.Core.Application.Operations.Queries;
 
 public record DocumentStatusGetByApiVersionIdQuery(string ApiVersionId) : IQuery;
 

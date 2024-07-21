@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Madot.Core.Application.Operations.Queries.GuideVersion;
+namespace Madot.Core.Application.Operations.Queries;
 
 public record GuideVersionLatestGetByIdQuery(string GuideId):IQuery;
 

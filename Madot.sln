@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{5C4EF854
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "source", "source", "{15909DCE-0F79-46B6-8862-4BEDC0AAA9C4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{45687309-8A6E-49BC-88CD-DE6622E50FEC}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastructure", "{2EFC5980-2B24-49C1-B9BC-59AA00448C9E}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Madot.Database", "database\Madot.Database\Madot.Database.sqlproj", "{2103B4B2-D9EE-4D4B-9664-E3CA8D6AE362}"
@@ -28,25 +26,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Madot.UnitTests", "test\Mad
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Madot.IntegrationTests", "test\Madot.IntegrationTests\Madot.IntegrationTests.csproj", "{D701B4F6-581A-4115-904A-0AF37642176D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shell", "shell", "{EBD31D73-A429-4C96-8D42-87E6E9F6FA83}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "interface", "interface", "{EBD31D73-A429-4C96-8D42-87E6E9F6FA83}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Madot.Shell.BlazorWebApp", "source\shell\Madot.Shell.BlazorWebApp\Madot.Shell.BlazorWebApp.csproj", "{AD351E86-3C5C-42DB-AF00-5B2A488A120E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Madot.Interface.BlazorWebUI", "source\interface\Madot.Interface.BlazorWebUI\Madot.Interface.BlazorWebUI.csproj", "{AD351E86-3C5C-42DB-AF00-5B2A488A120E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{031D7E97-4202-47D5-832C-55468E62BB3F} = {031D7E97-4202-47D5-832C-55468E62BB3F}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Madot.Shell.CLI", "source\shell\Madot.Shell.CLI\Madot.Shell.CLI.csproj", "{E8AEB375-3B7B-4BC4-BCBF-F70F303AF859}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Madot.Interface.CLI", "source\interface\Madot.Interface.CLI\Madot.Interface.CLI.csproj", "{E8AEB375-3B7B-4BC4-BCBF-F70F303AF859}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Madot.Shell.API", "source\shell\Madot.Shell.API\Madot.Shell.API.csproj", "{031D7E97-4202-47D5-832C-55468E62BB3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Madot.Interface.WebAPI", "source\interface\Madot.Interface.WebAPI\Madot.Interface.WebAPI.csproj", "{031D7E97-4202-47D5-832C-55468E62BB3F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{A786998D-3464-456E-B426-C0531DCC8735}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{155796A2-4A7B-4704-95D3-71D45DFCBA96}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution_items", "_solution_items", "{492DF390-F97D-4AE6-9CC5-A094EB68C60C}"
 	ProjectSection(SolutionItems) = preProject
 		compose.yml = compose.yml
 		README.md = README.md
+		.gitignore = .gitignore
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Madot.Infrastructure.SqlServer", "source\infrastructure\Madot.Infrastructure.SqlServer\Madot.Infrastructure.SqlServer.csproj", "{0E27CA79-EB11-4636-A241-F6A6593EB90F}"

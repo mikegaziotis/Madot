@@ -26,7 +26,7 @@
       <ProjectReference Include="..\..\source\core\Madot.Core.Application\Madot.Core.Application.csproj" />
       <ProjectReference Include="..\..\source\core\Madot.Core.Domain\Madot.Core.Domain.csproj" />
       <ProjectReference Include="..\..\source\infrastructure\Madot.Infrastructure.SqlServer\Madot.Infrastructure.SqlServer.csproj" />
-      <ProjectReference Include="..\..\source\shell\Madot.Shell.API\Madot.Shell.API.csproj" />
+      <ProjectReference Include="..\..\source\interface\Madot.Interface.WebAPI\Madot.Interface.WebAPI.csproj" />
     </ItemGroup>
 
 </Project>

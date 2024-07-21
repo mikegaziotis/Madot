@@ -1,7 +1,7 @@
 using Madot.Core.Application.Exceptions;
 using Madot.Core.Application.Providers;
 
-namespace Madot.Core.Application.Operations.Commands.Guide;
+namespace Madot.Core.Application.Operations.Commands;
 
 public record GuideUpdateCommand: ICommand
 {

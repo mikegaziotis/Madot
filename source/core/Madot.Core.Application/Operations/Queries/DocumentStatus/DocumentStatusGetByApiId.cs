@@ -1,7 +1,7 @@
 using Madot.Core.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
-namespace Madot.Core.Application.Operations.Queries.DocumentStatus;
+namespace Madot.Core.Application.Operations.Queries;
 
 public record DocumentStatusGetByApiIdQuery(string ApiId) : IQuery;
 

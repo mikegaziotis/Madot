@@ -5,7 +5,7 @@ using Madot.Core.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using OperatingSystem = Madot.Core.Domain.Enums.OperatingSystem;
 
-namespace Madot.Core.Application.Operations.Commands.File;
+namespace Madot.Core.Application.Operations.Commands;
 
 public class FileInsertCommand:ICommand
 {
@@ -17,14 +17,6 @@ public class FileInsertCommand:ICommand
     public string? ImageUrl { get; init; }
 
     public required FileLinkItem[] FileLinks { get; init; }
-    public record FileLinkItem
-    {
-        public required OperatingSystem OperatingSystem { get; init; }
-
-        public required ChipArchitecture ChipArchitecture { get; init; }
-
-        public required string DownloadUrl { get; init; }
-    }
 }
 
 public class FileInsertCommandHandler(

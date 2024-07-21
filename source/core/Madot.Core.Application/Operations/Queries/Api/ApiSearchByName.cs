@@ -1,7 +1,7 @@
 using Madot.Core.Application.Enums;
 using Microsoft.EntityFrameworkCore;
 
-namespace Madot.Core.Application.Operations.Queries.Api;
+namespace Madot.Core.Application.Operations.Queries;
 
 public record ApiSearchByNameQuery(string SearchTerm, SearchMethod SearchMethod):IQuery;
 

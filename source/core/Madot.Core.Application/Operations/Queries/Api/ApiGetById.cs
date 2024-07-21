@@ -1,4 +1,4 @@
-namespace Madot.Core.Application.Operations.Queries.Api;
+namespace Madot.Core.Application.Operations.Queries;
 
 public record ApiGetByIdQuery(string Id):IQuery;
 

@@ -1,4 +1,4 @@
-namespace Madot.Core.Application.Operations.Queries.ApiVersion;
+namespace Madot.Core.Application.Operations.Queries;
 
 public record ApiVersionGetByIdQuery(string Id) : IQuery;
 

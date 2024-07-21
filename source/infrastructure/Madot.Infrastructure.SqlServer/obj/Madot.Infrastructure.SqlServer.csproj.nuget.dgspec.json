@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/mikerg/Documents/Code/ApiDocPortal/source/infrastructure/Madot.Infrastructure.SqlServer/Madot.Infrastructure.SqlServer.csproj": {}
+    "/home/mikerg/Documents/Code/Madot/source/infrastructure/Madot.Infrastructure.SqlServer/Madot.Infrastructure.SqlServer.csproj": {}
   },
   "projects": {
-    "/home/mikerg/Documents/Code/ApiDocPortal/source/core/Madot.Core.Application/Madot.Core.Application.csproj": {
+    "/home/mikerg/Documents/Code/Madot/source/core/Madot.Core.Application/Madot.Core.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mikerg/Documents/Code/ApiDocPortal/source/core/Madot.Core.Application/Madot.Core.Application.csproj",
+        "projectUniqueName": "/home/mikerg/Documents/Code/Madot/source/core/Madot.Core.Application/Madot.Core.Application.csproj",
         "projectName": "Madot.Core.Application",
-        "projectPath": "/home/mikerg/Documents/Code/ApiDocPortal/source/core/Madot.Core.Application/Madot.Core.Application.csproj",
+        "projectPath": "/home/mikerg/Documents/Code/Madot/source/core/Madot.Core.Application/Madot.Core.Application.csproj",
         "packagesPath": "/home/mikerg/.nuget/packages/",
-        "outputPath": "/home/mikerg/Documents/Code/ApiDocPortal/source/core/Madot.Core.Application/obj/",
+        "outputPath": "/home/mikerg/Documents/Code/Madot/source/core/Madot.Core.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/mikerg/.nuget/NuGet/NuGet.Config"
@@ -26,8 +26,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/mikerg/Documents/Code/ApiDocPortal/source/core/Madot.Core.Domain/Madot.Core.Domain.csproj": {
-                "projectPath": "/home/mikerg/Documents/Code/ApiDocPortal/source/core/Madot.Core.Domain/Madot.Core.Domain.csproj"
+              "/home/mikerg/Documents/Code/Madot/source/core/Madot.Core.Domain/Madot.Core.Domain.csproj": {
+                "projectPath": "/home/mikerg/Documents/Code/Madot/source/core/Madot.Core.Domain/Madot.Core.Domain.csproj"
               }
             }
           }
@@ -71,14 +71,14 @@
         }
       }
     },
-    "/home/mikerg/Documents/Code/ApiDocPortal/source/core/Madot.Core.Domain/Madot.Core.Domain.csproj": {
+    "/home/mikerg/Documents/Code/Madot/source/core/Madot.Core.Domain/Madot.Core.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mikerg/Documents/Code/ApiDocPortal/source/core/Madot.Core.Domain/Madot.Core.Domain.csproj",
+        "projectUniqueName": "/home/mikerg/Documents/Code/Madot/source/core/Madot.Core.Domain/Madot.Core.Domain.csproj",
         "projectName": "Madot.Core.Domain",
-        "projectPath": "/home/mikerg/Documents/Code/ApiDocPortal/source/core/Madot.Core.Domain/Madot.Core.Domain.csproj",
+        "projectPath": "/home/mikerg/Documents/Code/Madot/source/core/Madot.Core.Domain/Madot.Core.Domain.csproj",
         "packagesPath": "/home/mikerg/.nuget/packages/",
-        "outputPath": "/home/mikerg/Documents/Code/ApiDocPortal/source/core/Madot.Core.Domain/obj/",
+        "outputPath": "/home/mikerg/Documents/Code/Madot/source/core/Madot.Core.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/mikerg/.nuget/NuGet/NuGet.Config"
@@ -124,14 +124,14 @@
         }
       }
     },
-    "/home/mikerg/Documents/Code/ApiDocPortal/source/infrastructure/Madot.Infrastructure.SqlServer/Madot.Infrastructure.SqlServer.csproj": {
+    "/home/mikerg/Documents/Code/Madot/source/infrastructure/Madot.Infrastructure.SqlServer/Madot.Infrastructure.SqlServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mikerg/Documents/Code/ApiDocPortal/source/infrastructure/Madot.Infrastructure.SqlServer/Madot.Infrastructure.SqlServer.csproj",
+        "projectUniqueName": "/home/mikerg/Documents/Code/Madot/source/infrastructure/Madot.Infrastructure.SqlServer/Madot.Infrastructure.SqlServer.csproj",
         "projectName": "Madot.Infrastructure.SqlServer",
-        "projectPath": "/home/mikerg/Documents/Code/ApiDocPortal/source/infrastructure/Madot.Infrastructure.SqlServer/Madot.Infrastructure.SqlServer.csproj",
+        "projectPath": "/home/mikerg/Documents/Code/Madot/source/infrastructure/Madot.Infrastructure.SqlServer/Madot.Infrastructure.SqlServer.csproj",
         "packagesPath": "/home/mikerg/.nuget/packages/",
-        "outputPath": "/home/mikerg/Documents/Code/ApiDocPortal/source/infrastructure/Madot.Infrastructure.SqlServer/obj/",
+        "outputPath": "/home/mikerg/Documents/Code/Madot/source/infrastructure/Madot.Infrastructure.SqlServer/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/mikerg/.nuget/NuGet/NuGet.Config"
@@ -146,8 +146,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/mikerg/Documents/Code/ApiDocPortal/source/core/Madot.Core.Application/Madot.Core.Application.csproj": {
-                "projectPath": "/home/mikerg/Documents/Code/ApiDocPortal/source/core/Madot.Core.Application/Madot.Core.Application.csproj"
+              "/home/mikerg/Documents/Code/Madot/source/core/Madot.Core.Application/Madot.Core.Application.csproj": {
+                "projectPath": "/home/mikerg/Documents/Code/Madot/source/core/Madot.Core.Application/Madot.Core.Application.csproj"
               }
             }
           }

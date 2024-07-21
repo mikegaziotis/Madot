@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Madot.Infrastrupture.DataConfig
-build_property.ProjectDir = /home/mikerg/Documents/Code/ApiDocPortal/source/infrastructure/Madot.Infrastructure.SqlServer/
+build_property.ProjectDir = /home/mikerg/Documents/Code/Madot/source/infrastructure/Madot.Infrastructure.SqlServer/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

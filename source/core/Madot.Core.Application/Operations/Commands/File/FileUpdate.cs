@@ -4,7 +4,7 @@ using Madot.Core.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using OperatingSystem = Madot.Core.Domain.Enums.OperatingSystem;
 
-namespace Madot.Core.Application.Operations.Commands.File;
+namespace Madot.Core.Application.Operations.Commands;
 
 public record FileUpdateCommand: ICommand
 {
@@ -18,15 +18,6 @@ public record FileUpdateCommand: ICommand
     public bool IsDeleted { get; init; }
 
     public required FileLinkItem[] FileLinks { get; init; }
-    public record FileLinkItem
-    {
-        public required OperatingSystem OperatingSystem { get; init; }
-
-        public required ChipArchitecture ChipArchitecture { get; init; }
-
-        public required string DownloadUrl { get; init; }
-    }
-    
 }
 
 public class FileUpdateCommandHandler(
@@ -111,7 +102,7 @@ public class FileUpdateCommandHandler(
         };
     }
     
-    public Domain.Models.FileLink GetFileLinkEntity(string fileId, FileUpdateCommand.FileLinkItem commandItem, Domain.Models.FileLink? existingEntity)
+    public Domain.Models.FileLink GetFileLinkEntity(string fileId, FileLinkItem commandItem, Domain.Models.FileLink? existingEntity)
     {
         var userId = userProvider.GetUser().UserId;
         var timestamp = dateTimeProvider.GetUtcNow();

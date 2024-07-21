@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Madot.Infrastructure.SqlServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ab4ed6f4515e4c3fec9563749a7840d4144f4eb3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c386bd3197f7145281bcf8a6a875c5084dc41b0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Madot.Infrastructure.SqlServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Madot.Infrastructure.SqlServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

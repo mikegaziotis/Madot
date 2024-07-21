@@ -1,7 +1,5 @@
 using Madot.Core.Application;
-using Madot.Core.Application.Operations.Queries.Api;
-using Madot.Core.Application.Operations.Queries.ApiVersionFile;
-using Madot.Core.Application.Operations.Queries.File;
+using Madot.Core.Application.Operations.Queries;
 using Madot.Core.Domain.Enums;
 using Madot.Infrastructure.SqlServer;
 using OperatingSystem = Madot.Core.Domain.Enums.OperatingSystem;

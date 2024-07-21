@@ -2,7 +2,7 @@ using Madot.Core.Domain.Enums;
 using Madot.Core.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Madot.Core.Application.Operations.Queries.Homepage;
+namespace Madot.Core.Application.Operations.Queries;
 
 public record VersionedDocumentGetByApiIdQuery(string ApiId, VersionedDocumentType Type):IQuery;
 

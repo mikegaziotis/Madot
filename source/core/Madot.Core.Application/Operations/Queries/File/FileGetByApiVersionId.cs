@@ -3,7 +3,7 @@ using Madot.Core.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using OperatingSystem = Madot.Core.Domain.Enums.OperatingSystem;
 
-namespace Madot.Core.Application.Operations.Queries.ApiVersionFile;
+namespace Madot.Core.Application.Operations.Queries;
 
 public record FileGetByApiVersionIdQuery(string ApiVersionId, OperatingSystem OperatingSystem= OperatingSystem.Any, ChipArchitecture ChipArchitecture = ChipArchitecture.Any) : IQuery;
 

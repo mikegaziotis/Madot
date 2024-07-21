@@ -1,0 +1,2437 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Madot.Interface.WebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/{id}": {
+      "get": {
+        "tags": [
+          "API"
+        ],
+        "summary": "Get an API record by its Id",
+        "description": "Returns the API definitions for an Api given an Id",
+        "operationId": "ApiGetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Api"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/list": {
+      "get": {
+        "tags": [
+          "API"
+        ],
+        "summary": "Get all API records",
+        "description": "Returns all the API definitions that the server has",
+        "operationId": "ApiGetAll",
+        "parameters": [
+          {
+            "name": "visible_only",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Api"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/search-by-name": {
+      "get": {
+        "tags": [
+          "API"
+        ],
+        "summary": "Search for API by their Display Name property",
+        "description": "Returns all the API definitions that match the search terms provided",
+        "operationId": "ApiSearchByName",
+        "parameters": [
+          {
+            "name": "search_term",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SearchMethod",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SearchMethod"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Api"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api": {
+      "post": {
+        "tags": [
+          "API"
+        ],
+        "summary": "Create an API record",
+        "description": "Creates an API record for the given specification",
+        "operationId": "ApiInsert",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiInsertCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "API"
+        ],
+        "summary": "Update an API record",
+        "description": "Updates an API record so it matches the given specification",
+        "operationId": "ApiUpdate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiUpdateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/api-version/{id}": {
+      "get": {
+        "tags": [
+          "API Version"
+        ],
+        "summary": "Get an ApiVersion",
+        "description": "Retrieve a specific ApiVersion by its Id",
+        "operationId": "ApiVersionGetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiVersion"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api-version/latest/{api_id}": {
+      "get": {
+        "tags": [
+          "API Version"
+        ],
+        "summary": "Get the latest ApiVersion for a given Api_Id",
+        "description": "Retrieve a specific ApiVersion by its Id",
+        "operationId": "ApiVersionGetLatestByApiId",
+        "parameters": [
+          {
+            "name": "api_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include_hidden",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiVersion"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api-version/list/{api_id}": {
+      "get": {
+        "tags": [
+          "API Version"
+        ],
+        "summary": "Get all ApiVersions for an Api_Id",
+        "description": "Returns all the API versions for a provided Api_Id",
+        "operationId": "ApiVersionsGetByApiId",
+        "parameters": [
+          {
+            "name": "api_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApiVersion"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api-version": {
+      "post": {
+        "tags": [
+          "API Version"
+        ],
+        "summary": "Create an APIVersion record",
+        "description": "Creates an API record for the given specification",
+        "operationId": "ApiVersionInsert",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiVersionInsertCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "API Version"
+        ],
+        "summary": "Update an APIVersion record",
+        "description": "Modifies an APIVersion record to match the given specification",
+        "operationId": "ApiVersionUpdate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiVersionUpdateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/app-common-page/{id}": {
+      "get": {
+        "tags": [
+          "App Common Pages"
+        ],
+        "summary": "Get an AppCommonPage by its Id",
+        "description": "Returns the AppCommonPage for the given Id",
+        "operationId": "AppCommonPageGetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppCommonPage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/app-common-page/list": {
+      "get": {
+        "tags": [
+          "App Common Pages"
+        ],
+        "summary": "Get all the AppCommonPages for the app",
+        "description": "Returns all the AppCommonPage records",
+        "operationId": "AppCommonPagesGetAll",
+        "parameters": [
+          {
+            "name": "include_deleted",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppCommonPageLite"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app-common-page": {
+      "post": {
+        "tags": [
+          "App Common Pages"
+        ],
+        "summary": "Create an AppCommonPage record",
+        "description": "Creates an AppCommonPage record for the given specification",
+        "operationId": "AppCommonPageInsert",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppCommonPageInsertCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "App Common Pages"
+        ],
+        "summary": "Update an AppCommonPage record",
+        "description": "Updates an AppCommonPage record for the given specification",
+        "operationId": "AppCommonPageUpdate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppCommonPageUpdateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/changelog/{id}": {
+      "get": {
+        "tags": [
+          "Changelog"
+        ],
+        "summary": "Get a Changelog by its Id",
+        "description": "Returns the Changelog for a given Id",
+        "operationId": "ChangelogGetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Changelog"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/changelog/by-api-version/{api_version_id}": {
+      "get": {
+        "tags": [
+          "Changelog"
+        ],
+        "summary": "Get the Changelog for an Api Version",
+        "description": "Returns the Changelog for a given Api_Version_id",
+        "operationId": "ChangelogGetByApiVersionId",
+        "parameters": [
+          {
+            "name": "api_version_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Changelog"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/changelog/by-api/{api_id}": {
+      "get": {
+        "tags": [
+          "Changelog"
+        ],
+        "summary": "Get the Changelog history for an Api Id",
+        "description": "Returns the Changelogs for a given Api_id",
+        "operationId": "ChangelogGetByApiId",
+        "parameters": [
+          {
+            "name": "api_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Changelog"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/changelog": {
+      "post": {
+        "tags": [
+          "Changelog"
+        ],
+        "summary": "Create a Changelog record",
+        "description": "Creates an Changelog record for the given specification",
+        "operationId": "ChangelogInsert",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionedDocumentInsertCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Changelog"
+        ],
+        "summary": "Update a Changelog record",
+        "description": "Updates an Changelog record for the given specification",
+        "operationId": "ChangelogUpdate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionedDocumentUpdateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/document-status/by-api-version-id/{api_version_id}": {
+      "get": {
+        "tags": [
+          "Document Status"
+        ],
+        "summary": "Get an ApiVersion's document status",
+        "description": "Retrieve the document status for an ApiVersion by its Id",
+        "operationId": "DocumentStatusGetByApiVersionId",
+        "parameters": [
+          {
+            "name": "api_version_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/document-status/by-api-id/{api_id}": {
+      "get": {
+        "tags": [
+          "Document Status"
+        ],
+        "summary": "Get an Api's document status",
+        "description": "Retrieve the document status for an Api by its Id",
+        "operationId": "DocumentStatusGetByApiId",
+        "parameters": [
+          {
+            "name": "api_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/file/{id}": {
+      "get": {
+        "tags": [
+          "File"
+        ],
+        "summary": "Get a File by its id",
+        "description": "Returns the file and its links, given a file Id",
+        "operationId": "FileGetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/File"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/file/list/by-api/{api_id}": {
+      "get": {
+        "tags": [
+          "File"
+        ],
+        "summary": "Get the list of files for an Api",
+        "description": "Returns the files and its links, given a Api_Id",
+        "operationId": "FilesGetByApiId",
+        "parameters": [
+          {
+            "name": "api_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/File"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/file/list/by-api-version/{api_version_id}": {
+      "get": {
+        "tags": [
+          "File"
+        ],
+        "summary": "Get a list of Files for an APi Version",
+        "description": "Returns the files and its links, for a given Api_Version_Id",
+        "operationId": "FilesGetByApiVersionId",
+        "parameters": [
+          {
+            "name": "api_version_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "OperatingSystem",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/OperatingSystem"
+            }
+          },
+          {
+            "name": "ChipArchitecture",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ChipArchitecture"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/File"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/file": {
+      "post": {
+        "tags": [
+          "File"
+        ],
+        "summary": "Create a File record",
+        "description": "Creates an File record for the given specification",
+        "operationId": "FileInsert",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FileInsertCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "File"
+        ],
+        "summary": "Update a File record",
+        "description": "Updates an File record for the given specification",
+        "operationId": "FileUpdate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FileUpdateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/guide/{id}": {
+      "get": {
+        "tags": [
+          "Guide"
+        ],
+        "summary": "Get a Guide by its unique id",
+        "description": "Returns a Guide record given the Guide Id",
+        "operationId": "GuideGetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Guide"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/guide/list/{api_id}": {
+      "get": {
+        "tags": [
+          "Guide"
+        ],
+        "summary": "Get the list of Guides for an Api",
+        "description": "Returns a Guide list for a given Api_Id",
+        "operationId": "GuidesGetByApiId",
+        "parameters": [
+          {
+            "name": "api_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include_deleted",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Guide"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/guide": {
+      "post": {
+        "tags": [
+          "Guide"
+        ],
+        "summary": "Create a Guide record",
+        "description": "Creates an Guide record for the given specification",
+        "operationId": "GuideInsert",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuideInsertCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Guide"
+        ],
+        "summary": "Update a Guide record",
+        "description": "Updates an Guide record for the given specification",
+        "operationId": "GuideUpdate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuideUpdateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/guide-version/{id}": {
+      "get": {
+        "tags": [
+          "Guide Version"
+        ],
+        "summary": "Get a Guide Version by its unique id",
+        "description": "Returns a Guide Version record given the Id",
+        "operationId": "GuideVersionGetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuideVersion"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/guide-version/by-api-version/{api_version_id}": {
+      "get": {
+        "tags": [
+          "Guide Version"
+        ],
+        "summary": "Get a list of GuidesVersions for an Api's VersionId",
+        "description": "",
+        "operationId": "GuideVersionGetByApiVersionId",
+        "parameters": [
+          {
+            "name": "api_version_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApiVersionGuide"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/guide-version/latest/{guide_id}": {
+      "get": {
+        "tags": [
+          "Guide Version"
+        ],
+        "summary": "Get the latest Guide Version for a Guide",
+        "description": "Returns a Guide Version record given the a Guide_Id",
+        "operationId": "GuideVersionLatestGetByGuideId",
+        "parameters": [
+          {
+            "name": "guide_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuideVersion"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/guide-version": {
+      "post": {
+        "tags": [
+          "Guide Version"
+        ],
+        "summary": "Create a GuideVersion record",
+        "description": "Creates an GuideVersion record for the given specification",
+        "operationId": "GuideVersionInsert",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuideVersionInsertCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Guide Version"
+        ],
+        "summary": "Update a GuideVersion record",
+        "description": "Updates an GuideVersion record for the given specification",
+        "operationId": "GuideVersionUpdate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuideVersionUpdateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/homepage/{id}": {
+      "get": {
+        "tags": [
+          "Homepage"
+        ],
+        "summary": "Get a Homepage by its Id",
+        "description": "Returns the Homepage for a given Id",
+        "operationId": "HomepageGetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Homepage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/homepage/by-api-version/{api_version_id}": {
+      "get": {
+        "tags": [
+          "Homepage"
+        ],
+        "summary": "Get the Homepage for an Api Version",
+        "description": "Returns the Homepage for a give Api_Version_id",
+        "operationId": "HomepageGetByApiVersionId",
+        "parameters": [
+          {
+            "name": "api_version_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Homepage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/homepage/by-api/{api_id}": {
+      "get": {
+        "tags": [
+          "Homepage"
+        ],
+        "summary": "Get the Homepage history for an Api Id",
+        "description": "Returns the Homepages for a given Api_id",
+        "operationId": "HomepageGetByApiId",
+        "parameters": [
+          {
+            "name": "api_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Homepage"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/homepage": {
+      "post": {
+        "tags": [
+          "Homepage"
+        ],
+        "summary": "Create a Homepage record",
+        "description": "Creates an Homepage record for the given specification",
+        "operationId": "HomepageInsert",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionedDocumentInsertCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Homepage"
+        ],
+        "summary": "Update a Homepage record",
+        "description": "Updates an Homepage record for the given specification",
+        "operationId": "HomepageUpdate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionedDocumentUpdateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/open-api-spec/{id}": {
+      "get": {
+        "tags": [
+          "Open API Specification"
+        ],
+        "summary": "Get an OpenApiSpec by its Id",
+        "description": "Returns the OpenApiSpec for a given Id",
+        "operationId": "OpenApiSpecGetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenApiSpec"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/open-api-spec/as-html/{id}": {
+      "get": {
+        "tags": [
+          "Open API Specification"
+        ],
+        "summary": "Get an OpenApiSpec by its Id, in HTML format",
+        "description": "Returns the OpenApiSpec's HTML for a given Id",
+        "operationId": "OpenApiSpecHtmlGetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/open-api-spec/by-api-version/{api_version_id}": {
+      "get": {
+        "tags": [
+          "Open API Specification"
+        ],
+        "summary": "Get the OpenApiSpec for an Api Version",
+        "description": "Returns the OpenApiSpec for a give Api_Version_id",
+        "operationId": "OpenApiSpecGetByApiVersionId",
+        "parameters": [
+          {
+            "name": "api_version_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenApiSpec"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/open-api-spec/by-api/{api_id}": {
+      "get": {
+        "tags": [
+          "Open API Specification"
+        ],
+        "summary": "Get the OpenApiSpec history for an Api Id",
+        "description": "Returns the OpenApiSpecs for a given Api_id",
+        "operationId": "OpenApiSpecGetByApiId",
+        "parameters": [
+          {
+            "name": "api_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OpenApiSpec"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/open-api-spec": {
+      "post": {
+        "tags": [
+          "Open API Specification"
+        ],
+        "summary": "Create a OpenApiSpec record",
+        "description": "Creates an OpenApiSpec record for the given specification",
+        "operationId": "OpenApiSpecInsert",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionedDocumentInsertCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Open API Specification"
+        ],
+        "summary": "Update a OpenApiSpec record",
+        "description": "Updates an OpenApiSpec record for the given specification",
+        "operationId": "OpenApiSpecUpdate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionedDocumentUpdateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Api": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseUrlPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "isInternal": {
+            "type": "boolean"
+          },
+          "isPreview": {
+            "type": "boolean"
+          },
+          "isHidden": {
+            "type": "boolean"
+          },
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiInsertCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseUrlPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "isInternal": {
+            "type": "boolean"
+          },
+          "isPreview": {
+            "type": "boolean"
+          },
+          "isHidden": {
+            "type": "boolean"
+          },
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiUpdateCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseUrlPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "isInternal": {
+            "type": "boolean"
+          },
+          "isPreview": {
+            "type": "boolean"
+          },
+          "isHidden": {
+            "type": "boolean"
+          },
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiVersion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "apiId": {
+            "type": "string",
+            "nullable": true
+          },
+          "majorVersion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minorVersion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "buildOrReleaseTag": {
+            "type": "string",
+            "nullable": true
+          },
+          "openApiSpecId": {
+            "type": "string",
+            "nullable": true
+          },
+          "homepageId": {
+            "type": "string",
+            "nullable": true
+          },
+          "changelogId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isBeta": {
+            "type": "boolean"
+          },
+          "isHidden": {
+            "type": "boolean"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fileItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FileItem"
+            },
+            "nullable": true
+          },
+          "guideVersionItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GuideVersionItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiVersionGuide": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "guideVersion": {
+            "$ref": "#/components/schemas/GuideVersion"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiVersionInsertCommand": {
+        "type": "object",
+        "properties": {
+          "apiId": {
+            "type": "string",
+            "nullable": true
+          },
+          "majorVersion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minorVersion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "buildOrReleaseTag": {
+            "type": "string",
+            "nullable": true
+          },
+          "openApiSpecId": {
+            "type": "string",
+            "nullable": true
+          },
+          "homepageId": {
+            "type": "string",
+            "nullable": true
+          },
+          "changelogId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isBeta": {
+            "type": "boolean"
+          },
+          "isHidden": {
+            "type": "boolean"
+          },
+          "guideVersionItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GuideVersionItem"
+            },
+            "nullable": true
+          },
+          "fileItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FileItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiVersionUpdateCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "buildOrReleaseTag": {
+            "type": "string",
+            "nullable": true
+          },
+          "openApiSpecId": {
+            "type": "string",
+            "nullable": true
+          },
+          "homepageId": {
+            "type": "string",
+            "nullable": true
+          },
+          "changelogId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isBeta": {
+            "type": "boolean"
+          },
+          "isHidden": {
+            "type": "boolean"
+          },
+          "guideVersionItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GuideVersionItem"
+            },
+            "nullable": true
+          },
+          "fileItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FileItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AppCommonPage": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AppCommonPageInsertCommand": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          },
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AppCommonPageLite": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AppCommonPageUpdateCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          },
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Changelog": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "apiId": {
+            "type": "string",
+            "nullable": true
+          },
+          "iteration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChipArchitecture": {
+        "enum": [
+          "X64",
+          "Arm64",
+          "Any"
+        ],
+        "type": "string"
+      },
+      "DocumentStatus": {
+        "type": "object",
+        "properties": {
+          "hasGuides": {
+            "type": "boolean"
+          },
+          "hasChangelog": {
+            "type": "boolean"
+          },
+          "hasDownloadFiles": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "File": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "apiId": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fileLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FileLink"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FileInsertCommand": {
+        "type": "object",
+        "properties": {
+          "apiId": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FileLinkItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FileItem": {
+        "type": "object",
+        "properties": {
+          "fileId": {
+            "type": "string",
+            "nullable": true
+          },
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FileLink": {
+        "type": "object",
+        "properties": {
+          "fileId": {
+            "type": "string",
+            "nullable": true
+          },
+          "operatingSystem": {
+            "$ref": "#/components/schemas/OperatingSystem"
+          },
+          "chipArchitecture": {
+            "$ref": "#/components/schemas/ChipArchitecture"
+          },
+          "downloadUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FileLinkItem": {
+        "type": "object",
+        "properties": {
+          "operatingSystem": {
+            "$ref": "#/components/schemas/OperatingSystem"
+          },
+          "chipArchitecture": {
+            "$ref": "#/components/schemas/ChipArchitecture"
+          },
+          "downloadUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FileUpdateCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "fileLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FileLinkItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Guide": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "apiId": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "provisionalOrderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuideInsertCommand": {
+        "type": "object",
+        "properties": {
+          "apiId": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "provisionalOrderId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuideUpdateCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "provisionalOrderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuideVersion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "guideId": {
+            "type": "string",
+            "nullable": true
+          },
+          "iteration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "guide": {
+            "$ref": "#/components/schemas/Guide"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuideVersionInsertCommand": {
+        "type": "object",
+        "properties": {
+          "guideId": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuideVersionItem": {
+        "type": "object",
+        "properties": {
+          "guideVersionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuideVersionUpdateCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          },
+          "isDeleted": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Homepage": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "apiId": {
+            "type": "string",
+            "nullable": true
+          },
+          "iteration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OpenApiSpec": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "apiId": {
+            "type": "string",
+            "nullable": true
+          },
+          "iteration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OperatingSystem": {
+        "enum": [
+          "Windows",
+          "Linux",
+          "MacOS",
+          "Any"
+        ],
+        "type": "string"
+      },
+      "SearchMethod": {
+        "enum": [
+          "StartsWith",
+          "Contains",
+          "EndsWith",
+          "Exact"
+        ],
+        "type": "string"
+      },
+      "VersionedDocumentInsertCommand": {
+        "type": "object",
+        "properties": {
+          "apiId": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VersionedDocumentUpdateCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

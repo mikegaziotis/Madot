@@ -2,7 +2,7 @@ using Madot.Core.Application.Exceptions;
 using Madot.Core.Application.Providers;
 using Microsoft.EntityFrameworkCore;
 
-namespace Madot.Core.Application.Operations.Commands.Guide;
+namespace Madot.Core.Application.Operations.Commands;
 
 public record GuideInsertCommand: ICommand
 {

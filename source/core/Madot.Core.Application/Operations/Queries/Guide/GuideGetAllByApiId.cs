@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Madot.Core.Application.Operations.Queries.Guide;
+namespace Madot.Core.Application.Operations.Queries;
 
 public record GuideGetAllByApiIdQuery(string ApiId, bool IncludeDeleted=false):IQuery;
 

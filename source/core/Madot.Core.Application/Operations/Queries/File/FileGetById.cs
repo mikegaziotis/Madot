@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Madot.Core.Application.Operations.Queries.File;
+namespace Madot.Core.Application.Operations.Queries;
 
 public record FileGetByIdQuery(string Id):IQuery;
 

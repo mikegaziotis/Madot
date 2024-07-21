@@ -3,7 +3,7 @@ using Madot.Core.Application.Providers;
 using Madot.Core.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
-namespace Madot.Core.Application.Operations.Commands.VersionedDocument;
+namespace Madot.Core.Application.Operations.Commands;
 
 public record VersionedDocumentInsertCommand: ICommand
 {
