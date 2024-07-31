@@ -1,5 +1,6 @@
 using Madot.Interface.API;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.StaticWebAssets;
 
 namespace Madot.Interface.BlazorWebUI.Components.Pages;
 
@@ -26,6 +27,8 @@ public partial class ApiPage : ComponentBase
     [Parameter] 
     public string? SectionName { get; set; } = "Homepage";
 
+    private bool _parametersSet;
+    
     private ApiVersion? _apiVersion;
     private Api? _api;
     private DocumentStatus? _documentStatus;
@@ -62,5 +65,6 @@ public partial class ApiPage : ComponentBase
             _documentStatus = await DocumentStatusClient.DocumentStatusGetByApiIdAsync(ApiId);
         }
 
+        _parametersSet = true;
     }
 }

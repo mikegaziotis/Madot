@@ -1,17 +1,21 @@
+@using System.Text
+
 <script language="JavaScript">
-    const _apiDictionary = [
     @if (_apis is not null)
     {
         bool first = true;
+        StringBuilder sb = new StringBuilder("const _apiDictionary = [");
         foreach (var api in _apis)
         {
-            var myString = $"{(first?"":",")}{{DisplayName: \"{api.DisplayName}\", Id: \"{api.Id}\"}}";
-            @((MarkupString)myString)
+            sb.Append($"{(first ? "" : ",")}{{DisplayName: \"{api.DisplayName}\", Id: \"{api.Id}\"}}");
             if (first)
+            {
                 first = false;
+            }
         }
+        sb.Append("]");
+        @((MarkupString)sb.ToString())
     }
-    ];
 
     function apiFilterKeyPressed(evt, input) {
         const code = evt.charCode || evt.keyCode;
@@ -19,6 +23,7 @@
             btnClearClick();
         }
     }
+    
     function btnClearClick(){
         document.getElementById("api-filter-textbox").value='';
         if(!document.getElementById("api-filter-clear").classList.contains('hidden'))
@@ -29,6 +34,7 @@
         }
         filterApiList('');
     }
+    
     function apiFilterOnInput(control)
     {
         if (control.value.length>0) {
@@ -75,6 +81,7 @@
     }
 
 </script>
+
 <div class="container-sm">
     <div id="api-search-group" class="input-group">
         <span id="api-search-addon" class="input-group-addon">

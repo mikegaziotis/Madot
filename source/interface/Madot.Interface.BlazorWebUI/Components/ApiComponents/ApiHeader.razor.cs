@@ -15,10 +15,10 @@ public partial class ApiHeader : ComponentBase
     public required string SelectedVersion { get; set; }
     
     [Parameter]
-    public Api? Api { get; set; }
+    public required Api Api { get; set; }
 
+    private bool _parametersSet;
     private List<ApiVersion>? _versions = null;
-    
 
     protected override async Task OnParametersSetAsync()
     {
@@ -26,6 +26,8 @@ public partial class ApiHeader : ComponentBase
         {
             _versions = (await ApiClient.ApiVersionsGetByApiIdAsync(Api!.Id)).Where(x=>!x.IsHidden).ToList();    
         }
+
+        _parametersSet = true;
     }
     
     private void VersionChanged(ChangeEventArgs args)

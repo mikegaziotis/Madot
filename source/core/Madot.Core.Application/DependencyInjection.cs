@@ -10,7 +10,7 @@ namespace Madot.Core.Application;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection RegisterApplicationContext(this IServiceCollection services)
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         return services
             .AddScoped<MadotDbContext>()

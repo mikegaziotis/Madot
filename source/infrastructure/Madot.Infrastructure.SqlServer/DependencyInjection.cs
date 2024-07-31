@@ -5,7 +5,7 @@ namespace Madot.Infrastructure.SqlServer;
 
 public static class DependencyInjection
 {
-    public static void AddDatabaseConfiguration(this IServiceCollection serviceCollection)
+    public static void AddDatabaseServices(this IServiceCollection serviceCollection)
     {
         serviceCollection.AddScoped<IDatabaseConfigurationProvider, SqlConfigurationProvider>();
     }

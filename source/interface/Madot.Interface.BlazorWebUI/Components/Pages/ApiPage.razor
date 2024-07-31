@@ -2,7 +2,7 @@
 @rendermode @(new InteractiveServerRenderMode(false))
 @using Madot.Interface.BlazorWebUI.Components.ApiComponents
 
-@if (_api is not null && _versionId is not null && _documentStatus is not null)
+@if (_parametersSet)
 {
     var changelogId = _apiVersion?.ChangelogId??AppSettings.PreviewKeyword;
     var homepageId = _apiVersion?.HomepageId??AppSettings.PreviewKeyword;
@@ -19,7 +19,7 @@
                 <ApiHomepage ApiId="@_api.Id" HomepageId="@homepageId"/>
             </Content>
         </Tab>
-        @if (_documentStatus.HasGuides)
+        @if (_documentStatus!.HasGuides)
         {
             <Tab>
                 <TitleTemplate>

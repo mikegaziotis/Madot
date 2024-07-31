@@ -3,17 +3,18 @@ using Madot.Core.Domain.Enums;
 using Madot.Core.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.Extensions.Options;
 using File = Madot.Core.Domain.Models.File;
 using OperatingSystem = Madot.Core.Domain.Enums.OperatingSystem;
 
 namespace Madot.Infrastructure.SqlServer;
 
-public class SqlConfigurationProvider: IDatabaseConfigurationProvider
+public class SqlConfigurationProvider(IOptions<DatabaseOptions> options): IDatabaseConfigurationProvider
 {
     public void ConfigureDbContextOptions(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder
-            .UseSqlServer("server=localhost,1433;database=Madot;user=sa;password=Password123!;Encrypt=false;")
+            .UseSqlServer(options.Value.SqlConnectionString)
             .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     }
 

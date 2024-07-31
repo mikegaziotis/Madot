@@ -11,8 +11,33 @@ services:
                 DATABASE_SEED_DATA: 1
                 DATABASE_SA_PASSWORD: 'Password123!'
         ports:
-            - 1433:1433
-
-            
-            
-  
+            - 1500:1433
+        networks:
+            - madot-net
+    webapi:
+        container_name: 'madot-webapi'
+        build:
+            context: .
+            dockerfile: ./build/webapi.Dockerfile
+        environment:
+            ASPNETCORE_ENVIRONMENT: Docker
+        ports:
+            - 5000:8080
+        networks:
+            - madot-net
+    webui:
+        container_name: 'madot-webui'
+        build:
+            context: .
+            dockerfile: ./build/webui.Dockerfile
+        environment:
+            ASPNETCORE_ENVIRONMENT: Development
+            ASPNETCORE_URLS: http://+:8081
+            DEPLOY_TARGET: Docker
+        ports:
+            - 5001:8081
+        networks:
+            - madot-net
+networks:
+    madot-net:
+        driver: bridge

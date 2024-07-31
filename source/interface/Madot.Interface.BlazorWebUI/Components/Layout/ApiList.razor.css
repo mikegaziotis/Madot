@@ -25,6 +25,10 @@
     border:1px solid;
 }
 
+#api-search-group:focus-within{
+    box-shadow: 0 0 0 0.1rem #258cfb;
+}
+
 #api-search-addon {
     padding: 7px 5px 7px 5px;
     border-top-left-radius: 5px;
@@ -36,6 +40,10 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border: 0;
+}
+
+#api-filter-textbox:focus{
+    box-shadow: none !important;
 }
 
 ::placeholder {

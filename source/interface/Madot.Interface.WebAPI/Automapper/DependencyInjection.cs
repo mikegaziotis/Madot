@@ -8,13 +8,7 @@ using File = Madot.Interface.WebAPI.DTOs.Responses.File;
 using FileLink = Madot.Interface.WebAPI.DTOs.Responses.FileLink;
 using Guide = Madot.Interface.WebAPI.DTOs.Responses.Guide;
 using GuideVersion = Madot.Interface.WebAPI.DTOs.Responses.GuideVersion;
-using Responses_Api = Madot.Interface.WebAPI.DTOs.Responses.Api;
-using Responses_ApiVersion = Madot.Interface.WebAPI.DTOs.Responses.ApiVersion;
-using Responses_AppCommonPage = Madot.Interface.WebAPI.DTOs.Responses.AppCommonPage;
-using Responses_File = Madot.Interface.WebAPI.DTOs.Responses.File;
-using Responses_FileLink = Madot.Interface.WebAPI.DTOs.Responses.FileLink;
-using Responses_Guide = Madot.Interface.WebAPI.DTOs.Responses.Guide;
-using Responses_GuideVersion = Madot.Interface.WebAPI.DTOs.Responses.GuideVersion;
+
 
 namespace Madot.Interface.WebAPI.Automapper;
 
@@ -37,17 +31,18 @@ public static class DependencyInjection
         exp.CreateMap<Core.Domain.Models.ApiVersionGuideVersion, GuideVersionItem>();
         exp.CreateMap<Core.Domain.Models.ApiVersionFile, FileItem>();
         //Responses
-        exp.CreateMap<Core.Domain.Models.Api, Responses_Api>();
-        exp.CreateMap<Core.Domain.Models.ApiVersion, Responses_ApiVersion>();
+        exp.CreateMap<Core.Domain.Models.Api, Api>();
+        exp.CreateMap<Core.Domain.Models.ApiVersion, ApiVersion>();
         exp.CreateMap<Core.Domain.Models.VersionedDocument, Homepage>();
         exp.CreateMap<Core.Domain.Models.VersionedDocument, Changelog>();
         exp.CreateMap<Core.Domain.Models.VersionedDocument, OpenApiSpec>();
-        exp.CreateMap<Core.Domain.Models.FileLink, Responses_FileLink>();
-        exp.CreateMap<Core.Domain.Models.File, Responses_File>();
-        exp.CreateMap<Core.Domain.Models.GuideVersion, Responses_GuideVersion>();
-        exp.CreateMap<Core.Domain.Models.Guide, Responses_Guide>();
+        exp.CreateMap<Core.Domain.Models.FileLink, FileLink>();
+        exp.CreateMap<Core.Domain.Models.File, File>();
+        exp.CreateMap<Core.Domain.Models.GuideVersion, GuideVersion>();
+        exp.CreateMap<Core.Domain.Models.Guide, Guide>();
         exp.CreateMap<Core.Domain.OtherTypes.ApiVersionGuide, ApiVersionGuide>();
-        exp.CreateMap<Core.Domain.Models.AppCommonPage, Responses_AppCommonPage>();
+        exp.CreateMap<Core.Domain.Models.AppCommonPage, AppCommonPage>();
+        exp.CreateMap<Core.Domain.Models.AppCommonPage, AppCommonPageLite>();
         //Commands
         exp.CreateMap<ApiInsertCommand, Core.Application.Operations.Commands.ApiInsertCommand>();
         exp.CreateMap<ApiUpdateCommand, Core.Application.Operations.Commands.ApiUpdateCommand>();

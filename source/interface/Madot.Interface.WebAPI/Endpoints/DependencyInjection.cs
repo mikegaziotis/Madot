@@ -6,7 +6,7 @@ namespace Madot.Interface.WebAPI.Endpoints;
 
 public static class DependencyInjection
 {
-    public static void RegisterHandlers(this IServiceCollection services)
+    public static void AddEndpointHandlers(this IServiceCollection services)
     {
         services.RegisterTypesByGenericInterface(Assembly.GetExecutingAssembly(),typeof(IEndpoint<,>),Scope.Transient);
     }

@@ -1,4 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;
+  &lt;Assembly Path="/usr/lib/dotnet/packs/Microsoft.AspNetCore.App.Ref/8.0.6/ref/net8.0/Microsoft.AspNetCore.Hosting.dll" /&gt;
+&lt;/AssemblyExplorer&gt;</s:String>
 	
 	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/CustomBuildToolPath/@EntryValue">/usr/lib/dotnet/sdk/8.0.301/MSBuild.dll</s:String>
 	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/DotNetCliExePath/@EntryValue">/usr/lib/dotnet/dotnet</s:String>
@@ -21,6 +24,8 @@
     &lt;TestId&gt;xUnit::D701B4F6-581A-4115-904A-0AF37642176D::net8.0::Madot.IntegrationTests.CQRS_Handlers.ApiVersionTests.GetLatestApiVersion&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
+	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=d701b4f6_002D581a_002D4115_002D904a_002D0af37642176d_0023Madot_002EIntegrationTests/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=ed36019d_002Dfd52_002D49c6_002D93c9_002De2e844d483e8_0023Madot_002EUnitTests/@EntryIndexedValue">True</s:Boolean>
 	
 	
 	

@@ -1,7 +1,11 @@
 using Madot.Interface.API;
+using Madot.Interface.BlazorWebUI;
 using Madot.Interface.BlazorWebUI.Components;
+using Microsoft.AspNetCore.StaticWebAssets;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.LoadConfiguration(builder.Configuration);
 
 builder.Services.AddBlazorBootstrap();
 // Add services to the container.
@@ -9,16 +13,11 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 
-builder.Services.ConfigureRefitClients();
+builder.Services.ConfigureRefitClients(AppSettings.ApiInternalUrl);
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+app.UseExceptionHandler("/Error", createScopeForErrors: true);
 
 app.UseStaticFiles();
 app.UseAntiforgery();

@@ -1,12 +1,10 @@
-
 using Refit;
-using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Madot.Interface.API
 {
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    
     public partial interface IAPIApi
     {
         [Get("/api/{id}")]
@@ -25,7 +23,7 @@ namespace Madot.Interface.API
         Task ApiUpdateAsync([Body] ApiUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    
     public partial interface IAPIVersionApi
     {
         [Get("/api-version/{id}")]
@@ -44,7 +42,7 @@ namespace Madot.Interface.API
         Task ApiVersionUpdateAsync([Body] ApiVersionUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    
     public partial interface IAppCommonPagesApi
     {
         [Get("/app-common-page/{id}")]
@@ -60,7 +58,7 @@ namespace Madot.Interface.API
         Task AppCommonPageUpdateAsync([Body] AppCommonPageUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    
     public partial interface IChangelogApi
     {
         [Get("/changelog/{id}")]
@@ -79,7 +77,7 @@ namespace Madot.Interface.API
         Task ChangelogUpdateAsync([Body] VersionedDocumentUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    
     public partial interface IDocumentStatusApi
     {
         [Get("/document-status/by-api-version-id/{api_version_id}")]
@@ -89,7 +87,7 @@ namespace Madot.Interface.API
         Task<DocumentStatus> DocumentStatusGetByApiIdAsync(string api_id);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    
     public partial interface IFileApi
     {
         [Get("/file/{id}")]
@@ -108,7 +106,7 @@ namespace Madot.Interface.API
         Task FileUpdateAsync([Body] FileUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    
     public partial interface IGuideApi
     {
         [Get("/guide/{id}")]
@@ -124,7 +122,7 @@ namespace Madot.Interface.API
         Task GuideUpdateAsync([Body] GuideUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    
     public partial interface IGuideVersionApi
     {
         [Get("/guide-version/{id}")]
@@ -143,7 +141,7 @@ namespace Madot.Interface.API
         Task GuideVersionUpdateAsync([Body] GuideVersionUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    
     public partial interface IHomepageApi
     {
         [Get("/homepage/{id}")]
@@ -162,7 +160,7 @@ namespace Madot.Interface.API
         Task HomepageUpdateAsync([Body] VersionedDocumentUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    
     public partial interface IOpenAPISpecificationApi
     {
         [Get("/open-api-spec/{id}")]
@@ -209,11 +207,6 @@ namespace Madot.Interface.API
 
 namespace Madot.Interface.API
 {
-    using System = global::System;
-
-    
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class Api
     {
 
@@ -242,17 +235,17 @@ namespace Madot.Interface.API
         public string CreatedBy { get; set; }
 
         [JsonPropertyName("createdDate")]
-        public System.DateTimeOffset CreatedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
 
         [JsonPropertyName("lastModifiedBy")]
         public string LastModifiedBy { get; set; }
 
         [JsonPropertyName("lastModifiedDate")]
-        public System.DateTimeOffset LastModifiedDate { get; set; }
+        public DateTimeOffset LastModifiedDate { get; set; }
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class ApiInsertCommand
     {
 
@@ -279,7 +272,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class ApiUpdateCommand
     {
 
@@ -306,7 +299,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class ApiVersion
     {
 
@@ -344,13 +337,13 @@ namespace Madot.Interface.API
         public string CreatedBy { get; set; }
 
         [JsonPropertyName("createdDate")]
-        public System.DateTimeOffset CreatedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
 
         [JsonPropertyName("lastModifiedBy")]
         public string LastModifiedBy { get; set; }
 
         [JsonPropertyName("lastModifiedDate")]
-        public System.DateTimeOffset LastModifiedDate { get; set; }
+        public DateTimeOffset LastModifiedDate { get; set; }
 
         [JsonPropertyName("fileItems")]
         public ICollection<FileItem> FileItems { get; set; }
@@ -360,7 +353,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class ApiVersionGuide
     {
 
@@ -372,7 +365,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class ApiVersionInsertCommand
     {
 
@@ -411,7 +404,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class ApiVersionUpdateCommand
     {
 
@@ -444,7 +437,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class AppCommonPage
     {
 
@@ -462,7 +455,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class AppCommonPageInsertCommand
     {
 
@@ -477,7 +470,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class AppCommonPageLite
     {
 
@@ -492,7 +485,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class AppCommonPageUpdateCommand
     {
 
@@ -510,7 +503,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class Changelog
     {
 
@@ -530,32 +523,32 @@ namespace Madot.Interface.API
         public string CreatedBy { get; set; }
 
         [JsonPropertyName("createdDate")]
-        public System.DateTimeOffset CreatedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
 
         [JsonPropertyName("lastModifiedBy")]
         public string LastModifiedBy { get; set; }
 
         [JsonPropertyName("lastModifiedDate")]
-        public System.DateTimeOffset LastModifiedDate { get; set; }
+        public DateTimeOffset LastModifiedDate { get; set; }
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public enum ChipArchitecture
     {
 
-        [System.Runtime.Serialization.EnumMember(Value = @"X64")]
+        [EnumMember(Value = @"X64")]
         X64 = 0,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Arm64")]
+        [EnumMember(Value = @"Arm64")]
         Arm64 = 1,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Any")]
+        [EnumMember(Value = @"Any")]
         Any = 2,
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class DocumentStatus
     {
 
@@ -570,7 +563,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class File
     {
 
@@ -596,20 +589,20 @@ namespace Madot.Interface.API
         public string CreatedBy { get; set; }
 
         [JsonPropertyName("createdDate")]
-        public System.DateTimeOffset CreatedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
 
         [JsonPropertyName("lastModifiedBy")]
         public string LastModifiedBy { get; set; }
 
         [JsonPropertyName("lastModifiedDate")]
-        public System.DateTimeOffset LastModifiedDate { get; set; }
+        public DateTimeOffset LastModifiedDate { get; set; }
 
         [JsonPropertyName("fileLinks")]
         public ICollection<FileLink> FileLinks { get; set; }
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class FileInsertCommand
     {
 
@@ -630,7 +623,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class FileItem
     {
 
@@ -642,7 +635,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class FileLink
     {
 
@@ -664,17 +657,17 @@ namespace Madot.Interface.API
         public string CreatedBy { get; set; }
 
         [JsonPropertyName("createdDate")]
-        public System.DateTimeOffset CreatedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
 
         [JsonPropertyName("lastModifiedBy")]
         public string LastModifiedBy { get; set; }
 
         [JsonPropertyName("lastModifiedDate")]
-        public System.DateTimeOffset LastModifiedDate { get; set; }
+        public DateTimeOffset LastModifiedDate { get; set; }
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class FileLinkItem
     {
 
@@ -691,7 +684,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class FileUpdateCommand
     {
 
@@ -715,7 +708,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class Guide
     {
 
@@ -738,17 +731,17 @@ namespace Madot.Interface.API
         public string CreatedBy { get; set; }
 
         [JsonPropertyName("createdDate")]
-        public System.DateTimeOffset CreatedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
 
         [JsonPropertyName("lastModifiedBy")]
         public string LastModifiedBy { get; set; }
 
         [JsonPropertyName("lastModifiedDate")]
-        public System.DateTimeOffset LastModifiedDate { get; set; }
+        public DateTimeOffset LastModifiedDate { get; set; }
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class GuideInsertCommand
     {
 
@@ -763,7 +756,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class GuideUpdateCommand
     {
 
@@ -778,7 +771,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class GuideVersion
     {
 
@@ -801,20 +794,20 @@ namespace Madot.Interface.API
         public string CreatedBy { get; set; }
 
         [JsonPropertyName("createdDate")]
-        public System.DateTimeOffset CreatedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
 
         [JsonPropertyName("lastModifiedBy")]
         public string LastModifiedBy { get; set; }
 
         [JsonPropertyName("lastModifiedDate")]
-        public System.DateTimeOffset LastModifiedDate { get; set; }
+        public DateTimeOffset LastModifiedDate { get; set; }
 
         [JsonPropertyName("guide")]
         public Guide Guide { get; set; }
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class GuideVersionInsertCommand
     {
 
@@ -826,7 +819,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class GuideVersionItem
     {
 
@@ -838,7 +831,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class GuideVersionUpdateCommand
     {
 
@@ -853,7 +846,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class Homepage
     {
 
@@ -873,17 +866,17 @@ namespace Madot.Interface.API
         public string CreatedBy { get; set; }
 
         [JsonPropertyName("createdDate")]
-        public System.DateTimeOffset CreatedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
 
         [JsonPropertyName("lastModifiedBy")]
         public string LastModifiedBy { get; set; }
 
         [JsonPropertyName("lastModifiedDate")]
-        public System.DateTimeOffset LastModifiedDate { get; set; }
+        public DateTimeOffset LastModifiedDate { get; set; }
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class OpenApiSpec
     {
 
@@ -903,53 +896,53 @@ namespace Madot.Interface.API
         public string CreatedBy { get; set; }
 
         [JsonPropertyName("createdDate")]
-        public System.DateTimeOffset CreatedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
 
         [JsonPropertyName("lastModifiedBy")]
         public string LastModifiedBy { get; set; }
 
         [JsonPropertyName("lastModifiedDate")]
-        public System.DateTimeOffset LastModifiedDate { get; set; }
+        public DateTimeOffset LastModifiedDate { get; set; }
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public enum OperatingSystem
     {
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Windows")]
+        [EnumMember(Value = @"Windows")]
         Windows = 0,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Linux")]
+        [EnumMember(Value = @"Linux")]
         Linux = 1,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"MacOS")]
+        [EnumMember(Value = @"MacOS")]
         MacOS = 2,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Any")]
+        [EnumMember(Value = @"Any")]
         Any = 3,
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public enum SearchMethod
     {
 
-        [System.Runtime.Serialization.EnumMember(Value = @"StartsWith")]
+        [EnumMember(Value = @"StartsWith")]
         StartsWith = 0,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Contains")]
+        [EnumMember(Value = @"Contains")]
         Contains = 1,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"EndsWith")]
+        [EnumMember(Value = @"EndsWith")]
         EndsWith = 2,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"Exact")]
+        [EnumMember(Value = @"Exact")]
         Exact = 3,
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class VersionedDocumentInsertCommand
     {
 
@@ -961,7 +954,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    
     public partial class VersionedDocumentUpdateCommand
     {
 
@@ -1000,11 +993,11 @@ namespace Madot.Interface.API
 
     public static partial class IServiceCollectionExtensions
     {
-        public static IServiceCollection ConfigureRefitClients(this IServiceCollection services, Action<IHttpClientBuilder>? builder = default)
+        public static IServiceCollection ConfigureRefitClients(this IServiceCollection services, string baseUrl, Action<IHttpClientBuilder>? builder = default)
         {
             var clientBuilderIAPIApi = services
                 .AddRefitClient<IAPIApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl))
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1016,7 +1009,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIAPIVersionApi = services
                 .AddRefitClient<IAPIVersionApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl))
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1028,7 +1021,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIAppCommonPagesApi = services
                 .AddRefitClient<IAppCommonPagesApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl))
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1040,7 +1033,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIChangelogApi = services
                 .AddRefitClient<IChangelogApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl))
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1052,7 +1045,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIDocumentStatusApi = services
                 .AddRefitClient<IDocumentStatusApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl))
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1064,7 +1057,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIFileApi = services
                 .AddRefitClient<IFileApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl))
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1076,7 +1069,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIGuideApi = services
                 .AddRefitClient<IGuideApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl))
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1088,7 +1081,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIGuideVersionApi = services
                 .AddRefitClient<IGuideVersionApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl))
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1100,7 +1093,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIHomepageApi = services
                 .AddRefitClient<IHomepageApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl))
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1112,7 +1105,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIOpenAPISpecificationApi = services
                 .AddRefitClient<IOpenAPISpecificationApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseUrl))
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()

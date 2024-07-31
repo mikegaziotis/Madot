@@ -15,6 +15,7 @@ public partial class ApiHomepage : ComponentBase
     public required string HomepageId { get; set; }
 
     private Homepage? _homepage;
+    private bool _parametersSet;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -26,5 +27,7 @@ public partial class ApiHomepage : ComponentBase
         {
             _homepage = (await HomepageClient.HomepageGetByApiIdAsync(ApiId)).MaxBy(x => x.Iteration);
         }
+
+        _parametersSet = true;
     }
 }
