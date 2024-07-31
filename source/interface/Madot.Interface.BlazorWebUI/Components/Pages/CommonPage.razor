@@ -1,0 +1,10 @@
+@page "/page/{StaticPageId:int}"
+@rendermode @(new InteractiveServerRenderMode(false))
+@using Markdig;
+
+<div class="static-page-content">
+@if (_data is not null)
+{
+    @((MarkupString)Markdown.ToHtml(_data));
+}
+</div>

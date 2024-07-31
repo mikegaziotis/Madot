@@ -1,0 +1,24 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+    <div class="top-row">
+        <div class="logo-container">
+            <NavLink href="/"><image id="logo" src="madot.jpg"/></NavLink>
+        </div>
+    </div>
+    <div class="sidebar">
+        <LeftMenu/>
+    </div>
+
+    <main>
+        <article class="content">
+            @Body
+        </article>
+    </main>
+</div>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>

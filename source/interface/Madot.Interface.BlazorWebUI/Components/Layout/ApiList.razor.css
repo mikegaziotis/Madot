@@ -1,0 +1,60 @@
+.api-section {
+    padding-left: 1rem;
+    margin: 1rem 0 1rem 0;
+}
+
+
+#api-filter {
+    text-indent: 0.5rem;
+    line-height: 2rem;
+    border-radius: 6px;
+    text-anchor: middle;
+    padding-top: 2px;
+    width: 100%;
+}
+.madot-api-name {
+    float: left;
+}
+.madot-api-link-preview {
+    line-height: 1.3rem;
+}
+
+#api-search-group {
+    background-color: white;
+    border-radius: 5px;
+    border:1px solid;
+}
+
+#api-search-group:focus-within{
+    box-shadow: 0 0 0 0.1rem #258cfb;
+}
+
+#api-search-addon {
+    padding: 7px 5px 7px 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: #C3E5EE;
+}
+
+#api-filter-textbox {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 0;
+}
+
+#api-filter-textbox:focus{
+    box-shadow: none !important;
+}
+
+::placeholder {
+    color: grey;
+}
+
+#api-filter-clear {
+    z-index: 100;
+    padding: 2px;
+}
+
+button.hidden {
+    display: none;
+}

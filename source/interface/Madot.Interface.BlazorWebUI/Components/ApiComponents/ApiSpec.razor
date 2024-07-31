@@ -1,0 +1,8 @@
+@if (_oasId is not null)
+{
+    var link = $"{AppSettings.ApiPublicUrl}/open-api-spec/as-html/{_oasId}";
+    <iframe class="api-spec-frame" src="@link">
+            
+    </iframe>
+    
+}

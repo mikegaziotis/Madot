@@ -1,0 +1,118 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{5C4EF854-5B46-4C91-AC73-800C8612599D}"
+	ProjectSection(SolutionItems) = preProject
+		build\database.Dockerfile = build\database.Dockerfile
+		build\webapi.Dockerfile = build\webapi.Dockerfile
+		build\webui.Dockerfile = build\webui.Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "source", "source", "{15909DCE-0F79-46B6-8862-4BEDC0AAA9C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastructure", "{2EFC5980-2B24-49C1-B9BC-59AA00448C9E}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Madot.Database", "database\Madot.Database\Madot.Database.sqlproj", "{2103B4B2-D9EE-4D4B-9664-E3CA8D6AE362}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{33B1D520-D474-4AAA-AB2C-99B4F3D475BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Madot.Core.Application", "source\core\Madot.Core.Application\Madot.Core.Application.csproj", "{AA994BF9-3BE2-4157-AB2C-C04886009096}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Madot.Core.Domain", "source\core\Madot.Core.Domain\Madot.Core.Domain.csproj", "{9B25F641-F2E1-4E9B-BA8A-705BEC8C6A69}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{37190624-8310-4BDE-B57C-607910ABB94F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Madot.UnitTests", "test\Madot.UnitTests\Madot.UnitTests.csproj", "{ED36019D-FD52-49C6-93C9-E2E844D483E8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Madot.IntegrationTests", "test\Madot.IntegrationTests\Madot.IntegrationTests.csproj", "{D701B4F6-581A-4115-904A-0AF37642176D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "interface", "interface", "{EBD31D73-A429-4C96-8D42-87E6E9F6FA83}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Madot.Interface.BlazorWebUI", "source\interface\Madot.Interface.BlazorWebUI\Madot.Interface.BlazorWebUI.csproj", "{AD351E86-3C5C-42DB-AF00-5B2A488A120E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{031D7E97-4202-47D5-832C-55468E62BB3F} = {031D7E97-4202-47D5-832C-55468E62BB3F}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Madot.Interface.CLI", "source\interface\Madot.Interface.CLI\Madot.Interface.CLI.csproj", "{E8AEB375-3B7B-4BC4-BCBF-F70F303AF859}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Madot.Interface.WebAPI", "source\interface\Madot.Interface.WebAPI\Madot.Interface.WebAPI.csproj", "{031D7E97-4202-47D5-832C-55468E62BB3F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{A786998D-3464-456E-B426-C0531DCC8735}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution_items", "_solution_items", "{492DF390-F97D-4AE6-9CC5-A094EB68C60C}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yml = compose.yml
+		README.md = README.md
+		.gitignore = .gitignore
+		.dockerignore = .dockerignore
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Madot.Infrastructure.SqlServer", "source\infrastructure\Madot.Infrastructure.SqlServer\Madot.Infrastructure.SqlServer.csproj", "{0E27CA79-EB11-4636-A241-F6A6593EB90F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2103B4B2-D9EE-4D4B-9664-E3CA8D6AE362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2103B4B2-D9EE-4D4B-9664-E3CA8D6AE362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2103B4B2-D9EE-4D4B-9664-E3CA8D6AE362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2103B4B2-D9EE-4D4B-9664-E3CA8D6AE362}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2103B4B2-D9EE-4D4B-9664-E3CA8D6AE362}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{AA994BF9-3BE2-4157-AB2C-C04886009096}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA994BF9-3BE2-4157-AB2C-C04886009096}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA994BF9-3BE2-4157-AB2C-C04886009096}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA994BF9-3BE2-4157-AB2C-C04886009096}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B25F641-F2E1-4E9B-BA8A-705BEC8C6A69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B25F641-F2E1-4E9B-BA8A-705BEC8C6A69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B25F641-F2E1-4E9B-BA8A-705BEC8C6A69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B25F641-F2E1-4E9B-BA8A-705BEC8C6A69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED36019D-FD52-49C6-93C9-E2E844D483E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED36019D-FD52-49C6-93C9-E2E844D483E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED36019D-FD52-49C6-93C9-E2E844D483E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED36019D-FD52-49C6-93C9-E2E844D483E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D701B4F6-581A-4115-904A-0AF37642176D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D701B4F6-581A-4115-904A-0AF37642176D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D701B4F6-581A-4115-904A-0AF37642176D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D701B4F6-581A-4115-904A-0AF37642176D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD351E86-3C5C-42DB-AF00-5B2A488A120E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD351E86-3C5C-42DB-AF00-5B2A488A120E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD351E86-3C5C-42DB-AF00-5B2A488A120E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD351E86-3C5C-42DB-AF00-5B2A488A120E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8AEB375-3B7B-4BC4-BCBF-F70F303AF859}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8AEB375-3B7B-4BC4-BCBF-F70F303AF859}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8AEB375-3B7B-4BC4-BCBF-F70F303AF859}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8AEB375-3B7B-4BC4-BCBF-F70F303AF859}.Release|Any CPU.Build.0 = Release|Any CPU
+		{031D7E97-4202-47D5-832C-55468E62BB3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{031D7E97-4202-47D5-832C-55468E62BB3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{031D7E97-4202-47D5-832C-55468E62BB3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{031D7E97-4202-47D5-832C-55468E62BB3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E27CA79-EB11-4636-A241-F6A6593EB90F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E27CA79-EB11-4636-A241-F6A6593EB90F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E27CA79-EB11-4636-A241-F6A6593EB90F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E27CA79-EB11-4636-A241-F6A6593EB90F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2EFC5980-2B24-49C1-B9BC-59AA00448C9E} = {15909DCE-0F79-46B6-8862-4BEDC0AAA9C4}
+		{2103B4B2-D9EE-4D4B-9664-E3CA8D6AE362} = {A786998D-3464-456E-B426-C0531DCC8735}
+		{33B1D520-D474-4AAA-AB2C-99B4F3D475BD} = {15909DCE-0F79-46B6-8862-4BEDC0AAA9C4}
+		{AA994BF9-3BE2-4157-AB2C-C04886009096} = {33B1D520-D474-4AAA-AB2C-99B4F3D475BD}
+		{9B25F641-F2E1-4E9B-BA8A-705BEC8C6A69} = {33B1D520-D474-4AAA-AB2C-99B4F3D475BD}
+		{ED36019D-FD52-49C6-93C9-E2E844D483E8} = {37190624-8310-4BDE-B57C-607910ABB94F}
+		{D701B4F6-581A-4115-904A-0AF37642176D} = {37190624-8310-4BDE-B57C-607910ABB94F}
+		{EBD31D73-A429-4C96-8D42-87E6E9F6FA83} = {15909DCE-0F79-46B6-8862-4BEDC0AAA9C4}
+		{AD351E86-3C5C-42DB-AF00-5B2A488A120E} = {EBD31D73-A429-4C96-8D42-87E6E9F6FA83}
+		{E8AEB375-3B7B-4BC4-BCBF-F70F303AF859} = {EBD31D73-A429-4C96-8D42-87E6E9F6FA83}
+		{031D7E97-4202-47D5-832C-55468E62BB3F} = {EBD31D73-A429-4C96-8D42-87E6E9F6FA83}
+		{0E27CA79-EB11-4636-A241-F6A6593EB90F} = {2EFC5980-2B24-49C1-B9BC-59AA00448C9E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F0E56714-7209-41BD-89CA-59DEC243132A}
+	EndGlobalSection
+EndGlobal

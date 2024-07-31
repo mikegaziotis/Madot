@@ -1,0 +1,10 @@
+/.git/
+/.idea/
+/.vs/
+**/bin
+**/obj
+/database/Madot.Database/Madot.Database.jfm
+/database/Madot.Database/Madot.Database.dbmdl
+/source/interface/Madot.Interface.BlazorWebApp/Madot.Interface.BlazorWebApp.csproj.user
+/source/interface/Madot.Interface.API/Madot.Interface.API.csproj.user
+
