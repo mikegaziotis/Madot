@@ -4,61 +4,65 @@
 
 @if (_parametersSet)
 {
-    var changelogId = _apiVersion?.ChangelogId??AppSettings.PreviewKeyword;
-    var homepageId = _apiVersion?.HomepageId??AppSettings.PreviewKeyword;
-    var oasId = _apiVersion?.OpenApiSpecId??AppSettings.PreviewKeyword;
-    
-    <ApiHeader Api="@_api" SelectedVersion="@_versionId"/>
+    if (_versionId is not null)
+    {
+        var changelogId = _apiVersion?.ChangelogId ?? AppSettings.PreviewKeyword;
+        var homepageId = _apiVersion?.HomepageId ?? AppSettings.PreviewKeyword;
+        var oasId = _apiVersion?.OpenApiSpecId ?? AppSettings.PreviewKeyword;
 
-    <Tabs EnableFadeEffect="true" Class="tabs-section">
-        <Tab IsActive="true">
-            <TitleTemplate>
-                <Icon Name="IconName.House"/> Homepage
-            </TitleTemplate>
-            <Content>
-                <ApiHomepage ApiId="@_api.Id" HomepageId="@homepageId"/>
-            </Content>
-        </Tab>
-        @if (_documentStatus!.HasGuides)
-        {
-            <Tab>
+        <ApiHeader Api="@_api" SelectedVersion="@_versionId"/>
+
+        <Tabs EnableFadeEffect="true" Class="tabs-section">
+            <Tab IsActive="true">
                 <TitleTemplate>
-                    <Icon Name="IconName.Book"/> Guides
+                    <Icon Name="IconName.House"/> Homepage
                 </TitleTemplate>
                 <Content>
-                    <ApiGuides ApiId="@_api.Id" ApiVersionId="@_versionId"/>
+                    <ApiHomepage ApiId="@_api.Id" HomepageId="@homepageId"/>
                 </Content>
             </Tab>
-        }
-        <Tab>
-            <TitleTemplate>
-                <Icon Name="IconName.CodeSlash"/> Api Reference
-            </TitleTemplate>
-            <Content>
-                <ApiSpec ApiId="@_api.Id" OasId="@oasId"/>
-            </Content>
-        </Tab>
-        @if (_documentStatus.HasChangelog)
-        {
+            @if (_documentStatus!.HasGuides)
+            {
+                <Tab>
+                    <TitleTemplate>
+                        <Icon Name="IconName.Book"/> Guides
+                    </TitleTemplate>
+                    <Content>
+                        <ApiGuides ApiId="@_api.Id" ApiVersionId="@_versionId"/>
+                    </Content>
+                </Tab>
+            }
             <Tab>
                 <TitleTemplate>
-                    <Icon Name="IconName.CardChecklist"/> Changelog
+                    <Icon Name="IconName.CodeSlash"/> Api Reference
                 </TitleTemplate>
                 <Content>
-                    <ApiChangelog ApiId="@_api.Id" ChangelogId="@changelogId"/>
+                    <ApiSpec ApiId="@_api.Id" OasId="@oasId"/>
                 </Content>
             </Tab>
-        }
-        @if (_documentStatus.HasDownloadFiles)
-        {
-            <Tab>
-                <TitleTemplate>
-                    <Icon Name="IconName.Download"/> Downloads
-                </TitleTemplate>
-                <Content>
-                    <ApiDownloadFiles ApiId="@_api.Id" ApiVersionId="@_versionId"/>
-                </Content>
-            </Tab>
-        }
-    </Tabs>
+            @if (_documentStatus.HasChangelog)
+            {
+                <Tab>
+                    <TitleTemplate>
+                        <Icon Name="IconName.CardChecklist"/> Changelog
+                    </TitleTemplate>
+                    <Content>
+                        <ApiChangelog ApiId="@_api.Id" ChangelogId="@changelogId"/>
+                    </Content>
+                </Tab>
+            }
+            @if (_documentStatus.HasDownloadFiles)
+            {
+                <Tab>
+                    <TitleTemplate>
+                        <Icon Name="IconName.Download"/> Downloads
+                    </TitleTemplate>
+                    <Content>
+                        <ApiDownloadFiles ApiId="@_api.Id" ApiVersionId="@_versionId"/>
+                    </Content>
+                </Tab>
+            }
+        </Tabs>
+    }
+    <h1>Nothing here... yet!</h1>
 }

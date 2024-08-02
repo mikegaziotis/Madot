@@ -5,6 +5,7 @@ using Madot.Infrastructure.SqlServer;
 using Madot.Interface.WebAPI.Automapper;
 using Madot.Interface.WebAPI.Endpoints;
 using Madot.Interface.WebAPI.Providers;
+using Madot.Interface.WebAPI.Swagger;
 
 namespace Madot.Interface.WebAPI;
 
@@ -35,7 +36,7 @@ public static class DependencyInjection
         
         //Web Api Services below
         services.AddAutomapper();
-        services.AddSwaggerGen();
+        services.AddSwaggerGen(o=>o.DocumentFilter<DocumentFilter>());
         services.AddControllers().AddJsonOptions(options => 
             options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
         services.AddTransient<IUserProvider, UserProvider>();

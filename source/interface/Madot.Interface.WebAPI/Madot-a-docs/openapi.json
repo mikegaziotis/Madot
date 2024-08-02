@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Madot.Interface.WebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "title": "Madot API",
     "version": "1.0"
   },
   "paths": {
@@ -439,7 +439,14 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntIdCreated"
+                }
+              }
+            }
           },
           "409": {
             "description": "Conflict"
@@ -581,6 +588,41 @@
         }
       }
     },
+    "/changelog/latest/{api_id}": {
+      "get": {
+        "tags": [
+          "Changelog"
+        ],
+        "summary": "Get the Changelog history for an Api Id",
+        "description": "Returns the Changelogs for a given Api_id",
+        "operationId": "ChangelogGetLatestByApiId",
+        "parameters": [
+          {
+            "name": "api_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Changelog"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/changelog": {
       "post": {
         "tags": [
@@ -601,7 +643,14 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringIdCreated"
+                }
+              }
+            }
           },
           "409": {
             "description": "Conflict"
@@ -985,7 +1034,14 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringIdCreated"
+                }
+              }
+            }
           },
           "409": {
             "description": "Conflict"
@@ -1144,7 +1200,14 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringIdCreated"
+                }
+              }
+            }
           },
           "409": {
             "description": "Conflict"
@@ -1286,6 +1349,41 @@
         }
       }
     },
+    "/homepage/latest/{api_id}": {
+      "get": {
+        "tags": [
+          "Homepage"
+        ],
+        "summary": "Get the Homepage history for an Api Id",
+        "description": "Returns the Homepages for a given Api_id",
+        "operationId": "HomepageGetLatestByApiId",
+        "parameters": [
+          {
+            "name": "api_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Homepage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/homepage": {
       "post": {
         "tags": [
@@ -1306,7 +1404,14 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringIdCreated"
+                }
+              }
+            }
           },
           "409": {
             "description": "Conflict"
@@ -1473,6 +1578,41 @@
         }
       }
     },
+    "/open-api-spec/latest/{api_id}": {
+      "get": {
+        "tags": [
+          "Open API Specification"
+        ],
+        "summary": "Get the OpenApiSpec history for an Api Id",
+        "description": "Returns the OpenApiSpecs for a given Api_id",
+        "operationId": "OpenApiSpecGetLatestByApiId",
+        "parameters": [
+          {
+            "name": "api_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenApiSpec"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/open-api-spec": {
       "post": {
         "tags": [
@@ -1493,7 +1633,14 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringIdCreated"
+                }
+              }
+            }
           },
           "409": {
             "description": "Conflict"
@@ -2348,6 +2495,16 @@
         },
         "additionalProperties": false
       },
+      "IntIdCreated": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "OpenApiSpec": {
         "type": "object",
         "properties": {
@@ -2403,6 +2560,16 @@
           "Exact"
         ],
         "type": "string"
+      },
+      "StringIdCreated": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "VersionedDocumentInsertCommand": {
         "type": "object",

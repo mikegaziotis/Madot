@@ -1,7 +1,6 @@
 using Madot.Interface.API;
 using Madot.Interface.BlazorWebUI;
 using Madot.Interface.BlazorWebUI.Components;
-using Microsoft.AspNetCore.StaticWebAssets;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,4 +24,4 @@ app.UseAntiforgery();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-app.Run();
+await app.RunAsync();

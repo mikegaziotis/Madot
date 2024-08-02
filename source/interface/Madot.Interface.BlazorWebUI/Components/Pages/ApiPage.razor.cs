@@ -1,6 +1,7 @@
 using Madot.Interface.API;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.StaticWebAssets;
+using Refit;
 
 namespace Madot.Interface.BlazorWebUI.Components.Pages;
 
@@ -40,8 +41,16 @@ public partial class ApiPage : ComponentBase
         
         if (VersionId is null)
         {
-            _apiVersion = await ApiVersionClient.ApiVersionGetLatestByApiIdAsync(ApiId, false);
-            _versionId = _apiVersion.Id;
+            try
+            {
+                _apiVersion = await ApiVersionClient.ApiVersionGetLatestByApiIdAsync(ApiId, false);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine(e);
+            }
+            
+            _versionId = _apiVersion?.Id;
         }
         else
         {

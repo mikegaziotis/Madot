@@ -1,7 +1,7 @@
 using Madot.Core.Application.Operations.Commands;
 using Madot.Core.Domain.Enums;
 using Madot.Core.Domain.Models;
-using Madot.Interface.WebAPI.Requests;
+using Madot.Interface.WebAPI.DTOs.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Madot.Interface.WebAPI.Endpoints;
@@ -10,11 +10,11 @@ public record OpenApiSpecInsertRequest([FromBody] DTOs.Requests.VersionedDocumen
 
 
 public class OpenApiSpecInsertEndpoint(
-    ICommandHandler<VersionedDocumentInsertCommand, VersionedDocument, string> handler): IEndpoint<OpenApiSpecInsertRequest,IResult> 
+    ICommandHandler<VersionedDocumentInsertCommand, Core.Domain.Models.VersionedDocument, string> handler): IEndpoint<OpenApiSpecInsertRequest,IResult> 
 {
     public async Task<IResult> Handle(OpenApiSpecInsertRequest request)
     {
-        var appCommonPageId = await handler.Handle(new VersionedDocumentInsertCommand()
+        var oasId = await handler.Handle(new VersionedDocumentInsertCommand()
         {
             ApiId = request.Command.ApiId,
             Data = request.Command.Data,
@@ -22,7 +22,7 @@ public class OpenApiSpecInsertEndpoint(
             Iteration = 1
         });
         
-        return Results.Ok(new StringIdCreated(appCommonPageId));
+        return Results.Ok(new StringIdCreated(oasId));
     }
     
     public static async Task<IResult> Send([FromServices] OpenApiSpecInsertEndpoint endpoint, [AsParameters] OpenApiSpecInsertRequest request) 
@@ -35,7 +35,7 @@ public static partial class EndpointExtensions
     {
         builder
             //add open AppCommonPage description
-            .Produces(StatusCodes.Status200OK)
+            .Produces<StringIdCreated>()
             .Produces(StatusCodes.Status409Conflict)
             .WithTags(OpenApiSpecTag)
             .WithOpenApi(op=>new(op)

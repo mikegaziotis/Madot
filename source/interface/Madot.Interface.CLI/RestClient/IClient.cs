@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Madot.Interface.API
 {
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.1.3.0")]
     public partial interface IAPIApi
     {
         [Get("/api/{id}")]
@@ -25,7 +25,7 @@ namespace Madot.Interface.API
         Task ApiUpdateAsync([Body] ApiUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.1.3.0")]
     public partial interface IAPIVersionApi
     {
         [Get("/api-version/{id}")]
@@ -44,7 +44,7 @@ namespace Madot.Interface.API
         Task ApiVersionUpdateAsync([Body] ApiVersionUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.1.3.0")]
     public partial interface IAppCommonPagesApi
     {
         [Get("/app-common-page/{id}")]
@@ -54,13 +54,13 @@ namespace Madot.Interface.API
         Task<ICollection<AppCommonPageLite>> AppCommonPagesGetAllAsync([Query] bool? include_deleted);
 
         [Post("/app-common-page")]
-        Task AppCommonPageInsertAsync([Body] AppCommonPageInsertCommand body);
+        Task<IntIdCreated> AppCommonPageInsertAsync([Body] AppCommonPageInsertCommand body);
 
         [Put("/app-common-page")]
         Task AppCommonPageUpdateAsync([Body] AppCommonPageUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.1.3.0")]
     public partial interface IChangelogApi
     {
         [Get("/changelog/{id}")]
@@ -72,14 +72,17 @@ namespace Madot.Interface.API
         [Get("/changelog/by-api/{api_id}")]
         Task<ICollection<Changelog>> ChangelogGetByApiIdAsync(string api_id);
 
+        [Get("/changelog/latest/{api_id}")]
+        Task<Changelog> ChangelogGetLatestByApiIdAsync(string api_id);
+
         [Post("/changelog")]
-        Task ChangelogInsertAsync([Body] VersionedDocumentInsertCommand body);
+        Task<StringIdCreated> ChangelogInsertAsync([Body] VersionedDocumentInsertCommand body);
 
         [Put("/changelog")]
         Task ChangelogUpdateAsync([Body] VersionedDocumentUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.1.3.0")]
     public partial interface IDocumentStatusApi
     {
         [Get("/document-status/by-api-version-id/{api_version_id}")]
@@ -89,7 +92,7 @@ namespace Madot.Interface.API
         Task<DocumentStatus> DocumentStatusGetByApiIdAsync(string api_id);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.1.3.0")]
     public partial interface IFileApi
     {
         [Get("/file/{id}")]
@@ -108,7 +111,7 @@ namespace Madot.Interface.API
         Task FileUpdateAsync([Body] FileUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.1.3.0")]
     public partial interface IGuideApi
     {
         [Get("/guide/{id}")]
@@ -118,13 +121,13 @@ namespace Madot.Interface.API
         Task<ICollection<Guide>> GuidesGetByApiIdAsync(string api_id, [Query] bool? include_deleted);
 
         [Post("/guide")]
-        Task GuideInsertAsync([Body] GuideInsertCommand body);
+        Task<StringIdCreated> GuideInsertAsync([Body] GuideInsertCommand body);
 
         [Put("/guide")]
         Task GuideUpdateAsync([Body] GuideUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.1.3.0")]
     public partial interface IGuideVersionApi
     {
         [Get("/guide-version/{id}")]
@@ -137,13 +140,13 @@ namespace Madot.Interface.API
         Task<GuideVersion> GuideVersionLatestGetByGuideIdAsync(string guide_id);
 
         [Post("/guide-version")]
-        Task GuideVersionInsertAsync([Body] GuideVersionInsertCommand body);
+        Task<StringIdCreated> GuideVersionInsertAsync([Body] GuideVersionInsertCommand body);
 
         [Put("/guide-version")]
         Task GuideVersionUpdateAsync([Body] GuideVersionUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.1.3.0")]
     public partial interface IHomepageApi
     {
         [Get("/homepage/{id}")]
@@ -155,14 +158,17 @@ namespace Madot.Interface.API
         [Get("/homepage/by-api/{api_id}")]
         Task<ICollection<Homepage>> HomepageGetByApiIdAsync(string api_id);
 
+        [Get("/homepage/latest/{api_id}")]
+        Task<Homepage> HomepageGetLatestByApiIdAsync(string api_id);
+
         [Post("/homepage")]
-        Task HomepageInsertAsync([Body] VersionedDocumentInsertCommand body);
+        Task<StringIdCreated> HomepageInsertAsync([Body] VersionedDocumentInsertCommand body);
 
         [Put("/homepage")]
         Task HomepageUpdateAsync([Body] VersionedDocumentUpdateCommand body);
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.0.1.0")]
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.1.3.0")]
     public partial interface IOpenAPISpecificationApi
     {
         [Get("/open-api-spec/{id}")]
@@ -177,8 +183,11 @@ namespace Madot.Interface.API
         [Get("/open-api-spec/by-api/{api_id}")]
         Task<ICollection<OpenApiSpec>> OpenApiSpecGetByApiIdAsync(string api_id);
 
+        [Get("/open-api-spec/latest/{api_id}")]
+        Task<OpenApiSpec> OpenApiSpecGetLatestByApiIdAsync(string api_id);
+
         [Post("/open-api-spec")]
-        Task OpenApiSpecInsertAsync([Body] VersionedDocumentInsertCommand body);
+        Task<StringIdCreated> OpenApiSpecInsertAsync([Body] VersionedDocumentInsertCommand body);
 
         [Put("/open-api-spec")]
         Task OpenApiSpecUpdateAsync([Body] VersionedDocumentUpdateCommand body);
@@ -190,7 +199,7 @@ namespace Madot.Interface.API
 
 //----------------------
 // <auto-generated>
-//     Generated using the NSwag toolchain v14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0)) (http://NSwag.org)
+//     Generated using the NSwag toolchain v14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0)) (http://NSwag.org)
 // </auto-generated>
 //----------------------
 
@@ -198,6 +207,7 @@ namespace Madot.Interface.API
 #pragma warning disable 114 // Disable "CS0114 '{derivedDto}.RaisePropertyChanged(String)' hides inherited member 'dtoBase.RaisePropertyChanged(String)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword."
 #pragma warning disable 472 // Disable "CS0472 The result of the expression is always 'false' since a value of type 'Int32' is never equal to 'null' of type 'Int32?'
 #pragma warning disable 612 // Disable "CS0612 '...' is obsolete"
+#pragma warning disable 649 // Disable "CS0649 Field is never assigned to, and will always have its default value null"
 #pragma warning disable 1573 // Disable "CS1573 Parameter '...' has no matching param tag in the XML comment for ...
 #pragma warning disable 1591 // Disable "CS1591 Missing XML comment for publicly visible type or member ..."
 #pragma warning disable 8073 // Disable "CS8073 The result of the expression is always 'false' since a value of type 'T' is never equal to 'null' of type 'T?'"
@@ -205,7 +215,7 @@ namespace Madot.Interface.API
 #pragma warning disable 8603 // Disable "CS8603 Possible null reference return"
 #pragma warning disable 8604 // Disable "CS8604 Possible null reference argument for parameter"
 #pragma warning disable 8625 // Disable "CS8625 Cannot convert null literal to non-nullable reference type"
-#pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
+#pragma warning disable 8765 // Disable "CS8765 Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes)."
 
 namespace Madot.Interface.API
 {
@@ -213,7 +223,7 @@ namespace Madot.Interface.API
 
     
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class Api
     {
 
@@ -252,7 +262,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ApiInsertCommand
     {
 
@@ -279,7 +289,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ApiUpdateCommand
     {
 
@@ -306,7 +316,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ApiVersion
     {
 
@@ -360,7 +370,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ApiVersionGuide
     {
 
@@ -372,7 +382,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ApiVersionInsertCommand
     {
 
@@ -411,7 +421,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ApiVersionUpdateCommand
     {
 
@@ -444,7 +454,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AppCommonPage
     {
 
@@ -462,7 +472,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AppCommonPageInsertCommand
     {
 
@@ -477,7 +487,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AppCommonPageLite
     {
 
@@ -492,7 +502,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AppCommonPageUpdateCommand
     {
 
@@ -510,7 +520,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class Changelog
     {
 
@@ -540,7 +550,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public enum ChipArchitecture
     {
 
@@ -555,7 +565,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class DocumentStatus
     {
 
@@ -570,7 +580,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class File
     {
 
@@ -609,7 +619,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class FileInsertCommand
     {
 
@@ -630,7 +640,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class FileItem
     {
 
@@ -642,7 +652,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class FileLink
     {
 
@@ -674,7 +684,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class FileLinkItem
     {
 
@@ -691,7 +701,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class FileUpdateCommand
     {
 
@@ -715,7 +725,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class Guide
     {
 
@@ -748,7 +758,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class GuideInsertCommand
     {
 
@@ -763,7 +773,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class GuideUpdateCommand
     {
 
@@ -778,7 +788,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class GuideVersion
     {
 
@@ -814,7 +824,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class GuideVersionInsertCommand
     {
 
@@ -826,7 +836,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class GuideVersionItem
     {
 
@@ -838,7 +848,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class GuideVersionUpdateCommand
     {
 
@@ -853,7 +863,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class Homepage
     {
 
@@ -883,7 +893,16 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class IntIdCreated
+    {
+
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class OpenApiSpec
     {
 
@@ -913,7 +932,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public enum OperatingSystem
     {
 
@@ -931,7 +950,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public enum SearchMethod
     {
 
@@ -949,7 +968,16 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class StringIdCreated
+    {
+
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class VersionedDocumentInsertCommand
     {
 
@@ -961,7 +989,7 @@ namespace Madot.Interface.API
 
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class VersionedDocumentUpdateCommand
     {
 
@@ -993,18 +1021,23 @@ namespace Madot.Interface.API
 namespace Madot.Interface.API
 {
     using System;
-    using Microsoft.Extensions.DependencyInjection;
-    using Polly;
-    using Polly.Contrib.WaitAndRetry;
-    using Polly.Extensions.Http;
+   using Microsoft.Extensions.DependencyInjection;
+   using Polly;
+   using Polly.Contrib.WaitAndRetry;
+   using Polly.Extensions.Http;
 
     public static partial class IServiceCollectionExtensions
     {
-        public static IServiceCollection ConfigureRefitClients(this IServiceCollection services, Action<IHttpClientBuilder>? builder = default)
+        public static IServiceCollection ConfigureRefitClients(
+            this IServiceCollection services, 
+            Action<IHttpClientBuilder>? builder = default, 
+            RefitSettings? settings = default)
         {
             var clientBuilderIAPIApi = services
-                .AddRefitClient<IAPIApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .AddRefitClient<IAPIApi>(settings)
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+
+            clientBuilderIAPIApi
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1012,11 +1045,14 @@ namespace Madot.Interface.API
                             Backoff.DecorrelatedJitterBackoffV2(
                                 TimeSpan.FromSeconds(0.5),
                                 3)));
+
             builder?.Invoke(clientBuilderIAPIApi);
 
             var clientBuilderIAPIVersionApi = services
-                .AddRefitClient<IAPIVersionApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .AddRefitClient<IAPIVersionApi>(settings)
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+
+            clientBuilderIAPIVersionApi
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1024,11 +1060,14 @@ namespace Madot.Interface.API
                             Backoff.DecorrelatedJitterBackoffV2(
                                 TimeSpan.FromSeconds(0.5),
                                 3)));
+
             builder?.Invoke(clientBuilderIAPIVersionApi);
 
             var clientBuilderIAppCommonPagesApi = services
-                .AddRefitClient<IAppCommonPagesApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .AddRefitClient<IAppCommonPagesApi>(settings)
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+
+            clientBuilderIAppCommonPagesApi
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1036,11 +1075,14 @@ namespace Madot.Interface.API
                             Backoff.DecorrelatedJitterBackoffV2(
                                 TimeSpan.FromSeconds(0.5),
                                 3)));
+
             builder?.Invoke(clientBuilderIAppCommonPagesApi);
 
             var clientBuilderIChangelogApi = services
-                .AddRefitClient<IChangelogApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .AddRefitClient<IChangelogApi>(settings)
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+
+            clientBuilderIChangelogApi
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1048,11 +1090,14 @@ namespace Madot.Interface.API
                             Backoff.DecorrelatedJitterBackoffV2(
                                 TimeSpan.FromSeconds(0.5),
                                 3)));
+
             builder?.Invoke(clientBuilderIChangelogApi);
 
             var clientBuilderIDocumentStatusApi = services
-                .AddRefitClient<IDocumentStatusApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .AddRefitClient<IDocumentStatusApi>(settings)
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+
+            clientBuilderIDocumentStatusApi
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1060,11 +1105,14 @@ namespace Madot.Interface.API
                             Backoff.DecorrelatedJitterBackoffV2(
                                 TimeSpan.FromSeconds(0.5),
                                 3)));
+
             builder?.Invoke(clientBuilderIDocumentStatusApi);
 
             var clientBuilderIFileApi = services
-                .AddRefitClient<IFileApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .AddRefitClient<IFileApi>(settings)
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+
+            clientBuilderIFileApi
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1072,11 +1120,14 @@ namespace Madot.Interface.API
                             Backoff.DecorrelatedJitterBackoffV2(
                                 TimeSpan.FromSeconds(0.5),
                                 3)));
+
             builder?.Invoke(clientBuilderIFileApi);
 
             var clientBuilderIGuideApi = services
-                .AddRefitClient<IGuideApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .AddRefitClient<IGuideApi>(settings)
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+
+            clientBuilderIGuideApi
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1084,11 +1135,14 @@ namespace Madot.Interface.API
                             Backoff.DecorrelatedJitterBackoffV2(
                                 TimeSpan.FromSeconds(0.5),
                                 3)));
+
             builder?.Invoke(clientBuilderIGuideApi);
 
             var clientBuilderIGuideVersionApi = services
-                .AddRefitClient<IGuideVersionApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .AddRefitClient<IGuideVersionApi>(settings)
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+
+            clientBuilderIGuideVersionApi
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1096,11 +1150,14 @@ namespace Madot.Interface.API
                             Backoff.DecorrelatedJitterBackoffV2(
                                 TimeSpan.FromSeconds(0.5),
                                 3)));
+
             builder?.Invoke(clientBuilderIGuideVersionApi);
 
             var clientBuilderIHomepageApi = services
-                .AddRefitClient<IHomepageApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .AddRefitClient<IHomepageApi>(settings)
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+
+            clientBuilderIHomepageApi
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1108,11 +1165,14 @@ namespace Madot.Interface.API
                             Backoff.DecorrelatedJitterBackoffV2(
                                 TimeSpan.FromSeconds(0.5),
                                 3)));
+
             builder?.Invoke(clientBuilderIHomepageApi);
 
             var clientBuilderIOpenAPISpecificationApi = services
-                .AddRefitClient<IOpenAPISpecificationApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"))
+                .AddRefitClient<IOpenAPISpecificationApi>(settings)
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+
+            clientBuilderIOpenAPISpecificationApi
                 .AddPolicyHandler(
                     HttpPolicyExtensions
                         .HandleTransientHttpError()
@@ -1120,6 +1180,7 @@ namespace Madot.Interface.API
                             Backoff.DecorrelatedJitterBackoffV2(
                                 TimeSpan.FromSeconds(0.5),
                                 3)));
+
             builder?.Invoke(clientBuilderIOpenAPISpecificationApi);
 
             return services;

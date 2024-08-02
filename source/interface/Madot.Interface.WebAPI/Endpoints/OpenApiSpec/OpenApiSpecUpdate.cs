@@ -1,7 +1,7 @@
 using Madot.Core.Application.Operations.Commands;
 using Madot.Core.Domain.Enums;
 using Madot.Core.Domain.Models;
-using Madot.Interface.WebAPI.Requests;
+using Madot.Interface.WebAPI.DTOs.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Madot.Interface.WebAPI.Endpoints;
@@ -10,7 +10,7 @@ public record OpenApiSpecUpdateRequest([FromBody] DTOs.Requests.VersionedDocumen
 
 
 public class OpenApiSpecUpdateEndpoint(
-    ICommandHandler<VersionedDocumentUpdateCommand, VersionedDocument> handler): IEndpoint<OpenApiSpecUpdateRequest,IResult> 
+    ICommandHandler<VersionedDocumentUpdateCommand, Core.Domain.Models.VersionedDocument> handler): IEndpoint<OpenApiSpecUpdateRequest,IResult> 
 {
     public async Task<IResult> Handle(OpenApiSpecUpdateRequest request)
     {

@@ -1,22 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using Madot.Interface.CLI.CommandHandlers;
-
 using ConsoleAppFramework;
-using Madot.Interface.API;
+using Madot.Interface.CLI;
+using Madot.Interface.CLI.CommandHandlers;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using ZLogger;
 
 
 var services = new ServiceCollection();
-services.AddLogging(x =>
-{
-    x.ClearProviders();
-    x.SetMinimumLevel(LogLevel.Error);
-    x.AddZLoggerConsole();
-});
-services.AddTransient<ApiGetCommandHandler>();
-services.ConfigureRefitClients();
+services.ConfigureServices();
 
 await using var serviceProvider = services.BuildServiceProvider();
 ConsoleApp.ServiceProvider = serviceProvider;
@@ -24,6 +14,10 @@ ConsoleApp.ServiceProvider = serviceProvider;
 var app = ConsoleApp.Create();
 
 app.Add("api-get", ApiGetCommandHandler.Send);
+app.Add("api-insert", ApiInsertCommandHandler.Send);
+app.Add("docs-merge", DocsMergeCommandHandler.Send);
+//app.Add("apiVersion-get", ()=>Console.WriteLine("Empty"));
+app.Add("apiversion-publish", (string apiId, string versionNumber = "1.0", bool autoIncrement = false, bool updateLatest = false )=>Console.WriteLine("Empty"));
 
 await app.RunAsync(args);
 

@@ -1,7 +1,7 @@
 using Madot.Core.Application.Operations.Commands;
 using Madot.Core.Domain.Enums;
 using Madot.Core.Domain.Models;
-using Madot.Interface.WebAPI.Requests;
+using Madot.Interface.WebAPI.DTOs.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Madot.Interface.WebAPI.Endpoints;
@@ -10,7 +10,7 @@ public record HomepageUpdateRequest([FromBody] DTOs.Requests.VersionedDocumentUp
 
 
 public class HomepageUpdateEndpoint(
-    ICommandHandler<VersionedDocumentUpdateCommand, VersionedDocument> handler): IEndpoint<HomepageUpdateRequest,IResult> 
+    ICommandHandler<VersionedDocumentUpdateCommand, Core.Domain.Models.VersionedDocument> handler): IEndpoint<HomepageUpdateRequest,IResult> 
 {
     public async Task<IResult> Handle(HomepageUpdateRequest request)
     {

@@ -28,7 +28,7 @@ public class VersionedDocumentInsertCommandHandler(
         if (!await SafeDbExecuteAsync(async () => await dbContext.Apis.Where(x => x.Id == command.ApiId).AnyAsync()))
             throw new EntityNotFoundException("Not Api entity exists for the provided ApiId");
         
-        if (!await SafeDbExecuteAsync(async () => await dbContext.VersionedDocuments.Where(x =>
+        if (await SafeDbExecuteAsync(async () => await dbContext.VersionedDocuments.Where(x =>
                             x.ApiId == command.ApiId && x.DocumentType == command.DocumentType &&
                             x.Iteration == command.Iteration).AnyAsync()))
             throw new EntityConflictException("A VersionedDocument of the same DocumentType and Iteration already exists");

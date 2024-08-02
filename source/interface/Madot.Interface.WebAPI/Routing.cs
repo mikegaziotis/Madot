@@ -57,6 +57,8 @@ public static class Routing
 
         app.MapGet("changelog/by-api/{api_id}", ChangelogGetByApiIdEndpoint.Send).ChangelogGetByApiIdEndpointConfiguration();
         
+        app.MapGet("changelog/latest/{api_id}", ChangelogGetLatestByApiIdEndpoint.Send).ChangelogGetLatestByApiIdEndpointConfiguration();
+        
         app.MapPost("changelog",ChangelogInsertEndpoint.Send).ChangelogInsertEndpointConfiguration();
         
         app.MapPut("changelog",ChangelogUpdateEndpoint.Send).ChangelogUpdateEndpointConfiguration();
@@ -70,6 +72,8 @@ public static class Routing
         app.MapGet("homepage/by-api-version/{api_version_id}", HomepageGetByApiVersionIdEndpoint.Send).HomepageGetByApiVersionIdEndpointConfiguration();
         
         app.MapGet("homepage/by-api/{api_id}", HomepageGetByApiIdEndpoint.Send).HomepageGetByApiIdEndpointConfiguration();
+        
+        app.MapGet("homepage/latest/{api_id}", HomepageGetLatestByApiIdEndpoint.Send).HomepageGetLatestByApiIdEndpointConfiguration();
         
         app.MapPost("homepage",HomepageInsertEndpoint.Send).HomepageInsertEndpointConfiguration();
         
@@ -87,6 +91,8 @@ public static class Routing
         app.MapGet("open-api-spec/by-api-version/{api_version_id}", OpenApiSpecGetByApiVersionIdEndpoint.Send).OpenApiSpecGetByApiVersionIdEndpointConfiguration();
         
         app.MapGet("open-api-spec/by-api/{api_id}", OpenApiSpecGetByApiIdEndpoint.Send).OpenApiSpecGetByApiIdEndpointConfiguration();
+        
+        app.MapGet("open-api-spec/latest/{api_id}", OpenApiSpecGetLatestByApiIdEndpoint.Send).OpenApiSpecGetLatestByApiIdEndpointConfiguration();
         
         app.MapPost("open-api-spec",OpenApiSpecInsertEndpoint.Send).OpenApiSpecInsertEndpointConfiguration();
         

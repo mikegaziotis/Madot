@@ -129,7 +129,6 @@ div.madot-menuitem:has(a[aria-current]) {
 
 div.madot-menuitem:has(a[aria-current]) i {
     display: block;
-    margin-top: -2px;
 }
 
 .madot-menuitem {

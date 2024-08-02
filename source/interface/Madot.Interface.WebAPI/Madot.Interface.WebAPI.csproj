@@ -19,24 +19,16 @@
       <Content Include="..\..\..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
-      <None Remove="Madot-a-docs\changelog.md" />
       <Content Include="Madot-a-docs\changelog.md">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <None Remove="Madot-a-docs\homepage.md" />
       <Content Include="Madot-a-docs\homepage.md">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <None Remove="Madot-a-docs\Guides\1_Authentication.md" />
       <Content Include="Madot-a-docs\Guides\1_Authentication.md">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <None Remove="Madot-a-docs\Guides\2_SDKs.md" />
       <Content Include="Madot-a-docs\Guides\2_SDKs.md">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <None Remove="Madot-a-docs\Guides\3_RethinkLife.md" />
-      <Content Include="Madot-a-docs\Guides\3_RethinkLife.md">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
@@ -47,8 +39,12 @@
       <ProjectReference Include="..\..\infrastructure\Madot.Infrastructure.SqlServer\Madot.Infrastructure.SqlServer.csproj" />
     </ItemGroup>
     
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="$(Configuration)==Debug">
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)|$(OS)'=='Debug|Unix'">
       <Exec Command="dotnet swagger tofile --output $(TargetDir)Madot-a-docs/openapi.json $(TargetPath) v1" WorkingDirectory="$(TargetDir)" />
       <Exec Command="cp $(TargetDir)Madot-a-docs/openapi.json $(ProjectDir)Madot-a-docs/" />
+    </Target>
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)|$(OS)'=='Debug|Windows_NT'">
+        <Exec Command="dotnet swagger tofile --output $(TargetDir)Madot-a-docs/openapi.json $(TargetPath) v1" WorkingDirectory="$(TargetDir)" />
+        <Exec Command="copy $(TargetDir)Madot-a-docs\openapi.json $(ProjectDir)Madot-a-docs /y" />
     </Target>
 </Project>

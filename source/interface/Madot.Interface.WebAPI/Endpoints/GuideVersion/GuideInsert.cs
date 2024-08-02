@@ -1,5 +1,5 @@
 using Madot.Core.Application.Operations.Commands;
-using Madot.Interface.WebAPI.Requests;
+using Madot.Interface.WebAPI.DTOs.Responses;
 using Microsoft.AspNetCore.Mvc;
 using GuideVersion = Madot.Core.Domain.Models.GuideVersion;
 
@@ -12,13 +12,13 @@ public class GuideVersionInsertEndpoint(
 {
     public async Task<IResult> Handle(GuideVersionInsertRequest request)
     {
-        var appCommonPageId = await handler.Handle(new GuideVersionInsertCommand
+        var guideVersionId = await handler.Handle(new GuideVersionInsertCommand
         {
             GuideId = request.Command.GuideId,
             Data = request.Command.Data
         });
         
-        return Results.Ok(new StringIdCreated(appCommonPageId));
+        return Results.Ok(new StringIdCreated(guideVersionId));
     }
     
     public static async Task<IResult> Send([FromServices] GuideVersionInsertEndpoint endpoint, [AsParameters] GuideVersionInsertRequest request) 
@@ -32,7 +32,7 @@ public static partial class EndpointExtensions
     {
         builder
             //add open AppCommonPage description
-            .Produces(StatusCodes.Status200OK)
+            .Produces<StringIdCreated>()
             .Produces(StatusCodes.Status409Conflict)
             .WithTags(GuideVersionTag)
             .WithOpenApi(op=>new(op)

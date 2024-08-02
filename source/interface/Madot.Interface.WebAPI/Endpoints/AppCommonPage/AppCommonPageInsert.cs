@@ -1,6 +1,6 @@
 using AutoMapper;
 using Madot.Core.Application.Operations.Commands;
-using Madot.Interface.WebAPI.Requests;
+using Madot.Interface.WebAPI.DTOs.Responses;
 using Microsoft.AspNetCore.Mvc;
 using AppCommonPage = Madot.Core.Domain.Models.AppCommonPage;
 
@@ -34,7 +34,7 @@ public static partial class EndpointExtensions
     {
         builder
             //add open AppCommonPage description
-            .Produces(StatusCodes.Status200OK)
+            .Produces<IntIdCreated>()
             .Produces(StatusCodes.Status409Conflict)
             .WithTags(AppCommonPageTag)
             .WithOpenApi(op=>new(op)

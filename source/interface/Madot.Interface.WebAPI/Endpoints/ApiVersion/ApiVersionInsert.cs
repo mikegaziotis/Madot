@@ -1,7 +1,7 @@
 using AutoMapper;
 using Madot.Core.Application.Operations;
 using Madot.Core.Application.Operations.Commands;
-using Madot.Interface.WebAPI.Requests;
+using Madot.Interface.WebAPI.DTOs.Responses;
 using Microsoft.AspNetCore.Mvc;
 using ApiVersion = Madot.Core.Domain.Models.ApiVersion;
 

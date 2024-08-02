@@ -1,5 +1,5 @@
 using Madot.Core.Application.Operations.Commands;
-using Madot.Interface.WebAPI.Requests;
+using Madot.Interface.WebAPI.DTOs.Responses;
 using Microsoft.AspNetCore.Mvc;
 using GuideVersion = Madot.Core.Domain.Models.GuideVersion;
 
