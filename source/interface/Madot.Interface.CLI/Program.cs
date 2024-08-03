@@ -16,8 +16,7 @@ var app = ConsoleApp.Create();
 app.Add("api-get", ApiGetCommandHandler.Send);
 app.Add("api-insert", ApiInsertCommandHandler.Send);
 app.Add("docs-merge", DocsMergeCommandHandler.Send);
-//app.Add("apiVersion-get", ()=>Console.WriteLine("Empty"));
-app.Add("apiversion-publish", (string apiId, string versionNumber = "1.0", bool autoIncrement = false, bool updateLatest = false )=>Console.WriteLine("Empty"));
+app.Add("apiversion-publish", ApiVersionPublishCommandHandler.Send);
 
 await app.RunAsync(args);
 

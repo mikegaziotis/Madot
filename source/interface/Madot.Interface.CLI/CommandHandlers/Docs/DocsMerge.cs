@@ -1,9 +1,11 @@
 using System.Text;
 using System.Text.Json;
 using ConsoleAppFramework;
+using JsonDiffPatchDotNet;
 using Madot.Interface.API;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
+using Newtonsoft.Json.Linq;
 using File = System.IO.File;
 using FileTuple = (string FileName, string Path, bool IsGuide, string? Contents);
 using GuideTuple = (int OrderId, string FormattedName);
@@ -176,11 +178,10 @@ public class DocsMergeCommandHandler(
         {
             var result  = await SafeHttpExecuteAsync(async () =>
             {
-                await guideVersionApi.GuideVersionUpdateAsync(new GuideVersionUpdateCommand
+                await guideVersionApi.GuideVersionInsertAsync(new GuideVersionInsertCommand
                 {
-                    Id = latestGuideVersion.Id,
-                    Data = latestGuideVersion.Data,
-                    IsDeleted = false
+                    GuideId = guide.Id,
+                    Data = latestGuideVersion.Data
                 });
                 return true;
             });
@@ -234,9 +235,9 @@ public class DocsMergeCommandHandler(
             }
             var result = await SafeHttpExecuteAsync(async () =>
             {
-                await changelogApi.ChangelogUpdateAsync(new VersionedDocumentUpdateCommand
+                await changelogApi.ChangelogInsertAsync(new VersionedDocumentInsertCommand
                 {
-                    Id = changelog.Id,
+                    ApiId = _apiId,
                     Data = fileContent.Contents!
                 });
                 return true;
@@ -268,9 +269,9 @@ public class DocsMergeCommandHandler(
             }
             var result = await SafeHttpExecuteAsync(async () =>
             {
-                await homepageApi.HomepageUpdateAsync(new VersionedDocumentUpdateCommand
+                await homepageApi.HomepageInsertAsync(new VersionedDocumentInsertCommand
                 {
-                    Id = homepage.Id,
+                    ApiId = _apiId,
                     Data = fileContent.Contents!
                 });
                 return true;
@@ -294,13 +295,13 @@ public class DocsMergeCommandHandler(
     
     private async Task<(bool, string)> CompareAndUpdateOpenApiSpec(FileTuple fileContent, OpenApiSpec? oas)
     {
-        JsonElement? fileJson = null;
+        JToken? fileJson;
         try
         {
             if (fileContent.Contents is null)
                 throw new ArgumentException();
 
-            fileJson = JsonDocument.Parse(fileContent.Contents).RootElement;
+            fileJson = JToken.Parse(fileContent.Contents);
         }
         catch (Exception ex)
         {
@@ -309,13 +310,14 @@ public class DocsMergeCommandHandler(
 
         if (oas is not null)
         {
-            var oasJson = JsonDocument.Parse(oas.Data).RootElement;
             
-            if (oasJson.Equals(fileJson))
+            var oasJson = JToken.Parse(oas.Data);
+            if (JToken.DeepEquals(fileJson,oasJson))
             {
                 return new ValueTuple<bool, string>(true,"[-] OpenApiSpec contents unmodified. Skipped");
             }
-            
+            var jdp = new JsonDiffPatch();
+            Console.WriteLine(jdp.Diff(oasJson, fileJson).ToString());
             var result = await SafeHttpExecuteAsync(async () =>
             {
                 await oasApi.OpenApiSpecUpdateAsync(new VersionedDocumentUpdateCommand
