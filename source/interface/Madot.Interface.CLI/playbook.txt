@@ -5,9 +5,9 @@ madot api-insert --id apiportal --display-name "Api Portal" --base-url "http://l
 madot docs-merge --api-id apiportal --docs-path ../../../../Madot.Interface.WebApi/Madot-a-docs
 
 
-madot apiversion-publish --id apiportal --version-number "1.0"
-madot apiversion-publish --id apiportal --auto-increment 
-madot apiversion-publish --id apiportal --update-latest 
+madot apiversion-publish --api-id apiportal --version-number "1.0"
+madot apiversion-publish --api-id apiportal --auto-increment 
+madot apiversion-publish --api-id apiportal --update-latest 
 
 
 
