@@ -47,6 +47,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution_items", "_solutio
 		README.md = README.md
 		.gitignore = .gitignore
 		.dockerignore = .dockerignore
+		playbook.ps1 = playbook.ps1
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Madot.Infrastructure.SqlServer", "source\infrastructure\Madot.Infrastructure.SqlServer\Madot.Infrastructure.SqlServer.csproj", "{0E27CA79-EB11-4636-A241-F6A6593EB90F}"

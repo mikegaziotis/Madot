@@ -1035,7 +1035,7 @@ namespace Madot.Interface.API
         {
             var clientBuilderIAPIApi = services
                 .AddRefitClient<IAPIApi>(settings)
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5000"));
 
             clientBuilderIAPIApi
                 .AddPolicyHandler(
@@ -1050,7 +1050,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIAPIVersionApi = services
                 .AddRefitClient<IAPIVersionApi>(settings)
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5000"));
 
             clientBuilderIAPIVersionApi
                 .AddPolicyHandler(
@@ -1065,7 +1065,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIAppCommonPagesApi = services
                 .AddRefitClient<IAppCommonPagesApi>(settings)
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5000"));
 
             clientBuilderIAppCommonPagesApi
                 .AddPolicyHandler(
@@ -1080,7 +1080,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIChangelogApi = services
                 .AddRefitClient<IChangelogApi>(settings)
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5000"));
 
             clientBuilderIChangelogApi
                 .AddPolicyHandler(
@@ -1095,7 +1095,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIDocumentStatusApi = services
                 .AddRefitClient<IDocumentStatusApi>(settings)
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5000"));
 
             clientBuilderIDocumentStatusApi
                 .AddPolicyHandler(
@@ -1110,7 +1110,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIFileApi = services
                 .AddRefitClient<IFileApi>(settings)
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5000"));
 
             clientBuilderIFileApi
                 .AddPolicyHandler(
@@ -1125,7 +1125,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIGuideApi = services
                 .AddRefitClient<IGuideApi>(settings)
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5000"));
 
             clientBuilderIGuideApi
                 .AddPolicyHandler(
@@ -1140,7 +1140,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIGuideVersionApi = services
                 .AddRefitClient<IGuideVersionApi>(settings)
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5000"));
 
             clientBuilderIGuideVersionApi
                 .AddPolicyHandler(
@@ -1155,7 +1155,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIHomepageApi = services
                 .AddRefitClient<IHomepageApi>(settings)
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5000"));
 
             clientBuilderIHomepageApi
                 .AddPolicyHandler(
@@ -1170,7 +1170,7 @@ namespace Madot.Interface.API
 
             var clientBuilderIOpenAPISpecificationApi = services
                 .AddRefitClient<IOpenAPISpecificationApi>(settings)
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5246"));
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5000"));
 
             clientBuilderIOpenAPISpecificationApi
                 .AddPolicyHandler(

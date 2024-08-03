@@ -1,6 +1,7 @@
 using System.Text.Json;
 using ConsoleAppFramework;
 using Madot.Interface.API;
+using Madot.Interface.CLI.Responses;
 using Microsoft.Extensions.Logging;
 using Refit;
 
@@ -18,8 +19,11 @@ public class ApiInsertCommandHandler(IAPIApi apiClient, ILogger<ApiInsertCommand
             return true;
         });
         if (result is false)
-            return;
-        Console.WriteLine("Success!");
+        {
+            Environment.Exit(1);
+        }
+        Console.WriteLine($"Success! Created api resource with Id: '{args.Command.Id}'");
+        Environment.Exit(0);
     }
 
     public static async Task Send([FromServices] ApiInsertCommandHandler handler, string id, string displayName, string baseUrl, bool isHidden = false, bool isPreview = false, bool isInternal =false, int orderId = 0)

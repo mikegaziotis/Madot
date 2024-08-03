@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Refit;
 using ZLogger;
@@ -47,5 +48,14 @@ public abstract class BaseCommandHandler<TCommandArgs>(
         }
 
         return default;
+    }
+
+    protected JsonSerializerOptions DefaultSerializerOptions()
+    {
+        return new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+        };
     }
 }
