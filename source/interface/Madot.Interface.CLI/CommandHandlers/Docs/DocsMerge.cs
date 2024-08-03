@@ -1,10 +1,8 @@
 using System.Text;
-using System.Text.Json;
 using ConsoleAppFramework;
 using JsonDiffPatchDotNet;
 using Madot.Interface.API;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json.Linq;
 using File = System.IO.File;
 using FileTuple = (string FileName, string Path, bool IsGuide, string? Contents);
@@ -303,7 +301,7 @@ public class DocsMergeCommandHandler(
 
             fileJson = JToken.Parse(fileContent.Contents);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return new ValueTuple<bool, string>(false, $"[x] !Contents of openapi.json not valid json!");
         }
