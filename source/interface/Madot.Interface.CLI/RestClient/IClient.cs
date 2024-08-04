@@ -396,7 +396,7 @@ namespace Madot.Interface.API
         public int MinorVersion { get; set; }
 
         [JsonPropertyName("buildOrReleaseTag")]
-        public string BuildOrReleaseTag { get; set; }
+        public string? BuildOrReleaseTag { get; set; }
 
         [JsonPropertyName("openApiSpecId")]
         public string OpenApiSpecId { get; set; }
@@ -405,7 +405,7 @@ namespace Madot.Interface.API
         public string HomepageId { get; set; }
 
         [JsonPropertyName("changelogId")]
-        public string ChangelogId { get; set; }
+        public string? ChangelogId { get; set; }
 
         [JsonPropertyName("isBeta")]
         public bool IsBeta { get; set; }
@@ -438,7 +438,7 @@ namespace Madot.Interface.API
         public string HomepageId { get; set; }
 
         [JsonPropertyName("changelogId")]
-        public string ChangelogId { get; set; }
+        public string? ChangelogId { get; set; }
 
         [JsonPropertyName("isBeta")]
         public bool IsBeta { get; set; }
