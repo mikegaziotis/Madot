@@ -20,5 +20,6 @@ internal static class DependencyInjection
         services.AddScoped<ApiGetCommandHandler>();
         services.AddScoped<ApiInsertCommandHandler>();
         services.AddScoped<DocsMergeCommandHandler>();
+        services.AddScoped<ApiVersionPublishCommandHandler>();
     }
 }

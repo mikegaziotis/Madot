@@ -31,8 +31,9 @@ public partial class ApiGuides : ComponentBase
                 var result = new ApiVersionGuide
                 {
                     OrderId = guide.ProvisionalOrderId,
-                    GuideVersion = await GuideVersionClient.GuideVersionLatestGetByGuideIdAsync(guide.Id)
+                    GuideVersion = await GuideVersionClient.GuideVersionLatestGetByGuideIdAsync(guide.Id),
                 };
+                result.GuideVersion.Guide = guide;
                 results.Add(result);    
             }
             
