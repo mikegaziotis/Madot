@@ -429,7 +429,7 @@ namespace Madot.Interface.API
         public string Id { get; set; }
 
         [JsonPropertyName("buildOrReleaseTag")]
-        public string BuildOrReleaseTag { get; set; }
+        public string? BuildOrReleaseTag { get; set; }
 
         [JsonPropertyName("openApiSpecId")]
         public string OpenApiSpecId { get; set; }

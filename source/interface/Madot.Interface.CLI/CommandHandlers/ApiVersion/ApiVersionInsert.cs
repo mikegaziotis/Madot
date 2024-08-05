@@ -8,7 +8,7 @@ using File = Madot.Interface.API.File;
 
 namespace Madot.Interface.CLI.CommandHandlers;
 
-public record struct ApiVersionPublishCommandArgs(string ApiId, string VersionNumber, bool AutoIncrement, bool UpdateLatest):ICommandArgs;
+public record struct ApiVersionPublishCommandArgs(string ApiId, string VersionNumber, bool AutoIncrement, bool UpdateLatest, string Tag):ICommandArgs;
 
 public class ApiVersionPublishCommandHandler(
     IAPIVersionApi apiVersionClient, 
@@ -45,9 +45,9 @@ public class ApiVersionPublishCommandHandler(
 
         var success = action switch
         {
-            Action.Explicit => await InsertExplicit(lastVersion),
-            Action.AutoIncrement => await AutoIncrement(lastVersion),
-            Action.UpdateLatest => await UpdateLatest(lastVersion!),
+            Action.Explicit => await InsertExplicit(lastVersion, args.Tag),
+            Action.AutoIncrement => await AutoIncrement(lastVersion, args.Tag),
+            Action.UpdateLatest => await UpdateLatest(lastVersion!, args.Tag),
             _ => false
         };
         if (!success)
@@ -58,7 +58,7 @@ public class ApiVersionPublishCommandHandler(
         Environment.Exit(0);
     }
 
-    private async Task<bool> UpdateLatest(ApiVersion lastVersion)
+    private async Task<bool> UpdateLatest(ApiVersion lastVersion, string? tag)
     {
         var latestDocs = await GetLatestVersionedDocs();
         if(latestDocs is null)
@@ -67,7 +67,7 @@ public class ApiVersionPublishCommandHandler(
         var command = new ApiVersionUpdateCommand
         {
             Id = lastVersion.Id,
-            BuildOrReleaseTag = lastVersion.BuildOrReleaseTag,
+            BuildOrReleaseTag = tag,
             OpenApiSpecId = latestDocs.Value.OasId,
             HomepageId = latestDocs.Value.HomepageId,
             ChangelogId = latestDocs.Value.ChangelogId,
@@ -83,7 +83,7 @@ public class ApiVersionPublishCommandHandler(
         });
     }
 
-    private async Task<bool> AutoIncrement(ApiVersion? lastVersion)
+    private async Task<bool> AutoIncrement(ApiVersion? lastVersion,string? tag)
     {
         var latestDocs = await GetLatestVersionedDocs();
         if(latestDocs is null)
@@ -94,7 +94,7 @@ public class ApiVersionPublishCommandHandler(
             ApiId = _apiId,
             MajorVersion = lastVersion?.MajorVersion ?? 1,
             MinorVersion = lastVersion?.MinorVersion+1 ?? 0,
-            BuildOrReleaseTag = lastVersion?.BuildOrReleaseTag,
+            BuildOrReleaseTag = tag ?? lastVersion?.BuildOrReleaseTag,
             OpenApiSpecId = latestDocs.Value.OasId,
             HomepageId = latestDocs.Value.HomepageId,
             ChangelogId = latestDocs.Value.ChangelogId,
@@ -110,7 +110,7 @@ public class ApiVersionPublishCommandHandler(
         });
     }
 
-    private async Task<bool> InsertExplicit(ApiVersion? lastVersion)
+    private async Task<bool> InsertExplicit(ApiVersion? lastVersion, string tag)
     {
         var latestDocs = await GetLatestVersionedDocs();
         if(latestDocs is null)
@@ -142,7 +142,7 @@ public class ApiVersionPublishCommandHandler(
             ApiId = _apiId,
             MajorVersion = _majorVersion,
             MinorVersion = _minorVersion,
-            BuildOrReleaseTag = null,
+            BuildOrReleaseTag = tag,
             OpenApiSpecId = latestDocs.Value.OasId,
             HomepageId = latestDocs.Value.HomepageId,
             ChangelogId = latestDocs.Value.ChangelogId,
@@ -263,9 +263,9 @@ public class ApiVersionPublishCommandHandler(
     }
 
 
-    public static async Task Send([FromServices] ApiVersionPublishCommandHandler handler, string apiId, string versionNumber = "", bool autoIncrement=false, bool updateLatest = false)
+    public static async Task Send([FromServices] ApiVersionPublishCommandHandler handler, string apiId, string versionNumber = "", bool autoIncrement=false, bool updateLatest = false, string? tag = null)
     {
-        await handler.Handle(new ApiVersionPublishCommandArgs(apiId,versionNumber,autoIncrement,updateLatest));
+        await handler.Handle(new ApiVersionPublishCommandArgs(apiId,versionNumber,autoIncrement,updateLatest, tag));
     }
 
     private enum Action
