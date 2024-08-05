@@ -2,7 +2,6 @@ using System.Text.RegularExpressions;
 using ConsoleAppFramework;
 using Madot.Interface.API;
 using Microsoft.Extensions.Logging;
-using System.Collections;
 using VersionedDocuments = (string HomepageId, string OasId, string? ChangelogId, System.Collections.Generic.List<Madot.Interface.API.GuideVersionItem> GuideVersionItems);
 using File = Madot.Interface.API.File; 
 
@@ -23,9 +22,11 @@ public class ApiVersionPublishCommandHandler(
     private int _majorVersion = 1;
     private int _minorVersion = 0;
     private string _apiId = null!;
+    private string? _buildOrReleaseTag;
     public override async Task Handle(ApiVersionPublishCommandArgs args)
     {
         _apiId = args.ApiId;
+        _buildOrReleaseTag = args.Tag;
         var result = ValidateArgs(args, out Action action);
         if (!result)
         {
@@ -45,9 +46,9 @@ public class ApiVersionPublishCommandHandler(
 
         var success = action switch
         {
-            Action.Explicit => await InsertExplicit(lastVersion, args.Tag),
-            Action.AutoIncrement => await AutoIncrement(lastVersion, args.Tag),
-            Action.UpdateLatest => await UpdateLatest(lastVersion!, args.Tag),
+            Action.Explicit => await InsertExplicit(lastVersion),
+            Action.AutoIncrement => await AutoIncrement(lastVersion),
+            Action.UpdateLatest => await UpdateLatest(lastVersion!),
             _ => false
         };
         if (!success)
@@ -58,7 +59,7 @@ public class ApiVersionPublishCommandHandler(
         Environment.Exit(0);
     }
 
-    private async Task<bool> UpdateLatest(ApiVersion lastVersion, string? tag)
+    private async Task<bool> UpdateLatest(ApiVersion lastVersion)
     {
         var latestDocs = await GetLatestVersionedDocs();
         if(latestDocs is null)
@@ -67,7 +68,7 @@ public class ApiVersionPublishCommandHandler(
         var command = new ApiVersionUpdateCommand
         {
             Id = lastVersion.Id,
-            BuildOrReleaseTag = tag,
+            BuildOrReleaseTag = _buildOrReleaseTag,
             OpenApiSpecId = latestDocs.Value.OasId,
             HomepageId = latestDocs.Value.HomepageId,
             ChangelogId = latestDocs.Value.ChangelogId,
@@ -83,7 +84,7 @@ public class ApiVersionPublishCommandHandler(
         });
     }
 
-    private async Task<bool> AutoIncrement(ApiVersion? lastVersion,string? tag)
+    private async Task<bool> AutoIncrement(ApiVersion? lastVersion)
     {
         var latestDocs = await GetLatestVersionedDocs();
         if(latestDocs is null)
@@ -94,7 +95,7 @@ public class ApiVersionPublishCommandHandler(
             ApiId = _apiId,
             MajorVersion = lastVersion?.MajorVersion ?? 1,
             MinorVersion = lastVersion?.MinorVersion+1 ?? 0,
-            BuildOrReleaseTag = tag ?? lastVersion?.BuildOrReleaseTag,
+            BuildOrReleaseTag = _buildOrReleaseTag,
             OpenApiSpecId = latestDocs.Value.OasId,
             HomepageId = latestDocs.Value.HomepageId,
             ChangelogId = latestDocs.Value.ChangelogId,
@@ -110,7 +111,7 @@ public class ApiVersionPublishCommandHandler(
         });
     }
 
-    private async Task<bool> InsertExplicit(ApiVersion? lastVersion, string tag)
+    private async Task<bool> InsertExplicit(ApiVersion? lastVersion)
     {
         var latestDocs = await GetLatestVersionedDocs();
         if(latestDocs is null)
@@ -142,7 +143,7 @@ public class ApiVersionPublishCommandHandler(
             ApiId = _apiId,
             MajorVersion = _majorVersion,
             MinorVersion = _minorVersion,
-            BuildOrReleaseTag = tag,
+            BuildOrReleaseTag = _buildOrReleaseTag,
             OpenApiSpecId = latestDocs.Value.OasId,
             HomepageId = latestDocs.Value.HomepageId,
             ChangelogId = latestDocs.Value.ChangelogId,
@@ -195,7 +196,7 @@ public class ApiVersionPublishCommandHandler(
         }
         
         var latestChangelog = latestChangelogTask.Result;
-        return new VersionedDocuments(latestOas.Id, latestHomepage.Id, latestChangelog?.Id, 
+        return new VersionedDocuments(latestHomepage.Id,latestOas.Id, latestChangelog?.Id, 
            latestGuideVersions.Where(x=>x is not null).ToList().ConvertAll(x=>x!));
         
     }
@@ -261,7 +262,6 @@ public class ApiVersionPublishCommandHandler(
         }
         return result;
     }
-
 
     public static async Task Send([FromServices] ApiVersionPublishCommandHandler handler, string apiId, string versionNumber = "", bool autoIncrement=false, bool updateLatest = false, string? tag = null)
     {

@@ -41,7 +41,7 @@ public class ApiVersionInsertCommandHandler(
             throw new EntityNotFoundException("Not Api entity exists for the provided ApiId");
             
         
-        if (!await SafeDbExecuteAsync(async () => await dbContext.ApiVersions.Where(x =>
+        if (await SafeDbExecuteAsync(async () => await dbContext.ApiVersions.Where(x =>
                             x.ApiId == command.ApiId && x.MajorVersion == command.MajorVersion &&
                             x.MinorVersion == command.MinorVersion).AnyAsync()))
             throw new EntityConflictException("An ApiVersion with Major.Minor number already exists for that Api Id");
