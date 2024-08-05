@@ -2,7 +2,7 @@
 
 namespace Madot.Interface.CLI.Responses;
 
-public record SuccessResponse([property: JsonPropertyName("success")]string Success);
+public record CreatedResponse([property: JsonPropertyName("id")]string Id);
 
 public record FailureResponse([property: JsonPropertyName("success")]string Success);
 

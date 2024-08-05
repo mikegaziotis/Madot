@@ -38,7 +38,7 @@ namespace Madot.Interface.API
         Task<ICollection<ApiVersion>> ApiVersionsGetByApiIdAsync(string api_id);
 
         [Post("/api-version")]
-        Task ApiVersionInsertAsync([Body] ApiVersionInsertCommand body);
+        Task<StringIdCreated> ApiVersionInsertAsync([Body] ApiVersionInsertCommand body);
 
         [Put("/api-version")]
         Task ApiVersionUpdateAsync([Body] ApiVersionUpdateCommand body);

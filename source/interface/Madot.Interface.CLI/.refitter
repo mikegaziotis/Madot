@@ -31,7 +31,7 @@
   "generateDefaultAdditionalProperties": true,
   "operationNameGenerator": "Default", 
   "dependencyInjectionSettings": { 
-    "baseUrl": "http://localhost:5246", 
+    "baseUrl": "http://localhost:5000", 
     "usePolly": true, 
     "pollyMaxRetryCount": 3, 
     "firstBackoffRetryInSeconds": 0.5 

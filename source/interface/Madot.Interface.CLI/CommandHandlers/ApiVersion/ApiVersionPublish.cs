@@ -1,13 +1,15 @@
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using ConsoleAppFramework;
 using Madot.Interface.API;
+using Madot.Interface.CLI.Responses;
 using Microsoft.Extensions.Logging;
 using VersionedDocuments = (string HomepageId, string OasId, string? ChangelogId, System.Collections.Generic.List<Madot.Interface.API.GuideVersionItem> GuideVersionItems);
 using File = Madot.Interface.API.File; 
 
 namespace Madot.Interface.CLI.CommandHandlers;
 
-public record struct ApiVersionPublishCommandArgs(string ApiId, string VersionNumber, bool AutoIncrement, bool UpdateLatest, string Tag):ICommandArgs;
+public record struct ApiVersionPublishCommandArgs(string ApiId, string VersionNumber, bool AutoIncrement, bool UpdateLatest, string? Tag):ICommandArgs;
 
 public class ApiVersionPublishCommandHandler(
     IAPIVersionApi apiVersionClient, 
@@ -23,6 +25,7 @@ public class ApiVersionPublishCommandHandler(
     private int _minorVersion = 0;
     private string _apiId = null!;
     private string? _buildOrReleaseTag;
+    private string? _apiVersionId;
     public override async Task Handle(ApiVersionPublishCommandArgs args)
     {
         _apiId = args.ApiId;
@@ -53,9 +56,16 @@ public class ApiVersionPublishCommandHandler(
         };
         if (!success)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+            await Console.Error.WriteLineAsync(JsonSerializer.Serialize(new ErrorResponse("Failed to save ApiVersion"),DefaultSerializerOptions()));
+            Console.ResetColor();
             Environment.Exit(1);
             return;
         }
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine(JsonSerializer.Serialize(new CreatedResponse(_apiVersionId!),DefaultSerializerOptions()));
+        Console.ResetColor();
         Environment.Exit(0);
     }
 
@@ -80,6 +90,7 @@ public class ApiVersionPublishCommandHandler(
         return await SafeHttpExecuteAsync(async () =>
         {
             await apiVersionClient.ApiVersionUpdateAsync(command);
+            _apiVersionId = lastVersion.Id;
             return true;
         });
     }
@@ -106,7 +117,8 @@ public class ApiVersionPublishCommandHandler(
         };
         return await SafeHttpExecuteAsync(async () =>
         {
-            await apiVersionClient.ApiVersionInsertAsync(command);
+            var created = await apiVersionClient.ApiVersionInsertAsync(command);
+            _apiVersionId = created.Id;
             return true;
         });
     }
@@ -117,7 +129,7 @@ public class ApiVersionPublishCommandHandler(
         if(latestDocs is null)
             return false;
 
-        List<FileItem> fileItems = lastVersion?.FileItems?.ToList() ?? [];
+        List<FileItem> fileItems = lastVersion?.FileItems.ToList() ?? [];
         if(lastVersion is null)
         {
             var files = await SafeHttpExecuteAsync(async () => await fileClient.FilesGetByApiIdAsync(_apiId));
@@ -154,7 +166,8 @@ public class ApiVersionPublishCommandHandler(
         };
         return await SafeHttpExecuteAsync(async () =>
         {
-            await apiVersionClient.ApiVersionInsertAsync(command);
+            var created = await apiVersionClient.ApiVersionInsertAsync(command);
+            _apiVersionId = created.Id;
             return true;
         });
     }

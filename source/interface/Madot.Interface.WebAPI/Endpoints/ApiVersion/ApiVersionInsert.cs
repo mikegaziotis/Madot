@@ -43,7 +43,7 @@ public static partial class EndpointExtensions
     {
         builder
             //add open api description
-            .Produces(StatusCodes.Status200OK)
+            .Produces<StringIdCreated>()
             .Produces(StatusCodes.Status409Conflict)
             .WithTags(ApiVersionTag)
             .WithOpenApi(op=>new(op)
