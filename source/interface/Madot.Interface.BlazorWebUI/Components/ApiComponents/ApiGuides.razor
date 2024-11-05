@@ -1,4 +1,4 @@
-@using Markdig
+@using Markdown = Markdig.Markdown
 
 @if (_guides is not null)
 {
@@ -8,8 +8,7 @@
         @foreach (var guide in _guides)
         {
             var title = guide.GuideVersion.Guide.Title.Length > 25 ? guide.GuideVersion.Guide.Title.Substring(0, 12) + "..." : guide.GuideVersion.Guide.Title;
-            var first = isFirst;
-            <Tab Title="@title" Active="@first.ToString()">
+            <Tab Title="@title" Active="@isFirst">
                 <Content>
                     @((MarkupString)Markdown.ToHtml(guide.GuideVersion.Data))
                 </Content>

@@ -4,7 +4,7 @@
 
 @if (_parametersSet)
 {
-    if (_versionId is not null)
+    if (_versionId is not null && _api is not null)
     {
         var changelogId = _apiVersion?.ChangelogId ?? AppSettings.PreviewKeyword;
         var homepageId = _apiVersion?.HomepageId ?? AppSettings.PreviewKeyword;

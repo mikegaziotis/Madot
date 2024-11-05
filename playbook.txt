@@ -1,6 +1,6 @@
 madot api-get --id apiportal
 
-madot api-insert --id apiportal --display-name "Api Portal" --base-url "http://localhost:5001"
+madot api-insert --id apiportal --display-name "Api Portal" --base-url "http://localhost:5000"
 
 madot docs-merge --api-id apiportal --docs-path ./source/interface/Madot.Interface.WebAPI/Madot-a-docs
 

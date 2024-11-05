@@ -1,6 +1,6 @@
 @page "/page/{StaticPageId:int}"
 @rendermode @(new InteractiveServerRenderMode(false))
-@using Markdig;
+@using Markdown = Markdig.Markdown
 
 <div class="static-page-content">
 @if (_data is not null)

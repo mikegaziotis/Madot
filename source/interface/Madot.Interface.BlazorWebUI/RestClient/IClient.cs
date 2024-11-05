@@ -2,6 +2,8 @@ using Refit;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
+#pragma warning disable CS8618
+
 namespace Madot.Interface.API
 {
     
@@ -1119,3 +1121,5 @@ namespace Madot.Interface.API
         }
     }
 }
+
+#pragma warning restore CS8168
